@@ -1,7 +1,12 @@
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import HeroSection from './components/HeroSection';
+import IntroSection from './components/IntroSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import CareerSection from './components/CareerSection';
+import PrivateRoute from './components/PrivateRoute';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 import portfolioData from './data/portfolio.json';
 import './App.css';
 
@@ -23,25 +28,25 @@ function burst(e) {
   }
 }
 
-function App() {
+function Portfolio() {
   return (
     <div className="portfolio">
       <nav className="navbar">
         <span className="nav-brand">Portfolio</span>
         <div className="nav-links">
+          <a href="#intro" onClick={burst}>소개</a>
           <a href="#skills" onClick={burst}>기술 스택</a>
           <a href="#projects" onClick={burst}>프로젝트</a>
           <a href="#career" onClick={burst}>경력</a>
         </div>
       </nav>
-
       <main>
         <HeroSection data={portfolioData.hero} />
+        <div id="intro"><IntroSection data={portfolioData.intro} /></div>
         <div id="skills"><SkillsSection data={portfolioData.skills} /></div>
         <div id="projects"><ProjectsSection data={portfolioData.projects} /></div>
         <div id="career"><CareerSection data={portfolioData.career} /></div>
       </main>
-
       <footer className="footer">
         <p>© 2026 · Built with React · Hosted on GitHub Pages</p>
       </footer>
@@ -49,4 +54,21 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <PrivateRoute>
+              <AdminDashboard />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </HashRouter>
+  );
+}
