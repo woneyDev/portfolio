@@ -4,11 +4,9 @@ import com.portfolio.api.entity.Career;
 import com.portfolio.api.entity.PortfolioOwner;
 import com.portfolio.api.entity.Project;
 import com.portfolio.api.entity.Skill;
-import lombok.Getter;
 
 import java.util.List;
 
-@Getter
 public class PortfolioResponse {
 
     private final HeroDto hero;
@@ -22,6 +20,11 @@ public class PortfolioResponse {
         this.projects = owner.getProjects().stream().map(ProjectDto::new).toList();
         this.career = owner.getCareers().stream().map(CareerDto::new).toList();
     }
+
+    public HeroDto getHero() { return hero; }
+    public List<SkillDto> getSkills() { return skills; }
+    public List<ProjectDto> getProjects() { return projects; }
+    public List<CareerDto> getCareer() { return career; }
 
     public record HeroDto(String title, String subtitle, String email, String githubUrl) {
         public HeroDto(PortfolioOwner o) {

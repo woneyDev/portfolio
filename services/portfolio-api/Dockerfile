@@ -1,12 +1,21 @@
-FROM maven:3.9-eclipse-temurin-25 AS builder
+FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline -q
-COPY src ./src
-RUN mvn package -DskipTests -q
 
-FROM eclipse-temurin:25-jre-alpine
+ARG GRADLE_VERSION=8.12
+RUN apk add --no-cache wget unzip \
+    && wget -q https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -O /tmp/gradle.zip \
+    && unzip -q /tmp/gradle.zip -d /opt \
+    && mv /opt/gradle-${GRADLE_VERSION} /opt/gradle \
+    && rm /tmp/gradle.zip
+ENV PATH="/opt/gradle/bin:${PATH}"
+
+COPY build.gradle.kts settings.gradle.kts ./
+RUN gradle dependencies --no-daemon -q
+COPY src ./src
+RUN gradle bootJar --no-daemon -x test -q
+
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-COPY --from=builder /app/target/portfolio-api-1.0.0.jar app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]

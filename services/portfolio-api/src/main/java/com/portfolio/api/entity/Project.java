@@ -1,16 +1,12 @@
 package com.portfolio.api.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "project")
-@Getter @Setter @NoArgsConstructor
 public class Project {
 
     @Id
@@ -26,10 +22,6 @@ public class Project {
     @Column(nullable = false)
     private String period;
 
-    /**
-     * 기술 스택 목록 — 별도 테이블(project_tech_stack)로 저장됩니다.
-     * e.g. ["Spring Boot", "React", "MySQL"]
-     */
     @ElementCollection
     @CollectionTable(name = "project_tech_stack", joinColumns = @JoinColumn(name = "project_id"))
     @Column(name = "tech")
@@ -38,4 +30,24 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private PortfolioOwner owner;
+
+    public Project() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public String getPeriod() { return period; }
+    public void setPeriod(String period) { this.period = period; }
+
+    public List<String> getTechStack() { return techStack; }
+    public void setTechStack(List<String> techStack) { this.techStack = techStack; }
+
+    public PortfolioOwner getOwner() { return owner; }
+    public void setOwner(PortfolioOwner owner) { this.owner = owner; }
 }

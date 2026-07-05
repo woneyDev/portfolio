@@ -1,13 +1,9 @@
 package com.portfolio.api.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "skill")
-@Getter @Setter @NoArgsConstructor
 public class Skill {
 
     @Id
@@ -18,9 +14,23 @@ public class Skill {
     private String name;
 
     @Column(nullable = false)
-    private String level; // Advanced / Intermediate / Beginner
+    private String level;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private PortfolioOwner owner;
+
+    public Skill() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getLevel() { return level; }
+    public void setLevel(String level) { this.level = level; }
+
+    public PortfolioOwner getOwner() { return owner; }
+    public void setOwner(PortfolioOwner owner) { this.owner = owner; }
 }

@@ -1,16 +1,12 @@
 package com.portfolio.api.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "career")
-@Getter @Setter @NoArgsConstructor
 public class Career {
 
     @Id
@@ -26,9 +22,6 @@ public class Career {
     @Column(nullable = false)
     private String period;
 
-    /**
-     * 주요 성과 목록 — 별도 테이블(career_achievement)로 저장됩니다.
-     */
     @ElementCollection
     @CollectionTable(name = "career_achievement", joinColumns = @JoinColumn(name = "career_id"))
     @Column(name = "achievement", length = 500)
@@ -37,4 +30,24 @@ public class Career {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private PortfolioOwner owner;
+
+    public Career() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getCompany() { return company; }
+    public void setCompany(String company) { this.company = company; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+
+    public String getPeriod() { return period; }
+    public void setPeriod(String period) { this.period = period; }
+
+    public List<String> getAchievements() { return achievements; }
+    public void setAchievements(List<String> achievements) { this.achievements = achievements; }
+
+    public PortfolioOwner getOwner() { return owner; }
+    public void setOwner(PortfolioOwner owner) { this.owner = owner; }
 }
