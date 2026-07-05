@@ -23,6 +23,8 @@ body {
 }
 
 /* ── 네비게이션 ── */
+.scroll-anchor { scroll-margin-top: 56px; }
+
 .navbar {
   position: sticky;
   top: 0;

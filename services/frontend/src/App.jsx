@@ -10,6 +10,12 @@ import AdminDashboard from './pages/AdminDashboard';
 import portfolioData from './data/portfolio.json';
 import './App.css';
 
+function scrollToSection(e, id) {
+  e.preventDefault();
+  burst(e);
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
 function burst(e) {
   const colors = ['#2563eb', '#60a5fa', '#93c5fd', '#3b82f6', '#1d4ed8'];
   const count = 10;
@@ -34,18 +40,18 @@ function Portfolio() {
       <nav className="navbar">
         <span className="nav-brand">Portfolio</span>
         <div className="nav-links">
-          <a href="#intro" onClick={burst}>소개</a>
-          <a href="#skills" onClick={burst}>기술 스택</a>
-          <a href="#projects" onClick={burst}>프로젝트</a>
-          <a href="#career" onClick={burst}>경력</a>
+          <a href="#intro" onClick={(e) => scrollToSection(e, 'intro')}>소개</a>
+          <a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>기술 스택</a>
+          <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>프로젝트</a>
+          <a href="#career" onClick={(e) => scrollToSection(e, 'career')}>경력</a>
         </div>
       </nav>
       <main>
         <HeroSection data={portfolioData.hero} />
-        <div id="intro"><IntroSection data={portfolioData.intro} /></div>
-        <div id="skills"><SkillsSection data={portfolioData.skills} /></div>
-        <div id="projects"><ProjectsSection data={portfolioData.projects} /></div>
-        <div id="career"><CareerSection data={portfolioData.career} /></div>
+        <div id="intro" className="scroll-anchor"><IntroSection data={portfolioData.intro} /></div>
+        <div id="skills" className="scroll-anchor"><SkillsSection data={portfolioData.skills} /></div>
+        <div id="projects" className="scroll-anchor"><ProjectsSection data={portfolioData.projects} /></div>
+        <div id="career" className="scroll-anchor"><CareerSection data={portfolioData.career} /></div>
       </main>
       <footer className="footer">
         <p>© 2026 · Built with React · Hosted on GitHub Pages</p>
