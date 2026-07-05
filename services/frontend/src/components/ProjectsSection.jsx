@@ -16,6 +16,13 @@ export default function ProjectsSection({ data }) {
                 <span key={tech} className="tech-badge">{tech}</span>
               ))}
             </div>
+            {project.hasDemo && (
+              <div className="project-demo">
+                <button type="button" className="btn btn-outline project-demo-btn" disabled title={t.projects.comingSoon}>
+                  {t.projects.viewButton}
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>

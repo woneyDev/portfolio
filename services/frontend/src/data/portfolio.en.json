@@ -24,20 +24,23 @@
     { "category": "Frontend", "items": ["HTML/CSS", "JSP", "JavaScript", "jQuery", "JSTL"] },
     { "category": "Database", "items": ["Oracle", "MariaDB", "MySQL"] },
     { "category": "Tools & DevOps", "items": ["Git", "SVN", "Linux (CentOS7)"] },
-    { "category": "Reporting Tool", "items": ["Clipreport"] }
+    { "category": "Reporting Tool", "items": ["Clipreport"] },
+    { "category": "Tech Stack Behind This Portfolio", "items": ["React", "Vite", "Java 21", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Nginx"] }
   ],
   "projects": [
     {
       "title": "Korea Credit Guarantee Fund – Mobile e-Notification",
       "period": "2022.06 - 2022.07",
       "description": "A mobile e-notification system that delivers messages to customers in real time at scheduled send times, replacing paper mail. Worked with in-house developers to establish the core data-processing workflow and built roughly 200 JSP front-end screens.",
-      "techStack": ["JSP", "JavaScript", "jQuery"]
+      "techStack": ["JSP", "JavaScript", "jQuery"],
+      "hasDemo": true
     },
     {
       "title": "Shinhan Investment Corp. – Customer Notification Digitalization",
       "period": "2022.09 - 2023.04",
       "description": "Built a system to process and map tens of thousands of records of core brokerage data. As project lead, I defined the data structure and formatting rules, wrote the screen design specs, oversaw both front-end and back-end development, and built a PDF generation system using Clipreport.",
-      "techStack": ["Java", "Clipreport"]
+      "techStack": ["Java", "Clipreport"],
+      "hasDemo": true
     },
     {
       "title": "4Depth – Structuring the Maintenance Team",
