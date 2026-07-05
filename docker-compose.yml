@@ -2,7 +2,10 @@ services:
 
   # ── 1. React 화면 (Nginx) ──────────────────────────────────────
   frontend:
-    build: ./services/frontend
+    build:
+      context: ./services/frontend
+      args:
+        VITE_MEMBER_ONE_USERNAME: ${VITE_MEMBER_ONE_USERNAME}
     ports:
       - "8080:80"
     depends_on:
@@ -19,6 +22,12 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
       - SPRING_REDIS_HOST=${SPRING_REDIS_HOST}
       - SPRING_REDIS_PORT=${SPRING_REDIS_PORT}
+      - JPA_DDL_AUTO=validate
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - MEMBER_ONE_USERNAME=${MEMBER_ONE_USERNAME}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_APP_PASSWORD=${MAIL_APP_PASSWORD}
+      - FRONTEND_URL=${FRONTEND_URL}
     depends_on:
       - postgres
       - redis

@@ -27,6 +27,9 @@ public class Project {
     @Column(name = "tech")
     private List<String> techStack = new ArrayList<>();
 
+    @Column(name = "has_demo", nullable = false)
+    private boolean hasDemo = false;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private PortfolioOwner owner;
@@ -47,6 +50,9 @@ public class Project {
 
     public List<String> getTechStack() { return techStack; }
     public void setTechStack(List<String> techStack) { this.techStack = techStack; }
+
+    public boolean isHasDemo() { return hasDemo; }
+    public void setHasDemo(boolean hasDemo) { this.hasDemo = hasDemo; }
 
     public PortfolioOwner getOwner() { return owner; }
     public void setOwner(PortfolioOwner owner) { this.owner = owner; }

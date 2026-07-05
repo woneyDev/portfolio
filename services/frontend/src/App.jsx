@@ -1,83 +1,30 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import HeroSection from './components/HeroSection';
 import IntroSection from './components/IntroSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import CareerSection from './components/CareerSection';
 import PrivateRoute from './components/PrivateRoute';
-import LanguageSwitcher from './components/LanguageSwitcher';
+import Navbar from './components/Navbar';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import PublicPortfolio from './pages/PublicPortfolio';
+import VerifyEmail from './pages/VerifyEmail';
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 import portfolioDataKo from './data/portfolio.json';
 import portfolioDataEn from './data/portfolio.en.json';
 import './App.css';
 
-const NAVBAR_HEIGHT = 56;
+const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
-function easeInOutQuad(t) {
-  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-}
-
-function animatedScrollTo(targetY, duration = 700) {
-  const startY = window.scrollY;
-  const distance = targetY - startY;
-  let startTime = null;
-
-  function step(timestamp) {
-    if (startTime === null) startTime = timestamp;
-    const progress = Math.min((timestamp - startTime) / duration, 1);
-    window.scrollTo(0, startY + distance * easeInOutQuad(progress));
-    if (progress < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function scrollToSection(e, id) {
-  e.preventDefault();
-  burst(e);
-  const el = document.getElementById(id);
-  if (!el) return;
-  const targetY = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-  animatedScrollTo(targetY);
-}
-
-function burst(e) {
-  const colors = ['#2563eb', '#60a5fa', '#93c5fd', '#3b82f6', '#1d4ed8'];
-  const count = 10;
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('span');
-    p.className = 'nav-particle';
-    document.body.appendChild(p);
-    const angle = (i / count) * 360;
-    const dist = 28 + Math.random() * 22;
-    p.style.left = e.clientX + 'px';
-    p.style.top = e.clientY + 'px';
-    p.style.setProperty('--dx', `${Math.cos((angle * Math.PI) / 180) * dist}px`);
-    p.style.setProperty('--dy', `${Math.sin((angle * Math.PI) / 180) * dist}px`);
-    p.style.background = colors[i % colors.length];
-    setTimeout(() => p.remove(), 650);
-  }
-}
-
-function Portfolio() {
+// 데모용 정적 페이지 — 실제 회원 데이터가 아닌 빌드에 포함된 예시 콘텐츠(portfolio.json)를 보여줍니다.
+function StaticDemoPortfolio() {
   const { lang, t } = useLanguage();
   const portfolioData = lang === 'en' ? portfolioDataEn : portfolioDataKo;
 
   return (
     <div className="portfolio">
-      <nav className="navbar">
-        <span className="nav-brand">Portfolio</span>
-        <div className="nav-right">
-          <div className="nav-links">
-            <a href="#intro" onClick={(e) => scrollToSection(e, 'intro')}>{t.nav.intro}</a>
-            <a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>{t.nav.skills}</a>
-            <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>{t.nav.projects}</a>
-            <a href="#career" onClick={(e) => scrollToSection(e, 'career')}>{t.nav.career}</a>
-          </div>
-          <LanguageSwitcher />
-        </div>
-      </nav>
+      <Navbar sectionIds={{ intro: true }} />
       <main>
         <HeroSection data={portfolioData.hero} />
         <div id="intro" className="scroll-anchor"><IntroSection data={portfolioData.intro} /></div>
@@ -97,7 +44,10 @@ export default function App() {
     <LanguageProvider>
       <HashRouter>
         <Routes>
-          <Route path="/" element={<Portfolio />} />
+          <Route path="/" element={<Navigate to={`/@${MEMBER_ONE_USERNAME}`} replace />} />
+          <Route path="/demo" element={<StaticDemoPortfolio />} />
+          <Route path="/@:username" element={<PublicPortfolio />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route
             path="/admin/dashboard"

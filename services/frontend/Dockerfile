@@ -1,6 +1,8 @@
 # 빌드 단계
 FROM node:24-alpine AS builder
 WORKDIR /app
+ARG VITE_MEMBER_ONE_USERNAME
+ENV VITE_MEMBER_ONE_USERNAME=$VITE_MEMBER_ONE_USERNAME
 COPY package*.json ./
 RUN npm ci
 COPY . .

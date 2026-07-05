@@ -25,6 +25,10 @@ public class PortfolioOwner {
     @Column(nullable = false)
     private String githubUrl;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false, unique = true)
+    private Member member;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Skill> skills = new LinkedHashSet<>();
 
@@ -50,6 +54,9 @@ public class PortfolioOwner {
 
     public String getGithubUrl() { return githubUrl; }
     public void setGithubUrl(String githubUrl) { this.githubUrl = githubUrl; }
+
+    public Member getMember() { return member; }
+    public void setMember(Member member) { this.member = member; }
 
     public Set<Skill> getSkills() { return skills; }
     public void setSkills(Set<Skill> skills) { this.skills = skills; }

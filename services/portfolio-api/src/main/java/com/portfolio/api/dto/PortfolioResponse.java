@@ -9,18 +9,21 @@ import java.util.List;
 
 public class PortfolioResponse {
 
+    private final String username;
     private final HeroDto hero;
     private final List<SkillDto> skills;
     private final List<ProjectDto> projects;
     private final List<CareerDto> career;
 
     public PortfolioResponse(PortfolioOwner owner) {
+        this.username = owner.getMember().getUsername();
         this.hero = new HeroDto(owner);
         this.skills = owner.getSkills().stream().map(SkillDto::new).toList();
         this.projects = owner.getProjects().stream().map(ProjectDto::new).toList();
         this.career = owner.getCareers().stream().map(CareerDto::new).toList();
     }
 
+    public String getUsername() { return username; }
     public HeroDto getHero() { return hero; }
     public List<SkillDto> getSkills() { return skills; }
     public List<ProjectDto> getProjects() { return projects; }
@@ -32,15 +35,15 @@ public class PortfolioResponse {
         }
     }
 
-    public record SkillDto(String name, String level) {
+    public record SkillDto(String name, String category) {
         public SkillDto(Skill s) {
-            this(s.getName(), s.getLevel());
+            this(s.getName(), s.getCategory());
         }
     }
 
-    public record ProjectDto(String title, String description, String period, List<String> techStack) {
+    public record ProjectDto(String title, String description, String period, List<String> techStack, boolean hasDemo) {
         public ProjectDto(Project p) {
-            this(p.getTitle(), p.getDescription(), p.getPeriod(), p.getTechStack());
+            this(p.getTitle(), p.getDescription(), p.getPeriod(), p.getTechStack(), p.isHasDemo());
         }
     }
 

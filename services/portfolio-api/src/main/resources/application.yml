@@ -8,18 +8,40 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:portfolio_user}
     password: ${SPRING_DATASOURCE_PASSWORD:changeme}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 3000
+      idle-timeout: 600000
 
   # ── JPA 설정 ──
   jpa:
     hibernate:
-      # 로컬 개발: docker-compose에서 JPA_DDL_AUTO=update 주입
-      # 운영(AWS): JPA_DDL_AUTO=validate 주입 — 자동 스키마 변경 차단
+      # 스키마 변경은 Flyway가 전담합니다 (docker-compose의 JPA_DDL_AUTO도 validate로 고정)
       ddl-auto: ${JPA_DDL_AUTO:validate}
     show-sql: ${JPA_SHOW_SQL:false}
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+  # ── Flyway 스키마 마이그레이션 ──
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 1
+    placeholders:
+      member1Username: ${MEMBER_ONE_USERNAME:woney}
+      adminPassword: ${ADMIN_PASSWORD}
+
+  # ── 이메일 발송 (회원가입 인증 메일) ──
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_APP_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 
   # ── Redis 연결 (중복 로그인 차단 + 서비스 간 캐싱) ──
   data:
@@ -36,6 +58,7 @@ server:
 session:
   ttl-seconds: ${SESSION_TTL_SECONDS:3600}
 
-# ── 관리자 인증 (환경변수 주입 필수 — 기본값 없음) ──
-admin:
-  password: ${ADMIN_PASSWORD}
+# ── 애플리케이션 설정 ──
+app:
+  # 인증 메일 링크에 사용할 프론트엔드 주소
+  frontend-url: ${FRONTEND_URL:http://localhost:8080}

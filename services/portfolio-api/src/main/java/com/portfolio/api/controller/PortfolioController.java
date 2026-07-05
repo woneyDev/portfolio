@@ -1,67 +1,55 @@
 package com.portfolio.api.controller;
 
+import com.portfolio.api.config.AuthInterceptor;
 import com.portfolio.api.dto.PortfolioResponse;
+import com.portfolio.api.dto.UpdatePortfolioRequest;
 import com.portfolio.api.service.PortfolioService;
-import com.portfolio.api.session.SessionManager;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Value;
+import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
 public class PortfolioController {
 
     private final PortfolioService portfolioService;
-    private final SessionManager sessionManager;
 
-    @Value("${admin.password}")
-    private String adminPassword;
-
-    public PortfolioController(PortfolioService portfolioService, SessionManager sessionManager) {
+    public PortfolioController(PortfolioService portfolioService) {
         this.portfolioService = portfolioService;
-        this.sessionManager = sessionManager;
     }
 
-    @GetMapping("/portfolio")
-    public ResponseEntity<PortfolioResponse> getPortfolio() {
-        return ResponseEntity.ok(portfolioService.getPortfolio());
-    }
-
-    @PostMapping("/auth/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> credentials) {
-        String userId = credentials.get("userId");
-        String password = credentials.get("password");
-
-        if (!"admin".equals(userId) || !adminPassword.equals(password)) {
-            return ResponseEntity.status(401).body(Map.of("error", "인증 실패"));
+    @GetMapping("/portfolio/{username}")
+    public ResponseEntity<String> getPortfolioByUsername(@PathVariable String username) {
+        try {
+            String json = portfolioService.getPortfolioJsonByUsername(username.toLowerCase());
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .header("Cache-Control", "public, max-age=60")
+                    .body(json);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
         }
-
-        String token = sessionManager.createSession(userId);
-        return ResponseEntity.ok(Map.of("token", token, "message", "로그인 성공"));
     }
 
-    @PostMapping("/auth/logout")
-    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
-        String token = extractToken(request);
-        if (token != null) {
-            sessionManager.invalidateSession(token);
-        }
-        return ResponseEntity.ok(Map.of("message", "로그아웃 완료"));
+    @GetMapping("/portfolio/me")
+    public ResponseEntity<PortfolioResponse> getMyPortfolio(
+            @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId) {
+        return ResponseEntity.ok(portfolioService.getMyPortfolio(memberId));
+    }
+
+    @PutMapping("/portfolio/me")
+    public ResponseEntity<PortfolioResponse> updateMyPortfolio(
+            @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId,
+            @Valid @RequestBody UpdatePortfolioRequest request) {
+        return ResponseEntity.ok(portfolioService.updateMyPortfolio(memberId, request));
     }
 
     @GetMapping("/health")
     public ResponseEntity<Map<String, String>> health() {
         return ResponseEntity.ok(Map.of("status", "UP", "service", "portfolio-api"));
-    }
-
-    private String extractToken(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer ")) {
-            return header.substring(7);
-        }
-        return null;
     }
 }
