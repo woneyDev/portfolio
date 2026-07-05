@@ -7,7 +7,7 @@ export default function CareerSection({ data }) {
       <h2 className="section-title">{t.sectionTitles.career}</h2>
       <div className="timeline">
         {data.map((item) => (
-          <div key={item.company} className="timeline-item">
+          <div key={`${item.company}-${item.period}`} className="timeline-item">
             <div className="timeline-marker" />
             <div className="timeline-body">
               <div className="timeline-header">

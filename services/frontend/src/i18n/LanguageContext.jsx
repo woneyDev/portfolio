@@ -3,8 +3,13 @@ import { strings } from './strings';
 
 const LanguageContext = createContext(null);
 
+function detectBrowserLang() {
+  const browserLang = navigator.language || navigator.languages?.[0] || '';
+  return browserLang.toLowerCase().startsWith('ko') ? 'ko' : 'en';
+}
+
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'ko');
+  const [lang, setLang] = useState(() => localStorage.getItem('lang') || detectBrowserLang());
 
   useEffect(() => {
     localStorage.setItem('lang', lang);
