@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { api, API_BASE_URL } from '../api-client';
+import { api } from '../api-client';
 import './Admin.css';
 
 // ── 임시 조치: 실제 서버(VPS)가 준비되기 전까지, 백엔드 없이도 정적 데모 화면을 볼 수 있게 하는 우회 ──
@@ -66,15 +66,15 @@ export default function AdminLogin() {
         </button>
 
         <div className="admin-oauth-divider">또는</div>
-        <a className="admin-btn admin-oauth-btn admin-oauth-google" href={`${API_BASE_URL}/api/auth/oauth/google/authorize`}>
+        <button type="button" className="admin-btn admin-oauth-btn admin-oauth-google" disabled title="준비 중입니다">
           Google로 로그인
-        </a>
-        <a className="admin-btn admin-oauth-btn admin-oauth-kakao" href={`${API_BASE_URL}/api/auth/oauth/kakao/authorize`}>
+        </button>
+        <button type="button" className="admin-btn admin-oauth-btn admin-oauth-kakao" disabled title="준비 중입니다">
           카카오로 로그인
-        </a>
-        <a className="admin-btn admin-oauth-btn admin-oauth-naver" href={`${API_BASE_URL}/api/auth/oauth/naver/authorize`}>
+        </button>
+        <button type="button" className="admin-btn admin-oauth-btn admin-oauth-naver" disabled title="준비 중입니다">
           네이버로 로그인
-        </a>
+        </button>
       </form>
     </div>
   );
