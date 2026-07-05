@@ -66,18 +66,64 @@ public class MemberService {
         member.setCreatedAt(Instant.now());
         member = memberRepository.save(member);
 
-        PortfolioOwner owner = new PortfolioOwner();
-        owner.setTitle("");
-        owner.setSubtitle("");
-        owner.setEmail(email);
-        owner.setGithubUrl("");
-        owner.setMember(member);
-        portfolioOwnerRepository.save(owner);
+        createBlankPortfolio(member, email);
 
         String verificationUrl = frontendUrl + "/#/verify-email?token=" + member.getVerificationToken();
         mailService.sendVerificationEmail(member.getEmail(), verificationUrl);
 
         return member;
+    }
+
+    /**
+     * 소셜 로그인(구글/카카오/네이버)으로 처음 들어온 사용자를 위한 회원 조회/생성.
+     * 같은 이메일의 기존 회원이 있으면 그 회원으로 간주해 연결하고, 없으면 새로 만든다.
+     * 소셜 로그인은 해당 서비스가 이미 이메일을 검증했으므로 emailVerified=true로 시작하고
+     * 비밀번호는 없다(passwordHash=null) — 나중에 원하면 비밀번호를 별도로 설정할 수 있다.
+     */
+    @Transactional
+    public Member findOrCreateForOAuth(String email) {
+        String normalizedEmail = email.toLowerCase();
+        return memberRepository.findByEmail(normalizedEmail)
+                .orElseGet(() -> {
+                    Member member = new Member();
+                    member.setUsername(generateUniqueUsername(normalizedEmail));
+                    member.setEmail(normalizedEmail);
+                    member.setPasswordHash(null);
+                    member.setEmailVerified(true);
+                    member.setCreatedAt(Instant.now());
+                    Member saved = memberRepository.save(member);
+                    createBlankPortfolio(saved, normalizedEmail);
+                    return saved;
+                });
+    }
+
+    private void createBlankPortfolio(Member member, String contactEmail) {
+        PortfolioOwner owner = new PortfolioOwner();
+        owner.setTitle("");
+        owner.setSubtitle("");
+        owner.setEmail(contactEmail);
+        owner.setGithubUrl("");
+        owner.setMember(member);
+        portfolioOwnerRepository.save(owner);
+    }
+
+    private String generateUniqueUsername(String email) {
+        String base = email.substring(0, email.indexOf('@')).toLowerCase()
+                .replaceAll("[^a-z0-9_-]", "");
+        if (base.isEmpty() || !base.matches("^[a-z0-9].*")) {
+            base = "user" + base;
+        }
+        if (base.length() > 27) {
+            base = base.substring(0, 27);
+        }
+
+        String candidate = base;
+        int suffix = 2;
+        while (RESERVED_USERNAMES.contains(candidate) || memberRepository.existsByUsername(candidate)) {
+            candidate = base + suffix;
+            suffix++;
+        }
+        return candidate;
     }
 
     @Transactional
@@ -101,7 +147,7 @@ public class MemberService {
                 .or(() -> memberRepository.findByEmail(normalized))
                 .orElseThrow(InvalidCredentialsException::new);
 
-        if (!passwordEncoder.matches(rawPassword, member.getPasswordHash())) {
+        if (member.getPasswordHash() == null || !passwordEncoder.matches(rawPassword, member.getPasswordHash())) {
             throw new InvalidCredentialsException();
         }
         if (!member.isEmailVerified()) {

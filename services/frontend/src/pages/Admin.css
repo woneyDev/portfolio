@@ -71,6 +71,26 @@
 .admin-btn:hover:not(:disabled) { background: #1d4ed8; }
 .admin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* 소셜 로그인 */
+.admin-oauth-divider {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0.25rem;
+}
+.admin-oauth-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.admin-oauth-google { background: #fff; color: #1f2937; border: 1px solid #d1d5db; }
+.admin-oauth-google:hover { background: #f3f4f6; }
+.admin-oauth-kakao { background: #fee500; color: #1f2937; }
+.admin-oauth-kakao:hover { background: #fada0a; }
+.admin-oauth-naver { background: #03c75a; color: #fff; }
+.admin-oauth-naver:hover { background: #02b350; }
+
 /* 대시보드 레이아웃 */
 .admin-wrap {
   display: flex;

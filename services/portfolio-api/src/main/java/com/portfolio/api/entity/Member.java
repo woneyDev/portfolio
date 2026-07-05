@@ -22,7 +22,8 @@ public class Member {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "password_hash", nullable = false, length = 60)
+    // 소셜 로그인만으로 가입한 회원은 비밀번호가 없어 null일 수 있음
+    @Column(name = "password_hash", length = 60)
     private String passwordHash;
 
     @Column(name = "email_verified", nullable = false)

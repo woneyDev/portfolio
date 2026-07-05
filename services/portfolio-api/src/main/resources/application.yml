@@ -62,3 +62,18 @@ session:
 app:
   # 인증 메일 링크에 사용할 프론트엔드 주소
   frontend-url: ${FRONTEND_URL:http://localhost:8080}
+
+# ── 소셜 로그인 (클라이언트 ID/비밀키가 없으면 해당 제공자는 그냥 작동하지 않을 뿐, 앱 시작에는 영향 없음) ──
+oauth:
+  google:
+    client-id: ${GOOGLE_CLIENT_ID:}
+    client-secret: ${GOOGLE_CLIENT_SECRET:}
+    redirect-uri: ${GOOGLE_REDIRECT_URI:http://localhost:8081/api/auth/oauth/google/callback}
+  kakao:
+    client-id: ${KAKAO_CLIENT_ID:}
+    client-secret: ${KAKAO_CLIENT_SECRET:}
+    redirect-uri: ${KAKAO_REDIRECT_URI:http://localhost:8081/api/auth/oauth/kakao/callback}
+  naver:
+    client-id: ${NAVER_CLIENT_ID:}
+    client-secret: ${NAVER_CLIENT_SECRET:}
+    redirect-uri: ${NAVER_REDIRECT_URI:http://localhost:8081/api/auth/oauth/naver/callback}

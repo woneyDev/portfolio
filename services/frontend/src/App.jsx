@@ -10,6 +10,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import PublicPortfolio from './pages/PublicPortfolio';
 import VerifyEmail from './pages/VerifyEmail';
+import OAuthCallback from './pages/OAuthCallback';
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 import portfolioDataKo from './data/portfolio.json';
 import portfolioDataEn from './data/portfolio.en.json';
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/demo" element={<StaticDemoPortfolio />} />
           <Route path="/@:username" element={<PublicPortfolio />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/oauth-callback" element={<OAuthCallback />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route
             path="/admin/dashboard"
