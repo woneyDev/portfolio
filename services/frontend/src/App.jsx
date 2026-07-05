@@ -5,9 +5,12 @@ import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import CareerSection from './components/CareerSection';
 import PrivateRoute from './components/PrivateRoute';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
-import portfolioData from './data/portfolio.json';
+import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
+import portfolioDataKo from './data/portfolio.json';
+import portfolioDataEn from './data/portfolio.en.json';
 import './App.css';
 
 const NAVBAR_HEIGHT = 56;
@@ -58,15 +61,21 @@ function burst(e) {
 }
 
 function Portfolio() {
+  const { lang, t } = useLanguage();
+  const portfolioData = lang === 'en' ? portfolioDataEn : portfolioDataKo;
+
   return (
     <div className="portfolio">
       <nav className="navbar">
         <span className="nav-brand">Portfolio</span>
-        <div className="nav-links">
-          <a href="#intro" onClick={(e) => scrollToSection(e, 'intro')}>소개</a>
-          <a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>기술 스택</a>
-          <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>프로젝트</a>
-          <a href="#career" onClick={(e) => scrollToSection(e, 'career')}>경력</a>
+        <div className="nav-right">
+          <div className="nav-links">
+            <a href="#intro" onClick={(e) => scrollToSection(e, 'intro')}>{t.nav.intro}</a>
+            <a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>{t.nav.skills}</a>
+            <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>{t.nav.projects}</a>
+            <a href="#career" onClick={(e) => scrollToSection(e, 'career')}>{t.nav.career}</a>
+          </div>
+          <LanguageSwitcher />
         </div>
       </nav>
       <main>
@@ -77,7 +86,7 @@ function Portfolio() {
         <div id="career" className="scroll-anchor"><CareerSection data={portfolioData.career} /></div>
       </main>
       <footer className="footer">
-        <p>© 2026 · Built with React · Hosted on GitHub Pages</p>
+        <p>{t.footer}</p>
       </footer>
     </div>
   );
@@ -85,19 +94,21 @@ function Portfolio() {
 
 export default function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Portfolio />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route
-          path="/admin/dashboard"
-          element={
-            <PrivateRoute>
-              <AdminDashboard />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </HashRouter>
+    <LanguageProvider>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Portfolio />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <PrivateRoute>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </HashRouter>
+    </LanguageProvider>
   );
 }

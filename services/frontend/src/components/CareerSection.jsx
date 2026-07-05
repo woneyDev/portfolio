@@ -1,7 +1,10 @@
+import { useLanguage } from '../i18n/LanguageContext';
+
 export default function CareerSection({ data }) {
+  const { t } = useLanguage();
   return (
     <section className="section career">
-      <h2 className="section-title">경력</h2>
+      <h2 className="section-title">{t.sectionTitles.career}</h2>
       <div className="timeline">
         {data.map((item) => (
           <div key={item.company} className="timeline-item">

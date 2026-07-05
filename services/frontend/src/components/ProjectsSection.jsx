@@ -1,7 +1,10 @@
+import { useLanguage } from '../i18n/LanguageContext';
+
 export default function ProjectsSection({ data }) {
+  const { t } = useLanguage();
   return (
     <section className="section projects">
-      <h2 className="section-title">프로젝트</h2>
+      <h2 className="section-title">{t.sectionTitles.projects}</h2>
       <div className="projects-grid">
         {data.map((project) => (
           <div key={project.title} className="project-card">

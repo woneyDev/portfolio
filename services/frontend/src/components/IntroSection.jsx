@@ -1,9 +1,11 @@
 import profilePhoto from "../assets/profile.jpg";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function IntroSection({ data }) {
+  const { t } = useLanguage();
   return (
     <section className="section intro">
-      <h2 className="section-title">자기소개</h2>
+      <h2 className="section-title">{t.sectionTitles.intro}</h2>
       <div className="intro-layout">
         <div className="intro-photo">
           <img src={profilePhoto} alt="프로필 사진" />

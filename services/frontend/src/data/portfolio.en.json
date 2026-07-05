@@ -1,0 +1,77 @@
+{
+  "hero": {
+    "title": "Hi, I'm Wonhee Ryu — a developer aiming to become an irreplaceable specialist.",
+    "subtitle": "From processing core financial-sector data to running a maintenance organization, I build reliable systems drawing on end-to-end experience — from planning through development.",
+    "email": "woneydepp@gmail.com",
+    "github": "https://github.com/woneyDev"
+  },
+  "intro": {
+    "name": "Wonhee Ryu",
+    "greeting": "Hello, I'm Wonhee Ryu, a developer aiming to become an irreplaceable specialist.",
+    "paragraphs": [
+      {
+        "heading": "Diverse Project Experience",
+        "body": "I successfully launched the Korea Credit Guarantee Fund's mobile e-notification system and led the digital transformation of Shinhan Investment Corp.'s customer notification operations. As team lead on the Shinhan Investment project, I drove the entire process end-to-end, from planning through development. Through close communication with business stakeholders and developers, I designed and built programs to process and map complex core financial data. Later, as head of the maintenance team, I managed contracts with roughly 20 client companies, delivering stable service while strengthening both team operations and client management."
+      },
+      {
+        "heading": "Organizational Management & Internal System Improvements",
+        "body": "After being appointed lead of the newly formed maintenance team, I closely studied each client's distinct database structure and customizations, and restructured our workflow so two team members could efficiently share client responsibilities. I designed and built an in-house, JPA-based management system to share maintenance status — inspection schedules, client requests, and more — across the team in real time, running it on our internal network. This system later became the basis for a standardized solution model."
+      }
+    ]
+  },
+  "skills": [
+    { "category": "Backend", "items": ["Java", "Spring", "Spring Boot", "JPA", "QueryDSL", "MyBatis"] },
+    { "category": "Frontend", "items": ["HTML/CSS", "JSP", "JavaScript", "jQuery", "JSTL"] },
+    { "category": "Database", "items": ["Oracle", "MariaDB", "MySQL"] },
+    { "category": "Tools & DevOps", "items": ["Git", "SVN", "Linux (CentOS7)"] },
+    { "category": "Reporting Tool", "items": ["Clipreport"] }
+  ],
+  "projects": [
+    {
+      "title": "Korea Credit Guarantee Fund – Mobile e-Notification",
+      "period": "2022.06 - 2022.07",
+      "description": "A mobile e-notification system that delivers messages to customers in real time at scheduled send times, replacing paper mail. Worked with in-house developers to establish the core data-processing workflow and built roughly 200 JSP front-end screens.",
+      "techStack": ["JSP", "JavaScript", "jQuery"]
+    },
+    {
+      "title": "Shinhan Investment Corp. – Customer Notification Digitalization",
+      "period": "2022.09 - 2023.04",
+      "description": "Built a system to process and map tens of thousands of records of core brokerage data. As project lead, I defined the data structure and formatting rules, wrote the screen design specs, oversaw both front-end and back-end development, and built a PDF generation system using Clipreport.",
+      "techStack": ["Java", "Clipreport"]
+    },
+    {
+      "title": "4Depth – Structuring the Maintenance Team",
+      "period": "2023.12 - 2024.09",
+      "description": "As lead of the newly formed maintenance team, I analyzed each client system's characteristics and complexity to build a role-sharing structure with two teammates. I studied JPA and QueryDSL together with the team, introduced Git and code review practices, and secured numerous maintenance contract renewals.",
+      "techStack": ["JPA", "QueryDSL", "Git"]
+    }
+  ],
+  "career": [
+    {
+      "company": "4Depth",
+      "role": "Maintenance Team Lead",
+      "period": "2023.12 - 2024.09",
+      "achievements": [
+        "Oversaw operations for about 20 client companies and built an in-house maintenance management system",
+        "Drove client-requested improvements and additional development for maintenance accounts"
+      ]
+    },
+    {
+      "company": "4Depth",
+      "role": "IT Business Division 1, Team 1",
+      "period": "2022 - 2023",
+      "achievements": [
+        "Led the Shinhan Investment Corp. customer notification digitalization project (designed and built financial data processing and large-scale dispatch systems)",
+        "Contributed to the Korea Credit Guarantee Fund mobile e-notification project (front-end development, helped cut the project timeline by 50%)"
+      ]
+    },
+    {
+      "company": "Beborndays",
+      "role": "Business Support",
+      "period": "2020 - 2021",
+      "achievements": [
+        "Performed business support operations"
+      ]
+    }
+  ]
+}
