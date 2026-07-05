@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { api } from '../api-client';
+import LoginRequired from '../pages/LoginRequired';
 
 export default function PrivateRoute({ children }) {
   const token = localStorage.getItem('admin_token');
@@ -17,6 +17,6 @@ export default function PrivateRoute({ children }) {
   }, [token]);
 
   if (status === 'checking') return null;
-  if (status === 'unauthenticated') return <Navigate to="/admin" replace />;
+  if (status === 'unauthenticated') return <LoginRequired />;
   return children;
 }

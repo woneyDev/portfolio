@@ -11,6 +11,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import PublicPortfolio from './pages/PublicPortfolio';
 import VerifyEmail from './pages/VerifyEmail';
 import OAuthCallback from './pages/OAuthCallback';
+import LoginRequired from './pages/LoginRequired';
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 import portfolioDataKo from './data/portfolio.json';
 import portfolioDataEn from './data/portfolio.en.json';
@@ -59,6 +60,7 @@ export default function App() {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<LoginRequired />} />
         </Routes>
       </HashRouter>
     </LanguageProvider>
