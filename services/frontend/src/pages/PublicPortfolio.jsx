@@ -7,6 +7,9 @@ import HeroSection from '../components/HeroSection';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
 import CareerSection from '../components/CareerSection';
+import StaticDemoPortfolio from './StaticDemoPortfolio';
+
+const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
 function groupSkillsByCategory(flatSkills) {
   const grouped = new Map();
@@ -41,6 +44,12 @@ export default function PublicPortfolio() {
 
     return () => { cancelled = true; };
   }, [username]);
+
+  // 서버(API)가 아직 인터넷에 없어서 응답을 못 받는 경우 — 기본 회원(홈)이면 정적 데모 콘텐츠로 대신 보여준다.
+  // 서버가 실제로 준비되면 이 요청들은 정상 응답하게 되고, 이 대체 화면은 더 이상 나타나지 않는다.
+  if (status === 'error' && username?.toLowerCase() === MEMBER_ONE_USERNAME?.toLowerCase()) {
+    return <StaticDemoPortfolio />;
+  }
 
   return (
     <div className="portfolio">
