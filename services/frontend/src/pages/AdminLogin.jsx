@@ -3,6 +3,11 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api, API_BASE_URL } from '../api-client';
 import './Admin.css';
 
+// ── 임시 조치: 실제 서버(VPS)가 준비되기 전까지, 백엔드 없이도 정적 데모 화면을 볼 수 있게 하는 우회 ──
+// VPS 준비 후 실제 로그인이 완전히 자리잡으면 이 블록은 통째로 삭제한다.
+const TEMP_PREVIEW_ID = 'woney';
+const TEMP_PREVIEW_PASSWORD = '1123';
+
 export default function AdminLogin() {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +21,12 @@ export default function AdminLogin() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
+
+    if (usernameOrEmail === TEMP_PREVIEW_ID && password === TEMP_PREVIEW_PASSWORD) {
+      navigate('/demo');
+      return;
+    }
+
     setLoading(true);
     try {
       const data = await api.login(usernameOrEmail, password);
