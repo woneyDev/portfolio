@@ -39,3 +39,6 @@ tools/
 # AI 에이전트 작업 지침서 (내부 운영 정보 포함, 공개 저장소에 올리지 않음)
 CLAUDE.md
 xCLAUDE.md
+
+# 신한투자증권 직인(서명) 이미지 - 법적 위험으로 공개 저장소에 올리지 않음
+services/frontend/src/assets/jsp-demo/sign_shinhan_*.png

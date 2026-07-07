@@ -15,6 +15,15 @@ import './App.css';
 // (이 화면 전용 스타일이 포트폴리오 본문 스타일과 섞이지 않도록 분리)
 const ShinhanMonthlyBalance = lazy(() => import('./pages/demo/ShinhanMonthlyBalance'));
 
+// 신한투자증권 데모 화면 목록: routeKey -> 컴포넌트. 화면이 늘어날 때 이 배열에만 추가하면 됩니다.
+const DEMO_SCREEN_ROUTES = [
+  { routeKey: 'shinhan-half-year-balance', Component: lazy(() => import('./pages/demo/screens/AAA003HalfYearBalance')) },
+  { routeKey: 'shinhan-agent-notice', Component: lazy(() => import('./pages/demo/screens/AAA004AgentNotice')) },
+  { routeKey: 'shinhan-dormant-assets', Component: lazy(() => import('./pages/demo/screens/AAA005DormantAssets')) },
+  { routeKey: 'shinhan-terms-change-notice', Component: lazy(() => import('./pages/demo/screens/AAA006TermsChangeNotice')) },
+  { routeKey: 'shinhan-wrap-report', Component: lazy(() => import('./pages/demo/screens/BAA001WrapPerformanceReport')) },
+];
+
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
 export default function App() {
@@ -32,6 +41,17 @@ export default function App() {
               </Suspense>
             }
           />
+          {DEMO_SCREEN_ROUTES.map(({ routeKey, Component }) => (
+            <Route
+              key={routeKey}
+              path={`/project-demo/${routeKey}`}
+              element={
+                <Suspense fallback={null}>
+                  <Component />
+                </Suspense>
+              }
+            />
+          ))}
           <Route path="/@:username" element={<PublicPortfolio />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/oauth-callback" element={<OAuthCallback />} />

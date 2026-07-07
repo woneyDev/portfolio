@@ -46,6 +46,26 @@
           {
             "screenName": "Monthly Transactions & Balance",
             "routeKey": "shinhan-monthly-balance"
+          },
+          {
+            "screenName": "Semi-Annual Balance Status",
+            "routeKey": "shinhan-half-year-balance"
+          },
+          {
+            "screenName": "Multi-Account Order Agent Notice",
+            "routeKey": "shinhan-agent-notice"
+          },
+          {
+            "screenName": "Dormant Securities Assets Notice",
+            "routeKey": "shinhan-dormant-assets"
+          },
+          {
+            "screenName": "Integrated Account Management Terms Change Notice",
+            "routeKey": "shinhan-terms-change-notice"
+          },
+          {
+            "screenName": "Discretionary Wrap Account Performance Report",
+            "routeKey": "shinhan-wrap-report"
           }
         ]
       }

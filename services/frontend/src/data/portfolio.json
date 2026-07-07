@@ -46,6 +46,26 @@
           {
             "screenName": "월간거래내역 및 잔고",
             "routeKey": "shinhan-monthly-balance"
+          },
+          {
+            "screenName": "반기잔고 현황",
+            "routeKey": "shinhan-half-year-balance"
+          },
+          {
+            "screenName": "다수계좌 주문대리인 안내",
+            "routeKey": "shinhan-agent-notice"
+          },
+          {
+            "screenName": "휴면성 증권자산 안내문",
+            "routeKey": "shinhan-dormant-assets"
+          },
+          {
+            "screenName": "계좌통합관리서비스 약관 변경 안내",
+            "routeKey": "shinhan-terms-change-notice"
+          },
+          {
+            "screenName": "일임형 종합자산관리계좌 성과보고서",
+            "routeKey": "shinhan-wrap-report"
           }
         ]
       }
