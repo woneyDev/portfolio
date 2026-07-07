@@ -1,0 +1,135 @@
+// 실제 고객 데이터가 아닌, 화면 구조를 보여주기 위한 예시(더미) 데이터입니다.
+// BAA001(단품_국내, 154)과 문구가 거의 동일하여 공통 문구는 그대로 재사용합니다.
+import { text as baseText } from './baa001Data';
+
+export const text = {
+  ...baseText,
+  s3aTit: { ko: '자산 유형별 현황', en: 'Status by Asset Type' },
+  assetTypeWeightTit: { ko: '국가별 자산 비중', en: 'Weight by Country' },
+  s3cTit: { ko: '나. 자산 종목 보유 현황', en: 'b. Asset Holdings Status' },
+};
+
+export const sampleData = {
+  baseDate: '2024-06-18',
+  contractor: { ko: '류원희', en: 'Wonhee Ryu' },
+  productName: { ko: '신한 마이더스 글로벌 랩', en: 'Shinhan Midas Global Wrap' },
+  accountNo: '40128765394',
+  firstContractDate: '2022.03.02',
+  investPeriod: 838,
+  infoBaseDate: '2024.06.18',
+  principal: 40000000,
+  withdrawal: 0,
+  fees: 298600,
+  valuation: 45238900,
+  cumulativeReturn: 13.10,
+  annualizedReturn: 5.42,
+  terminationDeduction: 95000,
+  expectedTermination: 45143900,
+  contractAmount: 40000000,
+  reportValuation: 45238900,
+  cumulativeProfit: 5238900,
+  cumulativeReturnFrom: '22년03월02일',
+  cumulativeReturnTo: '24년06월18일',
+  cumulativeReturnPct: 13.10,
+  quarterlyProfit: 512300,
+  quarterlyReturnFrom: '24년03월18일',
+  quarterlyReturnTo: '24년06월18일',
+  quarterlyReturnPct: 1.15,
+  wrapService: { ko: '신한 마이더스 글로벌 랩', en: 'Shinhan Midas Global Wrap' },
+  accountName: { ko: '류원희', en: 'Wonhee Ryu' },
+  riskTendency: { ko: '적극투자형', en: 'Aggressive' },
+  riskGrade: { ko: '2등급', en: 'Grade 2' },
+  serviceRegDate: '2022.03.02',
+  contractFrom: '2022.03.02',
+  contractTo: '2027.03.02',
+  overseasInvest: { ko: '해당', en: 'Yes' },
+  benchmark: { ko: 'S&P 500', en: 'S&P 500' },
+  expectedMaturity: '2027.03.02',
+  wrapBranch: { ko: '여의도금융센터', en: 'Yeouido Finance Center' },
+  wrapManager: { ko: '정하윤', en: 'Hayoon Jung' },
+  managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
+  managingAgent: { ko: '오세훈', en: 'Sehoon Oh' },
+  investTendency: { ko: '적극투자형', en: 'Aggressive' },
+  restriction: { ko: '해당없음', en: 'None' },
+  periodReturns: [
+    { division: { ko: '수익률(%)', en: 'Return (%)' }, m3: 2.41, m6: 4.62, m9: 7.85, m12: 10.20, cumulative: 13.10 },
+  ],
+  cumulativeLine: [
+    { date: '23.06', value: 3.2 }, { date: '23.09', value: 5.9 }, { date: '23.12', value: 8.4 },
+    { date: '24.03', value: 11.8 }, { date: '24.06', value: 13.10 },
+  ],
+  recent3mLine: [
+    { date: '04.01', value: 0.4 }, { date: '04.15', value: 0.2 }, { date: '05.01', value: 0.9 },
+    { date: '05.15', value: 1.3 }, { date: '06.01', value: 1.0 }, { date: '06.18', value: 1.15 },
+  ],
+  assetTypeHeaderCurrent: { ko: '당분기말', en: 'Current Quarter' },
+  assetTypeHeaderPrior: { ko: '전분기말', en: 'Prior Quarter' },
+  assetTypeRows: [
+    { name: { ko: '미국주식', en: 'US Equity' }, currentAmount: 22619450, currentWeight: 50.0, priorAmount: 20000000, priorWeight: 47.0 },
+    { name: { ko: '미국채권', en: 'US Bond' }, currentAmount: 13571670, currentWeight: 30.0, priorAmount: 13500000, priorWeight: 32.0 },
+    { name: { ko: '외화유동성', en: 'FX Liquidity' }, currentAmount: 9047780, currentWeight: 20.0, priorAmount: 8900000, priorWeight: 21.0 },
+  ],
+  assetTypeSum: { name: { ko: '합계', en: 'Total' }, currentAmount: 45238900, currentWeight: 100.0, priorAmount: 42400000, priorWeight: 100.0 },
+  holdings: [
+    { division: { ko: '주식', en: 'Equity' }, name: { ko: 'Apple Inc.', en: 'Apple Inc.' }, currency: { ko: 'USD', en: 'USD' }, region: { ko: '미국', en: 'US' }, qty: 85, avgPrice: 168.2, currentPrice: 195.8, returnRate: 16.41 },
+    { division: { ko: '채권', en: 'Bond' }, name: { ko: 'US Treasury 10Y', en: 'US Treasury 10Y' }, currency: { ko: 'USD', en: 'USD' }, region: { ko: '미국', en: 'US' }, qty: 15000, avgPrice: 96.5, currentPrice: 97.8, returnRate: 1.35 },
+  ],
+  managementStatus: {
+    ko: '분기 중 미국 빅테크 기업 비중을 유지하며 달러 강세에 대응해 외화유동성 비중을 소폭 확대했습니다.',
+    en: 'This quarter, we maintained our weighting in major US tech companies and slightly increased FX liquidity in response to dollar strength.',
+  },
+  managementPlan: {
+    ko: '다음 분기에는 미국 금리 인하 기대에 맞춰 채권 듀레이션을 확대할 계획입니다.',
+    en: 'Next quarter, we plan to extend bond duration in anticipation of US rate cuts.',
+  },
+  trades: [
+    { division: { ko: '매수', en: 'Buy' }, name: { ko: 'Apple Inc.', en: 'Apple Inc.' }, date: '2024-05-10', qty: 10, price: 189.4, amount: 1894, fee: 2, tax: 0 },
+  ],
+  mmw: [
+    { from: '2024.03.18', to: '2024.06.18', totalInvested: 226500000, totalRedeemed: 225980000, profitLoss: 38200 },
+  ],
+  buyAmount: 15200000,
+  sellAmount: 14650000,
+  turnoverCurrent: 10.8,
+  turnoverCurrentFrom: '2024.03.18',
+  turnoverCurrentTo: '2024.06.18',
+  turnoverCumulative: 38.6,
+  turnoverCumulativeFrom: '2022.03.02',
+  turnoverCumulativeTo: '2024.06.18',
+  deposits: [
+    { month: '2024.06', deposit: 0, withdrawal: 0, balance: 0 },
+  ],
+  rights: [
+    { division: { ko: '배당', en: 'Dividend' }, name: { ko: 'Apple Inc.', en: 'Apple Inc.' }, detailDivision: { ko: '현금배당', en: 'Cash Dividend' }, rightDetails: { ko: '배당금 지급', en: 'Dividend Payment' }, rightQty: 85, baseRate: 1385.2, amount: 68000, taxes: 10200 },
+  ],
+  riskExposure: {
+    ko: '해당 계좌는 미국주식 및 채권 중심으로 운용되며, 환율 및 해외시장 변동성에 따라 평가금액이 변동될 수 있습니다.',
+    en: 'This account is managed primarily in US equities and bonds, and the valuation amount may fluctuate with exchange rates and overseas market volatility.',
+  },
+  advisoryFirm: { ko: '해당 사항 없음', en: 'Not applicable' },
+  feeHistory: [
+    { from: '2024.03.18', to: '2024.06.18', discretionaryFee: 112400, performanceFee: 0, otherTradeCost: 0, taxes: 11240, otherCost: 0, totalCost: 123640 },
+  ],
+  wrapFeeBasis: {
+    ko: '랩수수료는 계약금액을 기준으로 연 0.9%를 분기별로 나누어 후취 방식으로 부과합니다.',
+    en: 'The wrap fee is charged quarterly in arrears at an annual rate of 0.9% based on the contract amount.',
+  },
+  performanceFeeBasis: {
+    ko: '별도의 성과보수는 부과하지 않습니다.',
+    en: 'No separate performance fee is charged.',
+  },
+  personnel: [
+    {
+      position: { ko: '팀장', en: 'Team Lead' },
+      name: { ko: '오세훈', en: 'Sehoon Oh' },
+      startDate: '2018.11.01',
+      contractCount: 142,
+      scale: 58900,
+      career: { ko: '신한자산운용 해외주식운용팀 12년 경력', en: '12 years at Shinhan Asset Management Overseas Equity Team' },
+      contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
+    },
+  ],
+  recommenderInfo: { ko: '신한투자증권 여의도금융센터', en: 'Shinhan Investment Corp. Yeouido Finance Center' },
+  recommenderContact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
+  signDate: '2024년06월18일',
+};
