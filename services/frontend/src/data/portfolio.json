@@ -98,6 +98,10 @@
           {
             "screenName": "특정금전신탁 분기 운용보고서",
             "routeKey": "shinhan-trust-quarterly-report"
+          },
+          {
+            "screenName": "펀드 수익률 보고서",
+            "routeKey": "shinhan-fund-return-report"
           }
         ]
       }

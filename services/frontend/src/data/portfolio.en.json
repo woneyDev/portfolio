@@ -98,6 +98,10 @@
           {
             "screenName": "Specific Money Trust Quarterly Management Report",
             "routeKey": "shinhan-trust-quarterly-report"
+          },
+          {
+            "screenName": "Fund Return Report",
+            "routeKey": "shinhan-fund-return-report"
           }
         ]
       }
