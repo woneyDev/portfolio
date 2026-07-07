@@ -1,0 +1,135 @@
+// 실제 고객 데이터가 아닌, 화면 구조를 보여주기 위한 예시(더미) 데이터입니다.
+// BAA001(단품_국내, 154)과 문구가 거의 동일하여 공통 문구는 그대로 재사용합니다.
+import { text as baseText } from './baa001Data';
+
+export const text = {
+  ...baseText,
+  s3aTit: { ko: '자산 유형별 현황', en: 'Status by Asset Type' },
+  assetTypeWeightTit: { ko: '자산 유형별 비중', en: 'Weight by Asset Type' },
+  s3cTit: { ko: '나. 자산 종목 보유 현황', en: 'b. Asset Holdings Status' },
+};
+
+export const sampleData = {
+  baseDate: '2024-06-18',
+  contractor: { ko: '류원희', en: 'Wonhee Ryu' },
+  productName: { ko: '신한 마이더스 EMA 랩', en: 'Shinhan Midas EMA Wrap' },
+  accountNo: '60384719255',
+  firstContractDate: '2023.01.10',
+  investPeriod: 526,
+  infoBaseDate: '2024.06.18',
+  principal: 25000000,
+  withdrawal: 0,
+  fees: 168400,
+  valuation: 27943500,
+  cumulativeReturn: 11.77,
+  annualizedReturn: 8.02,
+  terminationDeduction: 60000,
+  expectedTermination: 27883500,
+  contractAmount: 25000000,
+  reportValuation: 27943500,
+  cumulativeProfit: 2943500,
+  cumulativeReturnFrom: '23년01월10일',
+  cumulativeReturnTo: '24년06월18일',
+  cumulativeReturnPct: 11.77,
+  quarterlyProfit: 289400,
+  quarterlyReturnFrom: '24년03월18일',
+  quarterlyReturnTo: '24년06월18일',
+  quarterlyReturnPct: 1.05,
+  wrapService: { ko: '신한 마이더스 EMA 랩', en: 'Shinhan Midas EMA Wrap' },
+  accountName: { ko: '류원희', en: 'Wonhee Ryu' },
+  riskTendency: { ko: '위험중립형', en: 'Neutral' },
+  riskGrade: { ko: '3등급', en: 'Grade 3' },
+  serviceRegDate: '2023.01.10',
+  contractFrom: '2023.01.10',
+  contractTo: '2028.01.10',
+  overseasInvest: { ko: '해당없음', en: 'N/A' },
+  benchmark: { ko: 'KOSPI 200', en: 'KOSPI 200' },
+  expectedMaturity: '2028.01.10',
+  wrapBranch: { ko: '광화문금융센터', en: 'Gwanghwamun Finance Center' },
+  wrapManager: { ko: '조수민', en: 'Sumin Cho' },
+  managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
+  managingAgent: { ko: 'AI 알고리즘(EMA)', en: 'AI Algorithm (EMA)' },
+  investTendency: { ko: '위험중립형', en: 'Neutral' },
+  restriction: { ko: '해당없음', en: 'None' },
+  periodReturns: [
+    { division: { ko: '수익률(%)', en: 'Return (%)' }, m3: 1.85, m6: 3.42, m9: 6.90, m12: 9.85, cumulative: 11.77 },
+  ],
+  cumulativeLine: [
+    { date: '23.06', value: 1.5 }, { date: '23.09', value: 3.8 }, { date: '23.12', value: 6.2 },
+    { date: '24.03', value: 9.4 }, { date: '24.06', value: 11.77 },
+  ],
+  recent3mLine: [
+    { date: '04.01', value: 0.3 }, { date: '04.15', value: 0.5 }, { date: '05.01', value: 0.7 },
+    { date: '05.15', value: 0.8 }, { date: '06.01', value: 0.95 }, { date: '06.18', value: 1.05 },
+  ],
+  assetTypeHeaderCurrent: { ko: '당분기말', en: 'Current Quarter' },
+  assetTypeHeaderPrior: { ko: '전분기말', en: 'Prior Quarter' },
+  assetTypeRows: [
+    { name: { ko: '국내주식(EMA)', en: 'Domestic Equity (EMA)' }, currentAmount: 16766100, currentWeight: 60.0, priorAmount: 14200000, priorWeight: 55.0 },
+    { name: { ko: '국내채권', en: 'Domestic Bond' }, currentAmount: 8383050, currentWeight: 30.0, priorAmount: 8800000, priorWeight: 34.0 },
+    { name: { ko: '유동성', en: 'Liquidity' }, currentAmount: 2794350, currentWeight: 10.0, priorAmount: 2840000, priorWeight: 11.0 },
+  ],
+  assetTypeSum: { name: { ko: '합계', en: 'Total' }, currentAmount: 27943500, currentWeight: 100.0, priorAmount: 25840000, priorWeight: 100.0 },
+  holdings: [
+    { division: { ko: '주식', en: 'Equity' }, name: { ko: 'NAVER', en: 'NAVER Corp.' }, currency: { ko: 'KRW', en: 'KRW' }, region: { ko: '국내', en: 'Domestic' }, qty: 62, avgPrice: 182500, currentPrice: 198200, returnRate: 8.60 },
+    { division: { ko: '채권', en: 'Bond' }, name: { ko: '통안채 2년', en: 'MSB 2Y' }, currency: { ko: 'KRW', en: 'KRW' }, region: { ko: '국내', en: 'Domestic' }, qty: 8000000, avgPrice: 9905, currentPrice: 9948, returnRate: 0.43 },
+  ],
+  managementStatus: {
+    ko: 'EMA 알고리즘이 분기 중 변동성 신호에 따라 국내주식 비중을 자동으로 확대했습니다.',
+    en: 'This quarter, the EMA algorithm automatically increased domestic equity weighting in response to volatility signals.',
+  },
+  managementPlan: {
+    ko: '다음 분기에도 알고리즘 신호에 따라 자산배분을 동적으로 조정할 예정입니다.',
+    en: 'Next quarter, asset allocation will continue to be dynamically adjusted based on algorithmic signals.',
+  },
+  trades: [
+    { division: { ko: '매수', en: 'Buy' }, name: { ko: 'NAVER', en: 'NAVER Corp.' }, date: '2024-05-14', qty: 8, price: 191200, amount: 1529600, fee: 229, tax: 0 },
+  ],
+  mmw: [
+    { from: '2024.03.18', to: '2024.06.18', totalInvested: 68200000, totalRedeemed: 67950000, profitLoss: 11400 },
+  ],
+  buyAmount: 6820000,
+  sellAmount: 6410000,
+  turnoverCurrent: 11.2,
+  turnoverCurrentFrom: '2024.03.18',
+  turnoverCurrentTo: '2024.06.18',
+  turnoverCumulative: 52.6,
+  turnoverCumulativeFrom: '2023.01.10',
+  turnoverCumulativeTo: '2024.06.18',
+  deposits: [
+    { month: '2024.06', deposit: 0, withdrawal: 0, balance: 0 },
+  ],
+  rights: [
+    { division: { ko: '배당', en: 'Dividend' }, name: { ko: 'NAVER', en: 'NAVER Corp.' }, detailDivision: { ko: '현금배당', en: 'Cash Dividend' }, rightDetails: { ko: '배당금 지급', en: 'Dividend Payment' }, rightQty: 62, baseRate: 1, amount: 15500, taxes: 2387 },
+  ],
+  riskExposure: {
+    ko: '해당 계좌는 EMA 알고리즘에 따라 국내주식·채권 비중이 동적으로 조정되며, 시장 변동성에 따라 평가금액이 변동될 수 있습니다.',
+    en: 'This account’s domestic equity/bond weighting is dynamically adjusted by the EMA algorithm, and the valuation amount may fluctuate with market volatility.',
+  },
+  advisoryFirm: { ko: '해당 사항 없음', en: 'Not applicable' },
+  feeHistory: [
+    { from: '2024.03.18', to: '2024.06.18', discretionaryFee: 62800, performanceFee: 0, otherTradeCost: 0, taxes: 6280, otherCost: 0, totalCost: 69080 },
+  ],
+  wrapFeeBasis: {
+    ko: '랩수수료는 계약금액을 기준으로 연 0.6%를 분기별로 나누어 후취 방식으로 부과합니다.',
+    en: 'The wrap fee is charged quarterly in arrears at an annual rate of 0.6% based on the contract amount.',
+  },
+  performanceFeeBasis: {
+    ko: '별도의 성과보수는 부과하지 않습니다.',
+    en: 'No separate performance fee is charged.',
+  },
+  personnel: [
+    {
+      position: { ko: '퀀트팀장', en: 'Quant Team Lead' },
+      name: { ko: '조수민', en: 'Sumin Cho' },
+      startDate: '2021.09.01',
+      contractCount: 210,
+      scale: 41600,
+      career: { ko: '신한자산운용 퀀트운용팀 9년 경력', en: '9 years at Shinhan Asset Management Quant Team' },
+      contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
+    },
+  ],
+  recommenderInfo: { ko: '신한투자증권 광화문금융센터', en: 'Shinhan Investment Corp. Gwanghwamun Finance Center' },
+  recommenderContact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
+  signDate: '2024년06월18일',
+};

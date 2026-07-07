@@ -78,6 +78,10 @@
           {
             "screenName": "Discretionary Wrap Account Performance Report (157)",
             "routeKey": "shinhan-wrap-report-157"
+          },
+          {
+            "screenName": "Discretionary Wrap Account Performance Report (177)",
+            "routeKey": "shinhan-wrap-report-177"
           }
         ]
       }
