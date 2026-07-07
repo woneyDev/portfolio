@@ -102,6 +102,10 @@
           {
             "screenName": "Fund Return Report",
             "routeKey": "shinhan-fund-return-report"
+          },
+          {
+            "screenName": "Pension Savings Fund Return Report",
+            "routeKey": "shinhan-pension-fund-report"
           }
         ]
       }

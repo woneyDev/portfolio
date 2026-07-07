@@ -102,6 +102,10 @@
           {
             "screenName": "펀드 수익률 보고서",
             "routeKey": "shinhan-fund-return-report"
+          },
+          {
+            "screenName": "연금저축 수익률 보고서",
+            "routeKey": "shinhan-pension-fund-report"
           }
         ]
       }

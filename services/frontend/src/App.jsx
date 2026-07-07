@@ -31,6 +31,7 @@ const DEMO_SCREEN_ROUTES = [
   { routeKey: 'shinhan-trust-report', Component: lazy(() => import('./pages/demo/screens/BBD001TrustReport')) },
   { routeKey: 'shinhan-trust-quarterly-report', Component: lazy(() => import('./pages/demo/screens/BBD002TrustQuarterlyReport')) },
   { routeKey: 'shinhan-fund-return-report', Component: lazy(() => import('./pages/demo/screens/BCA001FundReturnReport')) },
+  { routeKey: 'shinhan-pension-fund-report', Component: lazy(() => import('./pages/demo/screens/BCA002PensionFundReport')) },
 ];
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
