@@ -1,0 +1,137 @@
+// 실제 고객 데이터가 아닌, 화면 구조를 보여주기 위한 예시(더미) 데이터입니다.
+// BAA001(단품_국내, 154)과 문구가 거의 동일하여 공통 문구는 그대로 재사용합니다.
+import { text as baseText } from './baa001Data';
+
+export const text = {
+  ...baseText,
+  s3aTit: { ko: '자산 유형별 현황', en: 'Status by Asset Type' },
+  assetTypeWeightTit: { ko: '유가 증권별 비중', en: 'Weight by Security' },
+  s3cTit: { ko: '나. 자산 종목 보유 현황', en: 'b. Asset Holdings Status' },
+};
+
+export const sampleData = {
+  baseDate: '2024-06-18',
+  contractor: { ko: '류원희', en: 'Wonhee Ryu' },
+  productName: { ko: '신한 마이더스 밸런스 랩', en: 'Shinhan Midas Balance Wrap' },
+  accountNo: '30947582615',
+  firstContractDate: '2021.09.01',
+  investPeriod: 1021,
+  infoBaseDate: '2024.06.18',
+  principal: 30000000,
+  withdrawal: 5000000,
+  fees: 214800,
+  valuation: 27862000,
+  cumulativeReturn: 12.94,
+  annualizedReturn: 4.62,
+  terminationDeduction: 80000,
+  expectedTermination: 27782000,
+  contractAmount: 30000000,
+  reportValuation: 27862000,
+  cumulativeProfit: 2862000,
+  cumulativeReturnFrom: '21년09월01일',
+  cumulativeReturnTo: '24년06월18일',
+  cumulativeReturnPct: 12.94,
+  quarterlyProfit: 312500,
+  quarterlyReturnFrom: '24년03월18일',
+  quarterlyReturnTo: '24년06월18일',
+  quarterlyReturnPct: 1.13,
+  wrapService: { ko: '신한 마이더스 밸런스 랩', en: 'Shinhan Midas Balance Wrap' },
+  accountName: { ko: '류원희', en: 'Wonhee Ryu' },
+  riskTendency: { ko: '위험중립형', en: 'Neutral' },
+  riskGrade: { ko: '3등급', en: 'Grade 3' },
+  serviceRegDate: '2021.09.01',
+  contractFrom: '2021.09.01',
+  contractTo: '2026.09.01',
+  overseasInvest: { ko: '해당없음', en: 'N/A' },
+  benchmark: { ko: 'KOSPI 200', en: 'KOSPI 200' },
+  expectedMaturity: '2026.09.01',
+  wrapBranch: { ko: '분당금융센터', en: 'Bundang Finance Center' },
+  wrapManager: { ko: '이하늘', en: 'Haneul Lee' },
+  managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
+  managingAgent: { ko: '최도윤', en: 'Doyun Choi' },
+  investTendency: { ko: '위험중립형', en: 'Neutral' },
+  restriction: { ko: '해당없음', en: 'None' },
+  periodReturns: [
+    { division: { ko: '수익률(%)', en: 'Return (%)' }, m3: 1.02, m6: 2.55, m9: 5.10, m12: 7.30, cumulative: 12.94 },
+  ],
+  cumulativeLine: [
+    { date: '23.06', value: 4.1 }, { date: '23.09', value: 6.4 }, { date: '23.12', value: 8.9 },
+    { date: '24.03', value: 11.6 }, { date: '24.06', value: 12.94 },
+  ],
+  recent3mLine: [
+    { date: '04.01', value: 0.2 }, { date: '04.15', value: 0.4 }, { date: '05.01', value: 0.6 },
+    { date: '05.15', value: 0.9 }, { date: '06.01', value: 1.0 }, { date: '06.18', value: 1.13 },
+  ],
+  assetTypeHeaderCurrent: { ko: '당분기말', en: 'Current Quarter' },
+  assetTypeHeaderPrior: { ko: '전분기말', en: 'Prior Quarter' },
+  assetTypeRows: [
+    { name: { ko: '국내주식형펀드', en: 'Domestic Equity Fund' }, currentAmount: 9752170, currentWeight: 35.0, priorAmount: 8900000, priorWeight: 32.0 },
+    { name: { ko: '국내채권형펀드', en: 'Domestic Bond Fund' }, currentAmount: 8358600, currentWeight: 30.0, priorAmount: 9100000, priorWeight: 33.0 },
+    { name: { ko: '해외주식형펀드', en: 'Overseas Equity Fund' }, currentAmount: 5015160, currentWeight: 18.0, priorAmount: 4500000, priorWeight: 16.0 },
+    { name: { ko: 'MMW', en: 'MMW' }, currentAmount: 3901680, currentWeight: 14.0, priorAmount: 4200000, priorWeight: 15.0 },
+    { name: { ko: '기타', en: 'Other' }, currentAmount: 834390, currentWeight: 3.0, priorAmount: 800000, priorWeight: 4.0 },
+  ],
+  assetTypeSum: { name: { ko: '합계', en: 'Total' }, currentAmount: 27862000, currentWeight: 100.0, priorAmount: 27500000, priorWeight: 100.0 },
+  holdings: [
+    { division: { ko: '펀드', en: 'Fund' }, name: { ko: '신한 코리아펀드', en: 'Shinhan Korea Fund' }, currency: { ko: 'KRW', en: 'KRW' }, region: { ko: '국내', en: 'Domestic' }, qty: 8520, avgPrice: 1144.5, currentPrice: 1287.2, returnRate: 12.47 },
+    { division: { ko: '펀드', en: 'Fund' }, name: { ko: '신한 글로벌리츠펀드', en: 'Shinhan Global REITs Fund' }, currency: { ko: 'USD', en: 'USD' }, region: { ko: '해외', en: 'Overseas' }, qty: 4230, avgPrice: 1085.3, currentPrice: 1186.0, returnRate: 9.28 },
+  ],
+  managementStatus: {
+    ko: '분기 중 국내채권 비중을 소폭 축소하고 해외주식형 펀드 비중을 확대하여 분산투자 효과를 강화했습니다.',
+    en: 'This quarter, we slightly reduced domestic bond weighting and increased overseas equity fund weighting to strengthen diversification.',
+  },
+  managementPlan: {
+    ko: '다음 분기에는 시장 변동성을 감안하여 MMW 비중을 소폭 확대할 계획입니다.',
+    en: 'Next quarter, we plan to modestly increase MMW allocation in light of market volatility.',
+  },
+  trades: [
+    { division: { ko: '매수', en: 'Buy' }, name: { ko: '신한 글로벌리츠펀드', en: 'Shinhan Global REITs Fund' }, date: '2024-04-15', qty: 500, price: 1150.2, amount: 575100, fee: 86, tax: 0 },
+  ],
+  mmw: [
+    { from: '2024.03.18', to: '2024.06.18', totalInvested: 98200000, totalRedeemed: 97850000, profitLoss: 16400 },
+  ],
+  buyAmount: 4820000,
+  sellAmount: 4510000,
+  turnoverCurrent: 8.6,
+  turnoverCurrentFrom: '2024.03.18',
+  turnoverCurrentTo: '2024.06.18',
+  turnoverCumulative: 31.4,
+  turnoverCumulativeFrom: '2021.09.01',
+  turnoverCumulativeTo: '2024.06.18',
+  deposits: [
+    { month: '2024.06', deposit: 0, withdrawal: 0, balance: 0 },
+  ],
+  rights: [
+    { division: { ko: '분배금', en: 'Distribution' }, name: { ko: '신한 글로벌리츠펀드', en: 'Shinhan Global REITs Fund' }, detailDivision: { ko: '현금분배', en: 'Cash Distribution' }, rightDetails: { ko: '분배금 지급', en: 'Distribution Payment' }, rightQty: 4230, baseRate: 1350.2, amount: 84600, taxes: 13029 },
+  ],
+  riskExposure: {
+    ko: '해당 계좌는 국내외 펀드 중심으로 운용되며, 환율 및 시장 변동성에 따라 평가금액이 변동될 수 있습니다.',
+    en: 'This account is managed primarily through domestic and overseas funds, and the valuation amount may fluctuate with exchange rates and market volatility.',
+  },
+  advisoryFirm: { ko: '해당 사항 없음', en: 'Not applicable' },
+  feeHistory: [
+    { from: '2024.03.18', to: '2024.06.18', discretionaryFee: 82300, performanceFee: 0, otherTradeCost: 0, taxes: 8230, otherCost: 0, totalCost: 90530 },
+  ],
+  wrapFeeBasis: {
+    ko: '랩수수료는 계약금액을 기준으로 연 0.7%를 분기별로 나누어 후취 방식으로 부과합니다.',
+    en: 'The wrap fee is charged quarterly in arrears at an annual rate of 0.7% based on the contract amount.',
+  },
+  performanceFeeBasis: {
+    ko: '별도의 성과보수는 부과하지 않습니다.',
+    en: 'No separate performance fee is charged.',
+  },
+  personnel: [
+    {
+      position: { ko: '팀장', en: 'Team Lead' },
+      name: { ko: '최도윤', en: 'Doyun Choi' },
+      startDate: '2020.07.01',
+      contractCount: 96,
+      scale: 32150,
+      career: { ko: '신한자산운용 멀티에셋운용팀 8년 경력', en: '8 years at Shinhan Asset Management Multi-Asset Team' },
+      contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
+    },
+  ],
+  recommenderInfo: { ko: '신한투자증권 분당금융센터', en: 'Shinhan Investment Corp. Bundang Finance Center' },
+  recommenderContact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
+  signDate: '2024년06월18일',
+};

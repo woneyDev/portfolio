@@ -22,6 +22,7 @@ const DEMO_SCREEN_ROUTES = [
   { routeKey: 'shinhan-dormant-assets', Component: lazy(() => import('./pages/demo/screens/AAA005DormantAssets')) },
   { routeKey: 'shinhan-terms-change-notice', Component: lazy(() => import('./pages/demo/screens/AAA006TermsChangeNotice')) },
   { routeKey: 'shinhan-wrap-report', Component: lazy(() => import('./pages/demo/screens/BAA001WrapPerformanceReport')) },
+  { routeKey: 'shinhan-wrap-report-155', Component: lazy(() => import('./pages/demo/screens/BAA002WrapPerformanceReport')) },
 ];
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
