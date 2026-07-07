@@ -82,6 +82,10 @@
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (177)",
             "routeKey": "shinhan-wrap-report-177"
+          },
+          {
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (178)",
+            "routeKey": "shinhan-wrap-report-178"
           }
         ]
       }
