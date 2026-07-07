@@ -90,6 +90,10 @@
           {
             "screenName": "MMW-type CMA Investment Result Report",
             "routeKey": "shinhan-mmw-cma-report"
+          },
+          {
+            "screenName": "Specific Money Trust Management Report",
+            "routeKey": "shinhan-trust-report"
           }
         ]
       }

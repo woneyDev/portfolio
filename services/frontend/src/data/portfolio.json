@@ -90,6 +90,10 @@
           {
             "screenName": "MMW형 CMA 투자결과 보고서",
             "routeKey": "shinhan-mmw-cma-report"
+          },
+          {
+            "screenName": "특정금전신탁 운용보고서",
+            "routeKey": "shinhan-trust-report"
           }
         ]
       }
