@@ -1,0 +1,306 @@
+@font-face {
+  font-family: 'OneShinhanDemo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src:
+    url('../../assets/jsp-demo/fonts/OneShinhanLight.woff2') format('woff2'),
+    url('../../assets/jsp-demo/fonts/OneShinhanLight.woff') format('woff');
+}
+@font-face {
+  font-family: 'OneShinhanDemo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src:
+    url('../../assets/jsp-demo/fonts/OneShinhanMedium.woff2') format('woff2'),
+    url('../../assets/jsp-demo/fonts/OneShinhanMedium.woff') format('woff');
+}
+@font-face {
+  font-family: 'OneShinhanDemo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    url('../../assets/jsp-demo/fonts/OneShinhanBold.woff2') format('woff2'),
+    url('../../assets/jsp-demo/fonts/OneShinhanBold.woff') format('woff');
+}
+
+/* ── 페이지 바깥 배경. 창 크기에 비례해 화면이 커지도록 스케일 처리 ── */
+.page {
+  min-height: 100vh;
+  background: #444;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+/* 스케일된 화면이 차지할 실제 자리(레이아웃 크기)를 확보하는 역할 */
+.sizer {
+  flex: none;
+}
+.screen {
+  width: 430px;
+  background: #fff;
+  text-align: left;
+  font-family: 'OneShinhanDemo', sans-serif;
+  color: #111;
+  line-height: 1.4;
+}
+.screen table { border-collapse: collapse; width: 100%; }
+.screen th, .screen td { margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline; }
+.screen ul, .screen ol { list-style: none; margin: 0; }
+.screen ul li::marker, .screen ol li::marker { content: ''; }
+
+/* ── header ── */
+.topLogoArea { padding: 25px 24px 3px; background-color: #0046FF; }
+.logoHeader { width: 123px; height: 22px; display: block; }
+
+/* ── 메인 타이틀 ── */
+.main { position: relative; width: 100%; padding-top: 35px; padding-bottom: 105px; background-color: #003CDE; background-image: url('../../assets/jsp-demo/mainBg.png'); background-size: 50px 178px; background-repeat: repeat-x; overflow: hidden; }
+.mainImg { position: absolute; background-image: url('../../assets/jsp-demo/mainImg_short.png'); background-size: cover; width: 161px; height: 146px; top: 0; right: 0; }
+.mainTit { position: relative; font-size: 22px; letter-spacing: -0.55px; color: #fff; word-break: keep-all; margin-bottom: 10px; font-weight: 700; }
+.inner { padding: 0 24px; position: relative; }
+
+/* ── 인트로 ── */
+.intro { position: relative; margin-top: -60px; margin-bottom: 25px; padding: 0 24px; }
+.introCard { padding: 20px 15px; background-color: #fff; border-radius: 6px; box-shadow: 0 2px 12px 0 rgba(64, 77, 112, 0.1); }
+.introGreeting { font-size: 16px; margin-bottom: 15px; }
+.introGreeting .name { font-weight: 500; }
+.introGreeting .suffix { font-weight: 300; }
+.introTable { width: 100%; border-top: 1px solid #E9EAEB; }
+.introTable th, .introTable td, .introTable span { font-size: 14px; letter-spacing: -0.35px; }
+.introTable th { text-align: left; font-weight: 300; padding: 5px 0; }
+.introTable td { text-align: right; padding: 5px 0; }
+.introTable tr:first-child th { padding-top: 10px; }
+.introTable tr:last-child th { padding-bottom: 0; }
+
+/* ── 총자산평가금액 ── */
+.totalValue { width: 100%; padding: 20px 24px; background-color: #F1F5FA; display: flex; justify-content: space-between; margin-bottom: 25px; }
+.totalValueTit { font-size: 18px; color: #10226A; }
+.totalValueNum { font-size: 18px; }
+
+/* ── 세부평가내역 섹션 ── */
+.content { padding: 0 24px; }
+.sectionTit { font-size: 18px; letter-spacing: -0.45px; margin-bottom: 17px; }
+
+/* ── 2행1열 테이블 ── */
+.table2r1c { margin-bottom: 25px; }
+.table2r1cTable { width: 100%; border-top: 2px solid #E9EAEB; border-bottom: 2px solid #E9EAEB; margin-bottom: 15px; }
+.table2r1cTable tr { border-bottom: 1px solid #e5e5e5; }
+.table2r1cTable tr:last-child { border-bottom: none; }
+.table2r1cTable th, .table2r1cTable td { font-size: 13px; letter-spacing: -0.35px; vertical-align: middle; padding: 10px 0; }
+.table2r1cTable th { text-align: left; font-weight: 300; }
+.table2r1cTable td { text-align: right; }
+.contTit { display: block; font-size: 16px; letter-spacing: -0.4px; margin-bottom: 15px; }
+
+/* ── 안내 리스트 ── */
+.info { background-color: #F9F9F9; padding: 15px; }
+.info ul { padding-left: 8px; }
+.info li { position: relative; margin-bottom: 7px; color: #555; font-size: 13px; letter-spacing: -0.33px; line-height: 18px; font-weight: 300; word-break: break-all; }
+.info li:last-child { margin-bottom: 0; }
+.info li::before { position: absolute; content: ''; width: 3px; height: 3px; border-radius: 50%; background-color: #555; left: -8px; top: 8px; }
+.guideSubList { margin-top: 5px; padding-left: 5px; }
+.guideSubList li { margin-left: 5px; margin-top: 5px; margin-bottom: 0; }
+.guideSubList li::before { content: '-'; background: none; width: auto; height: auto; border-radius: 0; left: -7px; top: 0; }
+
+/* ── 더보기 테이블 ── */
+.tableMore { margin-bottom: 25px; }
+.tableMoreHead {}
+.tableMoreHeadWrap { display: flex; align-items: baseline; }
+.totalNum { font-size: 13px; font-weight: 300; color: #888; margin-left: 10px; }
+.unit { display: block; font-size: 10px; color: #888; font-weight: 300; text-align: right; margin-bottom: 5px; }
+.dataTable { width: 100%; border-top: 2px solid #E9EAEB; border-bottom: 2px solid #E9EAEB; margin-bottom: 15px; }
+/* 행 구분선: rowSpan 셀은 tr 경계와 무관하게 끝나는 지점이 다르므로, tr이 아니라 각 셀에 직접 붙입니다.
+   .screen td{border:0} 리셋 규칙보다 우선순위가 낮아 지워지므로 !important로 강제합니다. */
+.rowDivider { border-bottom: 1px solid #E9EAEB !important; }
+.dataTable thead th { font-size: 13px; font-weight: 300; letter-spacing: -0.3px; vertical-align: middle; padding: 10px 0; border-right: 1px solid #E9EAEB; text-align: center; }
+.dataTable tbody td { font-size: 13px; font-weight: 300; letter-spacing: -0.3px; padding: 10px 0; border-right: 1px solid #E9EAEB; vertical-align: middle; }
+.tal { text-align: left !important; }
+.tar { text-align: right !important; }
+.tac { text-align: center !important; }
+.noResult { font-size: 12px; font-weight: 300; padding: 15px 0; color: #888; text-align: center; }
+.moreBtn, .lessBtn {
+  display: block;
+  width: 100%;
+  padding: 13px 0;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #E7ECF2;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,.1);
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #111;
+}
+.detailBtnCell { text-align: center; border-right: none !important; }
+.detailHeaderCell { border-right: none !important; word-break: keep-all; }
+.detailBtn {
+  display: block;
+  width: 16px; height: 16px;
+  margin: 0 auto;
+  background-image: url('../../assets/jsp-demo/btn_detail_modal.png');
+  background-size: cover;
+  border: 0; background-color: transparent; cursor: pointer; padding: 0;
+}
+.sumValue { display: flex; justify-content: space-between; background-color: #F1F5FA; padding: 18px 15px; border-radius: 6px; margin-bottom: 15px; }
+.sumValueTit { font-size: 16px; color: #10226A; }
+.sumValueNum { font-size: 16px; }
+
+/* ── 상세보기 모달 ── */
+.dark { position: fixed; inset: 0; background-color: rgba(0,0,0,.5); z-index: 500; }
+.detailModal {
+  position: fixed;
+  width: calc(100% - 48px);
+  max-width: 380px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,.1);
+  padding: 25px 15px;
+  z-index: 501;
+}
+.detailModalTit { font-size: 16px; font-weight: 500; letter-spacing: -0.4px; margin-bottom: 15px; }
+.detailModalTable { width: 100%; border-top: 2px solid #E9EAEB; border-bottom: 2px solid #E9EAEB; margin-bottom: 20px; }
+.detailModalTable tr { border-bottom: 1px solid #E9EAEB; }
+.detailModalTable tr:last-child { border-bottom: none; }
+.detailModalTable th, .detailModalTable td { font-size: 13px; letter-spacing: -0.3px; padding: 10px 0; }
+.detailModalTable th { font-weight: 300; text-align: left; }
+.detailModalTable td { font-weight: 500; text-align: right; }
+.closeBtn {
+  display: block;
+  width: 100%;
+  padding: 13px 0;
+  text-align: center;
+  background-color: #F3F5F8;
+  border: 1px solid #E9EAEB;
+  border-radius: 6px;
+  font-size: 14px;
+  letter-spacing: -0.35px;
+  cursor: pointer;
+}
+
+/* ── 주의사항 ── */
+.guide { padding: 0 24px; }
+.guideTit { padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; color: #111; font-size: 16px; margin-bottom: 10px; }
+.guideCont { padding-left: 22px; counter-reset: section; }
+/* 원본은 첫 번째 안내 목록에만 아래 여백(mb25)이 있고, 두 번째는 없습니다 */
+.guide > div:first-child .guideCont { margin-bottom: 25px; }
+.guideCont li { position: relative; margin-bottom: 7px; font-size: 13px; font-weight: 300; letter-spacing: -0.3px; color: #111; counter-increment: section; }
+.guideCont li::before {
+  position: absolute;
+  display: flex; justify-content: center; align-items: center;
+  content: counter(section);
+  width: 18px; height: 18px;
+  left: -22px;
+  border-radius: 50%;
+  background-color: #E8F2FE;
+  font-size: 9px; font-weight: 700; color: #10226A;
+}
+.guideCont li:last-child { margin-bottom: 0; }
+
+/* ── 하단 버튼 영역 ── */
+.btnArea { padding: 0 24px; }
+.pdfBtn {
+  display: block; width: 100%;
+  margin: 25px 0;
+  padding: 17px 0;
+  background-color: #10226A;
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: -0.35px;
+  color: #fff;
+  cursor: pointer;
+}
+.infoRed {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 33px;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+  color: #FF8181;
+}
+.infoRed::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 20px; height: 20px;
+  background-image: url('../../assets/jsp-demo/ico_info_red.png');
+  background-size: cover;
+}
+.anotherApp {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 18px 15px;
+  border-radius: 6px;
+  border: 1px solid #E5E5E5;
+  font-size: 13px;
+  letter-spacing: -0.33px;
+  color: #111;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+.anotherApp::after {
+  content: '';
+  position: absolute;
+  top: 21px; right: 15px;
+  width: 7px; height: 12px;
+  background-image: url('../../assets/jsp-demo/ico_shorcut.png');
+  background-size: cover;
+}
+.sectionBar { width: 100%; height: 10px; background-color: #F9F9F9; margin-bottom: 25px; }
+.customer { margin-bottom: 35px; }
+.customerBtn {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 18px 15px;
+  font-size: 13px;
+  letter-spacing: -0.33px;
+  color: #111;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.customerBtn::after {
+  content: '';
+  position: absolute;
+  top: 18px; right: 15px;
+  width: 18px; height: 18px;
+  background-image: url('../../assets/jsp-demo/ico_call.png');
+  background-size: cover;
+}
+
+/* ── footer ── */
+.footer { width: 100%; padding: 50px 0; background-color: #E7ECF2; text-align: center; }
+/* 원본 .additionalArea 스타일(footer 안내문구 자리)을 그대로 적용 */
+.aiPromo { margin: 0 auto 20px; color: gray; font-size: 11px; line-height: 1.5; }
+.aiPromoLine1 { display: block; }
+.aiPromoLine2 { display: flex; align-items: center; justify-content: center; gap: 4px; }
+.aiPromoIcon { width: 14px; height: 14px; border-radius: 3px; }
+.footerLogoBtn { border: 0; background: transparent; cursor: pointer; padding: 0; }
+.logoFooter { width: 123px; height: 22px; display: block; margin: 0 auto; }
+
+/* ── 안내 토스트 ── */
+.toast {
+  position: fixed;
+  top: 50%; left: 50%;
+  background: rgba(17,17,17,0.88);
+  color: #fff;
+  font-size: 13px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  z-index: 600;
+  max-width: 280px;
+  text-align: center;
+  line-height: 1.4;
+}

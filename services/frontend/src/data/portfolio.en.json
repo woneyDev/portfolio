@@ -40,7 +40,15 @@
       "period": "2022.09 - 2023.04",
       "description": "Built a system to process and map tens of thousands of records of core brokerage data. As project lead, I defined the data structure and formatting rules, wrote the screen design specs, oversaw both front-end and back-end development, and built a PDF generation system using Clipreport.",
       "techStack": ["Java", "Clipreport"],
-      "hasDemo": true
+      "hasDemo": true,
+      "demo": {
+        "screens": [
+          {
+            "screenName": "Monthly Transactions & Balance",
+            "routeKey": "shinhan-monthly-balance"
+          }
+        ]
+      }
     },
     {
       "title": "4Depth – Structuring the Maintenance Team",

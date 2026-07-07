@@ -40,7 +40,15 @@
       "period": "2022.09 - 2023.04",
       "description": "수만 건에 이르는 증권사 기간계 데이터를 가공·맵핑하는 시스템 구축. 프로젝트 리더로서 데이터 구성 및 서식 규칙을 정립하고 화면 설계서를 작성했으며, FE/BE 개발을 총괄하고 Clipreport를 활용한 PDF 생성 시스템을 구축했습니다.",
       "techStack": ["Java", "Clipreport"],
-      "hasDemo": true
+      "hasDemo": true,
+      "demo": {
+        "screens": [
+          {
+            "screenName": "월간거래내역 및 잔고",
+            "routeKey": "shinhan-monthly-balance"
+          }
+        ]
+      }
     },
     {
       "title": "포뎁스 유지보수팀 체계화",
