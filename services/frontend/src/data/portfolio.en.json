@@ -86,6 +86,10 @@
           {
             "screenName": "Discretionary Wrap Account Performance Report (178)",
             "routeKey": "shinhan-wrap-report-178"
+          },
+          {
+            "screenName": "MMW-type CMA Investment Result Report",
+            "routeKey": "shinhan-mmw-cma-report"
           }
         ]
       }
