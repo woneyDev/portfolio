@@ -94,6 +94,10 @@
           {
             "screenName": "특정금전신탁 운용보고서",
             "routeKey": "shinhan-trust-report"
+          },
+          {
+            "screenName": "특정금전신탁 분기 운용보고서",
+            "routeKey": "shinhan-trust-quarterly-report"
           }
         ]
       }
