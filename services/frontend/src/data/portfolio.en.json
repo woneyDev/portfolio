@@ -45,83 +45,103 @@
         "screens": [
           {
             "screenName": "Monthly Transactions & Balance",
-            "routeKey": "shinhan-monthly-balance"
+            "routeKey": "shinhan-monthly-balance",
+            "category": "Customer Innovation Dept."
           },
           {
             "screenName": "Semi-Annual Balance Status",
-            "routeKey": "shinhan-half-year-balance"
+            "routeKey": "shinhan-half-year-balance",
+            "category": "Customer Innovation Dept."
           },
           {
             "screenName": "Multi-Account Order Agent Notice",
-            "routeKey": "shinhan-agent-notice"
+            "routeKey": "shinhan-agent-notice",
+            "category": "Customer Innovation Dept."
           },
           {
             "screenName": "Dormant Securities Assets Notice",
-            "routeKey": "shinhan-dormant-assets"
+            "routeKey": "shinhan-dormant-assets",
+            "category": "Customer Innovation Dept."
           },
           {
             "screenName": "Integrated Account Management Terms Change Notice",
-            "routeKey": "shinhan-terms-change-notice"
+            "routeKey": "shinhan-terms-change-notice",
+            "category": "Customer Innovation Dept."
           },
           {
             "screenName": "Discretionary Wrap Account Performance Report (Single Product, Domestic)",
-            "routeKey": "shinhan-wrap-report-domestic-basic"
+            "routeKey": "shinhan-wrap-report-domestic-basic",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "Discretionary Wrap Account Performance Report (Single Product, Domestic Simple)",
-            "routeKey": "shinhan-wrap-report-domestic-simple"
+            "routeKey": "shinhan-wrap-report-domestic-simple",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "Discretionary Wrap Account Performance Report (Single Product, Overseas)",
-            "routeKey": "shinhan-wrap-report-overseas-basic"
+            "routeKey": "shinhan-wrap-report-overseas-basic",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "Discretionary Wrap Account Performance Report (Asset Allocation, Overseas)",
-            "routeKey": "shinhan-wrap-report-overseas-asset"
+            "routeKey": "shinhan-wrap-report-overseas-asset",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "Discretionary Wrap Account Performance Report (EMA, Domestic)",
-            "routeKey": "shinhan-wrap-report-ema-domestic"
+            "routeKey": "shinhan-wrap-report-ema-domestic",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "Discretionary Wrap Account Performance Report (EMA, Overseas)",
-            "routeKey": "shinhan-wrap-report-ema-overseas"
+            "routeKey": "shinhan-wrap-report-ema-overseas",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "MMW-type CMA Investment Result Report",
-            "routeKey": "shinhan-mmw-cma-report"
+            "routeKey": "shinhan-mmw-cma-report",
+            "category": "Wrap Management Dept."
           },
           {
             "screenName": "Specific Money Trust Management Report",
-            "routeKey": "shinhan-trust-report"
+            "routeKey": "shinhan-trust-report",
+            "category": "Trust Dept."
           },
           {
             "screenName": "Specific Money Trust Quarterly Management Report",
-            "routeKey": "shinhan-trust-quarterly-report"
+            "routeKey": "shinhan-trust-quarterly-report",
+            "category": "Trust Dept."
           },
           {
             "screenName": "Fund Return Report",
-            "routeKey": "shinhan-fund-return-report"
+            "routeKey": "shinhan-fund-return-report",
+            "category": "Fund Products Dept."
           },
           {
             "screenName": "Pension Savings Fund Return Report",
-            "routeKey": "shinhan-pension-fund-report"
+            "routeKey": "shinhan-pension-fund-report",
+            "category": "Fund Products Dept."
           },
           {
             "screenName": "Retirement Pension Fund Management Status Report",
-            "routeKey": "shinhan-retirement-pension-report"
+            "routeKey": "shinhan-retirement-pension-report",
+            "category": "Pension Business Dept."
           },
           {
             "screenName": "Retirement Pension Statutory Education (DC Type)",
-            "routeKey": "shinhan-legal-education-dc"
+            "routeKey": "shinhan-legal-education-dc",
+            "category": "Pension Business Dept."
           },
           {
             "screenName": "Retirement Pension Statutory Education (IRP Type)",
-            "routeKey": "shinhan-legal-education-irp"
+            "routeKey": "shinhan-legal-education-irp",
+            "category": "Pension Business Dept."
           },
           {
             "screenName": "Financial Income Withholding Tax Statement",
-            "routeKey": "shinhan-withholding-statement"
+            "routeKey": "shinhan-withholding-statement",
+            "category": "Treasury Dept."
           }
         ]
       }

@@ -45,83 +45,103 @@
         "screens": [
           {
             "screenName": "월간거래내역 및 잔고",
-            "routeKey": "shinhan-monthly-balance"
+            "routeKey": "shinhan-monthly-balance",
+            "category": "고객업무혁신부"
           },
           {
             "screenName": "반기잔고 현황",
-            "routeKey": "shinhan-half-year-balance"
+            "routeKey": "shinhan-half-year-balance",
+            "category": "고객업무혁신부"
           },
           {
             "screenName": "다수계좌 주문대리인 안내",
-            "routeKey": "shinhan-agent-notice"
+            "routeKey": "shinhan-agent-notice",
+            "category": "고객업무혁신부"
           },
           {
             "screenName": "휴면성 증권자산 안내문",
-            "routeKey": "shinhan-dormant-assets"
+            "routeKey": "shinhan-dormant-assets",
+            "category": "고객업무혁신부"
           },
           {
             "screenName": "계좌통합관리서비스 약관 변경 안내",
-            "routeKey": "shinhan-terms-change-notice"
+            "routeKey": "shinhan-terms-change-notice",
+            "category": "고객업무혁신부"
           },
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (단품형·국내)",
-            "routeKey": "shinhan-wrap-report-domestic-basic"
+            "routeKey": "shinhan-wrap-report-domestic-basic",
+            "category": "랩운용부"
           },
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (단품형·국내 간편)",
-            "routeKey": "shinhan-wrap-report-domestic-simple"
+            "routeKey": "shinhan-wrap-report-domestic-simple",
+            "category": "랩운용부"
           },
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (단품형·해외)",
-            "routeKey": "shinhan-wrap-report-overseas-basic"
+            "routeKey": "shinhan-wrap-report-overseas-basic",
+            "category": "랩운용부"
           },
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (자산배분형·해외)",
-            "routeKey": "shinhan-wrap-report-overseas-asset"
+            "routeKey": "shinhan-wrap-report-overseas-asset",
+            "category": "랩운용부"
           },
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (EMA형·국내)",
-            "routeKey": "shinhan-wrap-report-ema-domestic"
+            "routeKey": "shinhan-wrap-report-ema-domestic",
+            "category": "랩운용부"
           },
           {
             "screenName": "일임형 종합자산관리계좌 성과보고서 (EMA형·해외)",
-            "routeKey": "shinhan-wrap-report-ema-overseas"
+            "routeKey": "shinhan-wrap-report-ema-overseas",
+            "category": "랩운용부"
           },
           {
             "screenName": "MMW형 CMA 투자결과 보고서",
-            "routeKey": "shinhan-mmw-cma-report"
+            "routeKey": "shinhan-mmw-cma-report",
+            "category": "랩운용부"
           },
           {
             "screenName": "특정금전신탁 운용보고서",
-            "routeKey": "shinhan-trust-report"
+            "routeKey": "shinhan-trust-report",
+            "category": "신탁부"
           },
           {
             "screenName": "특정금전신탁 분기 운용보고서",
-            "routeKey": "shinhan-trust-quarterly-report"
+            "routeKey": "shinhan-trust-quarterly-report",
+            "category": "신탁부"
           },
           {
             "screenName": "펀드 수익률 보고서",
-            "routeKey": "shinhan-fund-return-report"
+            "routeKey": "shinhan-fund-return-report",
+            "category": "펀드상품부"
           },
           {
             "screenName": "연금저축 수익률 보고서",
-            "routeKey": "shinhan-pension-fund-report"
+            "routeKey": "shinhan-pension-fund-report",
+            "category": "펀드상품부"
           },
           {
             "screenName": "퇴직연금 적립금 운용현황보고서",
-            "routeKey": "shinhan-retirement-pension-report"
+            "routeKey": "shinhan-retirement-pension-report",
+            "category": "연금사업부"
           },
           {
             "screenName": "퇴직연금 가입자 법정교육(DC형)",
-            "routeKey": "shinhan-legal-education-dc"
+            "routeKey": "shinhan-legal-education-dc",
+            "category": "연금사업부"
           },
           {
             "screenName": "퇴직연금 가입자 법정교육(IRP형)",
-            "routeKey": "shinhan-legal-education-irp"
+            "routeKey": "shinhan-legal-education-irp",
+            "category": "연금사업부"
           },
           {
             "screenName": "금융소득 원천징수 명세서",
-            "routeKey": "shinhan-withholding-statement"
+            "routeKey": "shinhan-withholding-statement",
+            "category": "자금관리부"
           }
         ]
       }

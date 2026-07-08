@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import ProjectDemoThumbnail from './ProjectDemoThumbnail';
 
@@ -18,6 +18,16 @@ export default function ProjectDemoModal({ project, onClose }) {
   }, [onClose]);
 
   const screens = project.demo?.screens ?? [];
+
+  const groups = useMemo(() => {
+    const map = new Map();
+    screens.forEach((screen) => {
+      const key = screen.category || '';
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(screen);
+    });
+    return Array.from(map.entries());
+  }, [screens]);
 
   const openDemoScreen = (routeKey) => {
     const url = `${window.location.pathname}${window.location.search}#/project-demo/${routeKey}`;
@@ -47,16 +57,25 @@ export default function ProjectDemoModal({ project, onClose }) {
           &times;
         </button>
         <h3 className="demo-modal-title">{project.title}</h3>
-        <div className="demo-modal-screens">
-          {screens.map((screen) => (
-            <button
-              key={screen.screenName}
-              type="button"
-              className="demo-modal-screen"
-              onClick={() => openDemoScreen(screen.routeKey)}
-            >
-              <ProjectDemoThumbnail screenName={screen.screenName} />
-            </button>
+        <p className="demo-modal-subtitle">{t.projects.demoListSubtitle}</p>
+        <div className="demo-modal-list">
+          {groups.map(([category, items]) => (
+            <div className="demo-modal-group" key={category || 'default'}>
+              {category && <div className="demo-modal-group-label">{category}</div>}
+              <div className="demo-modal-grid">
+                {items.map((screen) => (
+                  <button
+                    key={screen.routeKey}
+                    type="button"
+                    className="demo-modal-card"
+                    onClick={() => openDemoScreen(screen.routeKey)}
+                  >
+                    <ProjectDemoThumbnail screenName={screen.screenName} />
+                    <span className="demo-modal-card-name">{screen.screenName}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
