@@ -23,6 +23,7 @@ export default function AdminLogin() {
     setError('');
 
     if (usernameOrEmail === TEMP_PREVIEW_ID && password === TEMP_PREVIEW_PASSWORD) {
+      localStorage.setItem('preview_session', '1');
       navigate('/demo');
       return;
     }

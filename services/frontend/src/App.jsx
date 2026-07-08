@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
+import DemoAccessGuard from './components/DemoAccessGuard';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import PublicPortfolio from './pages/PublicPortfolio';
@@ -51,9 +52,11 @@ export default function App() {
           <Route
             path="/project-demo/shinhan-monthly-balance"
             element={
-              <Suspense fallback={null}>
-                <ShinhanMonthlyBalance />
-              </Suspense>
+              <DemoAccessGuard>
+                <Suspense fallback={null}>
+                  <ShinhanMonthlyBalance />
+                </Suspense>
+              </DemoAccessGuard>
             }
           />
           {DEMO_SCREEN_ROUTES.map(({ routeKey, Component }) => (
@@ -61,9 +64,11 @@ export default function App() {
               key={routeKey}
               path={`/project-demo/${routeKey}`}
               element={
-                <Suspense fallback={null}>
-                  <Component />
-                </Suspense>
+                <DemoAccessGuard>
+                  <Suspense fallback={null}>
+                    <Component />
+                  </Suspense>
+                </DemoAccessGuard>
               }
             />
           ))}
