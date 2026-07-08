@@ -142,6 +142,11 @@
             "screenName": "Financial Income Withholding Tax Statement",
             "routeKey": "shinhan-withholding-statement",
             "category": "Treasury Dept."
+          },
+          {
+            "screenName": "Notice of Customer Information Disclosure within Shinhan Financial Group",
+            "routeKey": "shinhan-customer-info-disclosure-notice",
+            "category": "Information Security Center"
           }
         ]
       }

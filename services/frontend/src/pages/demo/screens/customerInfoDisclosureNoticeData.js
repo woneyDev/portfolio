@@ -1,0 +1,73 @@
+// 실제 고객 데이터가 아닌, 화면 구조를 보여주기 위한 예시(더미) 데이터입니다.
+
+export const text = {
+  screenName: { ko: '신한금융그룹 내 고객정보 제공내역 안내', en: 'Notice of Customer Information Disclosure within Shinhan Financial Group' },
+  greeting: { ko: '고객님', en: 'Dear Customer' },
+  greetingSuffix: { ko: ' 안녕하십니까', en: '' },
+  bodyText1: { ko: '신한금융그룹을 아끼고 사랑해주시는 고객님께 깊은 감사를 드립니다.', en: 'We sincerely thank you for your continued trust and support of Shinhan Financial Group.' },
+  bodyText2: {
+    ko: '신한금융그룹은 금융지주회사법 제 48조의2에 의해 내부 경영관리상 그룹사간 고객정보의 제공 및 이용이 가능하고, 고객정보를 제공하는 경우에는 그 제공내역을 통지하여야 합니다.',
+    en: 'Under Article 48-2 of the Financial Holding Companies Act, Shinhan Financial Group may share and use customer information among group companies for internal management purposes, and must notify customers when such information is provided.',
+  },
+  bodyText3: {
+    ko: '이에 신한투자증권에서는 신한금융그룹 내 고객정보를 제공한 내역에 대하여 아래와 같이 안내해 드립니다.',
+    en: 'Accordingly, Shinhan Investment Corp. provides the following notice regarding customer information disclosed within Shinhan Financial Group.',
+  },
+  s1Tit: { ko: '정보제공 관련 법령', en: 'Applicable Law' },
+  s1Sub: { ko: '금융지주회사법 제48조의2', en: 'Financial Holding Companies Act, Article 48-2' },
+  s1SubSub: { ko: '(고객정보의 제공 및 관리)', en: '(Provision and Management of Customer Information)' },
+  s1Items: [
+    { ko: '금융지주회사 등은 「금융실명거래 및 비밀보장에 관한 법률」제4조 제1항 및「신용정보의 이용 및 보호에 관한 법률」제32조ㆍ제33조에도 불구하고 「금융실명거래 및 비밀보장에 관한 법률」제4조에 따른 금융거래의 내용에 관한 정보 또는 자료 및 「신용정보의 이용 및 보호에 관한법률」제32조1항에 따른 개인신용정보를 다음 각 호의 사항에 관하여 금융위원회가 정하는 방법과 절차에 따라 그가 속하는 금융지주회사 등에게 신용위험관리 등 대통령령으로 정하는 내부 경영관리상 이용하게 할 목적으로 제공할 수 있다. <중략>', en: 'Notwithstanding Article 4(1) of the Act on Real Name Financial Transactions and Confidentiality and Articles 32-33 of the Credit Information Use and Protection Act, a financial holding company may provide financial transaction information and personal credit information to affiliated financial holding companies for internal management purposes such as credit risk management, per procedures set by the Financial Services Commission. <abridged>' },
+    { ko: '제1항 및 제2항에 따라 고객정보를 그가 속하는 금융지주회사 등에게 제공하는 경우에는 그 제공내역을 고객에게 통지하여야 한다. 다만, 연락처 등 통지할 수 있는 개인정보를 수집하지 아니한 경우에는 그러하지 아니하다. <후략>', en: 'When customer information is provided to affiliated financial holding companies under Paragraphs 1 and 2, the details of such provision must be notified to the customer, except where contact information for notification was not collected. <continued>' },
+  ],
+  s2Tit: { ko: '고객정보 제공 내역', en: 'Customer Information Disclosure Details' },
+  periodLabel: { ko: '(해당기간 : {from} ~ {to})', en: '(Period: {from} ~ {to})' },
+  col: {
+    provider: { ko: '제공하는자', en: 'Provider' },
+    recipient: { ko: '제공받는자', en: 'Recipient' },
+    purpose: { ko: '제공목적', en: 'Purpose' },
+    items: { ko: '제공정보항목', en: 'Information Items' },
+  },
+  noResult: { ko: '내역이 없습니다', en: 'No records found.' },
+  s2Note: { ko: '식별번호 : 신한금융그룹 내에서 고객을 구분할 수 있도록 암호화하여 만든 번호', en: 'Identification Number: an encrypted number used to distinguish customers within Shinhan Financial Group.' },
+  s3Tit: { ko: '제공목적 안내', en: 'Purpose of Disclosure' },
+  purposeRows: [
+    {
+      title: { ko: '고객분석과 상품 및 서비스 개발', en: 'Customer Analysis and Product/Service Development' },
+      paragraphs: [
+        { ko: '그룹사 별 금융거래 실적에 따라 회사별 Tops Club 점수를 부여하고, 그룹사간 점수를 합산하여 우수고객으로 선정된 고객에게 신한금융그룹만의 차별화된 서비스를 제공하기 위한 정보 공유', en: 'Sharing information to assign Tops Club scores per company based on financial transaction performance, and to provide differentiated services to customers selected as top customers based on combined group scores.' },
+        { ko: '신한금융그룹 내 축적된 다양한 고객의 금융거래 형태, 거래패턴 등을 빅데이터 분석을 통하여 타 금융과의 차별화된 상품 및 서비스 등을 개발하기 위한 분석 목적의 정보 공유', en: 'Sharing information for big-data analysis of accumulated customer transaction patterns to develop differentiated products and services.' },
+      ],
+    },
+    {
+      title: { ko: '성과관리', en: 'Performance Management' },
+      paragraphs: [
+        { ko: '신한금융그룹 내 협업을 통해 개발한 빅데이터 분석 모형의 성능 및 효과를 측정하기 위한 정보공유', en: 'Sharing information to measure the performance and effectiveness of big-data analysis models developed through collaboration within the group.' },
+      ],
+    },
+    {
+      title: { ko: '신용위험관리 등 위험관리와 내부통제', en: 'Credit Risk Management and Internal Control' },
+      paragraphs: [
+        { ko: '신한금융그룹 내 BIS 비율 산출을 위한(기업여신보유) 개인사업자 및 그룹 리스크관리시스템 운영을 위한 데이터(신용,유동성) 정보공유', en: 'Sharing data (credit, liquidity) for calculating BIS ratios for business loan holders and operating the group risk management system.' },
+      ],
+    },
+  ],
+  s3Notes: [
+    { ko: '고객정보 제공 내역에 대해서는 연 1회 통지합니다.', en: 'Customer information disclosure details are notified once a year.' },
+    { ko: '제공된 정보는 법령에서 허용하는 목적에 한해 이용되며, 마케팅 등 영업목적으로 이용되지 않습니다.', en: 'Provided information is used only for purposes permitted by law, and is not used for marketing or sales purposes.' },
+    { ko: '상기 목적으로 신한금융그룹 내 정보제공은 계속 운영될 예정이며, 관련 법령에 의거하여 이후 통지를 생략할 수 있음을 안내해 드립니다. (금융지주회사법 시행령 제27조의2 제4항)', en: 'Information sharing within the group for the above purposes will continue, and subsequent notices may be omitted per applicable law (Enforcement Decree of the Financial Holding Companies Act, Article 27-2(4)).' },
+    { ko: '문의 : 신한투자증권 상담센터 ☎ 1588-0365', en: 'Inquiries: Shinhan Investment Corp. Customer Center (1588-0365)' },
+  ],
+  promiseText: {
+    ko: '신한금융그룹은 그룹사간 고객정보의 제공 및 이용을 허용한 것이 금융서비스의 질을 높이고, 나아가 우리나라 금융산업을 선진화시키기 위한 조치임을 명심하고 고객정보의 교류를 토대로 고객 여러분들께 보다 편리하고 질 높은 선진금융서비스를 제공할 것을 약속 드리며, 고객정보의 보호 및 엄격한 관리를 위해 최선을 다 할 것입니다.',
+    en: 'Shinhan Financial Group recognizes that sharing customer information among group companies is intended to improve financial service quality and advance the domestic financial industry. We promise to provide more convenient, high-quality financial services based on this information sharing, while making every effort to protect and strictly manage customer information.',
+  },
+};
+
+export const sampleData = {
+  periodFrom: '2024.01.01',
+  periodTo: '2024.12.31',
+  disclosures: [
+    { provider: { ko: '신한투자증권', en: 'Shinhan Investment Corp.' }, recipient: { ko: '신한지주', en: 'Shinhan Financial Group' }, purpose: { ko: '고객분석과 상품 및 서비스 개발', en: 'Customer Analysis and Product/Service Development' }, items: { ko: '식별번호, 탑스클럽 등급', en: 'Identification Number, Tops Club Grade' } },
+  ],
+};

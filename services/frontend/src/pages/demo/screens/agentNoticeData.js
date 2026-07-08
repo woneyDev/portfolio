@@ -28,7 +28,7 @@ export const text = {
 
 export const sampleData = {
   customerName: { ko: '류원희', en: 'Wonhee Ryu' },
-  agentName: { ko: '포뎁스', en: '4DEPTH' },
+  agentName: { ko: '신한투자증권', en: 'Shinhan Investment Corp.' },
   registeredDate: '2023-08-01',
   sendDate: '2023-08-02',
 };

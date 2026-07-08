@@ -142,6 +142,11 @@
             "screenName": "금융소득 원천징수 명세서",
             "routeKey": "shinhan-withholding-statement",
             "category": "자금관리부"
+          },
+          {
+            "screenName": "신한금융그룹 내 고객정보 제공내역 안내",
+            "routeKey": "shinhan-customer-info-disclosure-notice",
+            "category": "정보보호센터"
           }
         ]
       }

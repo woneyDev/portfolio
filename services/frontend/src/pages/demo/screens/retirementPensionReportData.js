@@ -216,7 +216,7 @@ export const sampleData = {
   subscriber: { ko: '류원희', en: 'Wonhee Ryu' },
   contractDate: '2016.07.01',
   planType: { ko: 'DC(확정기여형)', en: 'DC (Defined Contribution)' },
-  company: { ko: '(주)포뎁스', en: '4DEPTH Co., Ltd.' },
+  company: { ko: '신한투자증권', en: 'Shinhan Investment Corp.' },
   pensionAvailableDate: '2029.07.01',
   contribution: 42000000,
   investProfit: 6820000,

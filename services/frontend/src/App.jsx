@@ -36,6 +36,7 @@ const DEMO_SCREEN_ROUTES = [
   { routeKey: 'shinhan-legal-education-dc', Component: lazy(() => import('./pages/demo/screens/LegalEducationDCScreen')) },
   { routeKey: 'shinhan-legal-education-irp', Component: lazy(() => import('./pages/demo/screens/LegalEducationIRPScreen')) },
   { routeKey: 'shinhan-withholding-statement', Component: lazy(() => import('./pages/demo/screens/WithholdingStatementScreen')) },
+  { routeKey: 'shinhan-customer-info-disclosure-notice', Component: lazy(() => import('./pages/demo/screens/CustomerInfoDisclosureNoticeScreen')) },
 ];
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;

@@ -48,7 +48,7 @@ export const text = {
 
 export const sampleData = {
   subscriberName: { ko: '류원희', en: 'Wonhee Ryu' },
-  companyName: { ko: '주식회사 포뎁스', en: '4DEPTH Co., Ltd.' },
+  companyName: { ko: '신한투자증권', en: 'Shinhan Investment Corp.' },
   businessNo: '134-87-*****',
   accountNo: '28011356402',
   contractDate: { ko: '2019년 07월 01일', en: 'Jul 1, 2019' },
