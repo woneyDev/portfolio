@@ -9,7 +9,7 @@ import AssetDonutChart from '../shared/AssetDonutChart';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './baa004Data';
+import { text as tx, sampleData as sd } from './wrapReportOverseasAssetData';
 import circle1 from '../../../assets/jsp-demo/circle_1.png';
 import circle2 from '../../../assets/jsp-demo/circle_2.png';
 import circle3 from '../../../assets/jsp-demo/circle_3.png';
@@ -21,7 +21,7 @@ import circle7 from '../../../assets/jsp-demo/circle_7.png';
 const s = sharedStyles;
 const CIRCLE_IMG = [circle1, circle2, circle3, circle4, circle5, circle6, circle7];
 
-export default function BAA004WrapPerformanceReport() {
+export default function WrapReportOverseasAssetScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);

@@ -8,11 +8,11 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './bdc003Data';
+import { text as tx, sampleData as sd } from './legalEducationDCData';
 
 const s = sharedStyles;
 
-export default function BDC003LegalEducationIRP() {
+export default function LegalEducationDCScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);
@@ -27,9 +27,9 @@ export default function BDC003LegalEducationIRP() {
     rows: [
       [L(tx.detail.period), `${item.from} ~ ${item.to}`],
       [L(tx.detail.amount), won(item.amount)],
-      [L(tx.detail.severancePay), won(item.severancePay)],
+      [L(tx.detail.employerContribution), won(item.employerAmount)],
       [L(tx.detail.subscriberContribution), won(item.subscriberAmount)],
-      [L(tx.detail.transferredAmount), won(item.transferredAmount)],
+      [L(tx.detail.total), won(item.employerAmount + item.subscriberAmount)],
     ],
   });
 
@@ -57,8 +57,10 @@ export default function BDC003LegalEducationIRP() {
             <table className={s.table2r1cTable}>
               <colgroup><col style={{ width: '50%' }} /><col style={{ width: '50%' }} /></colgroup>
               <tbody>
+                <tr><th>{L(tx.companyName)}</th><td className={s.tar}>{L(sd.companyName)}</td></tr>
+                <tr><th>{L(tx.businessNo)}</th><td className={s.tar}>{sd.businessNo}</td></tr>
                 <tr><th>{L(tx.subscriberName)}</th><td className={s.tar}>{L(sd.subscriberName)}</td></tr>
-                <tr><th>{L(tx.accountNo)}</th><td className={s.tar}>{maskedAccountNo}</td></tr>
+                <tr><th>{L(tx.subscriberAccount)}</th><td className={s.tar}>{maskedAccountNo}</td></tr>
               </tbody>
             </table>
           </div>
@@ -74,7 +76,8 @@ export default function BDC003LegalEducationIRP() {
                   <li style={{ fontWeight: 300 }}>{L(tx.contractDateLabel)}{L(sd.contractDate)}</li>
                 </ul>
               </li>
-              <li style={{ fontWeight: 500, fontSize: 12 }}>{L(tx.planLine2)}</li>
+              <li style={{ fontWeight: 500, fontSize: 12 }}>{L(tx.planLine2)}{L(sd.paymentCycle)}</li>
+              <li style={{ fontWeight: 500, fontSize: 12 }}>{L(tx.planLine3)}</li>
             </ul>
           </div>
 

@@ -8,7 +8,7 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './bca002Data';
+import { text as tx, sampleData as sd } from './pensionFundReportData';
 import circle1 from '../../../assets/jsp-demo/circle_1.png';
 import circle2 from '../../../assets/jsp-demo/circle_2.png';
 import circle3 from '../../../assets/jsp-demo/circle_3.png';
@@ -19,7 +19,7 @@ import circle6 from '../../../assets/jsp-demo/circle_6.png';
 const s = sharedStyles;
 const CIRCLE_IMG = [circle1, circle2, circle3, circle4, circle5, circle6];
 
-export default function BCA002PensionFundReport() {
+export default function PensionFundReportScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);

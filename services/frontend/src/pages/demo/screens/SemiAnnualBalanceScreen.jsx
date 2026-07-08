@@ -8,11 +8,11 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { sampleAccount } from './aaa003Data';
+import { sampleAccount } from './semiAnnualBalanceData';
 
 const s = sharedStyles;
 
-export default function AAA003HalfYearBalance() {
+export default function SemiAnnualBalanceScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => field[lang];

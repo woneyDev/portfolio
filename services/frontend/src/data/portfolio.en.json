@@ -64,28 +64,28 @@
             "routeKey": "shinhan-terms-change-notice"
           },
           {
-            "screenName": "Discretionary Wrap Account Performance Report (154)",
-            "routeKey": "shinhan-wrap-report"
+            "screenName": "Discretionary Wrap Account Performance Report (Single Product, Domestic)",
+            "routeKey": "shinhan-wrap-report-domestic-basic"
           },
           {
-            "screenName": "Discretionary Wrap Account Performance Report (155)",
-            "routeKey": "shinhan-wrap-report-155"
+            "screenName": "Discretionary Wrap Account Performance Report (Single Product, Domestic Simple)",
+            "routeKey": "shinhan-wrap-report-domestic-simple"
           },
           {
-            "screenName": "Discretionary Wrap Account Performance Report (156)",
-            "routeKey": "shinhan-wrap-report-156"
+            "screenName": "Discretionary Wrap Account Performance Report (Single Product, Overseas)",
+            "routeKey": "shinhan-wrap-report-overseas-basic"
           },
           {
-            "screenName": "Discretionary Wrap Account Performance Report (157)",
-            "routeKey": "shinhan-wrap-report-157"
+            "screenName": "Discretionary Wrap Account Performance Report (Asset Allocation, Overseas)",
+            "routeKey": "shinhan-wrap-report-overseas-asset"
           },
           {
-            "screenName": "Discretionary Wrap Account Performance Report (177)",
-            "routeKey": "shinhan-wrap-report-177"
+            "screenName": "Discretionary Wrap Account Performance Report (EMA, Domestic)",
+            "routeKey": "shinhan-wrap-report-ema-domestic"
           },
           {
-            "screenName": "Discretionary Wrap Account Performance Report (178)",
-            "routeKey": "shinhan-wrap-report-178"
+            "screenName": "Discretionary Wrap Account Performance Report (EMA, Overseas)",
+            "routeKey": "shinhan-wrap-report-ema-overseas"
           },
           {
             "screenName": "MMW-type CMA Investment Result Report",
@@ -118,6 +118,10 @@
           {
             "screenName": "Retirement Pension Statutory Education (IRP Type)",
             "routeKey": "shinhan-legal-education-irp"
+          },
+          {
+            "screenName": "Financial Income Withholding Tax Statement",
+            "routeKey": "shinhan-withholding-statement"
           }
         ]
       }

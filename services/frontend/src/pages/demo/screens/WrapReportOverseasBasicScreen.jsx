@@ -9,7 +9,7 @@ import AssetDonutChart from '../shared/AssetDonutChart';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './baa001Data';
+import { text as tx, sampleData as sd } from './wrapReportOverseasBasicData';
 import circle1 from '../../../assets/jsp-demo/circle_1.png';
 import circle2 from '../../../assets/jsp-demo/circle_2.png';
 import circle3 from '../../../assets/jsp-demo/circle_3.png';
@@ -21,7 +21,7 @@ import circle7 from '../../../assets/jsp-demo/circle_7.png';
 const s = sharedStyles;
 const CIRCLE_IMG = [circle1, circle2, circle3, circle4, circle5, circle6, circle7];
 
-export default function BAA001WrapPerformanceReport() {
+export default function WrapReportOverseasBasicScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);
@@ -261,65 +261,6 @@ export default function BAA001WrapPerformanceReport() {
             </table>
           </div>
 
-          <h3 className={s.contTitSub} style={{ marginBottom: 15 }}>{L(tx.cumulativeLineTit)}</h3>
-          <div className={s.chartFigure}>
-            <TrendLineChart data={sd.cumulativeLine} />
-          </div>
-
-          <h3 className={s.contTit}>{L(tx.s2bTit)}</h3>
-          <div className={s.table5r1c}>
-            <div className={s.numunitflexEnd}>
-              <span className={s.chartLegend}><span className={`${s.graphBox} ${s.cGraph1}`} />{L(tx.legendCurrent)}</span>
-              <span className={s.chartLegend} style={{ marginLeft: 10 }}><span className={`${s.graphBox} ${s.cGraph2}`} />{L(tx.legendPrior)}</span>
-              <span className={s.unit} style={{ marginLeft: 10 }}>{L(tx.unitPercent)}</span>
-            </div>
-            <table className={s.table5r1cTable}>
-              <colgroup><col style={{ width: '20%' }} /><col style={{ width: '20%' }} /><col style={{ width: '25%' }} /><col /></colgroup>
-              <thead>
-                <tr>
-                  <th>{L(tx.col2.assetClass)}</th>
-                  <th>{L(tx.col2.returnRate)}</th>
-                  <th rowSpan={2}>{L(tx.col2.holdingStatus)}</th>
-                  <th rowSpan={2} colSpan={2}>{L(tx.weight)}</th>
-                </tr>
-                <tr>
-                  <th>{L(tx.col2.weightSub)}</th>
-                  <th className={s.bdr}>{L(tx.col2.cumulativeReturnSub)}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sd.returnComposition.map((row) => (
-                  <Fragment key={L(row.assetClass)}>
-                    <tr>
-                      <td className={s.tac}>{L(row.assetClass)}</td>
-                      <td className={s.tar}>{row.currentReturn.toFixed(2)}</td>
-                      <td rowSpan={2} className={s.tac}>{L(row.holding)}</td>
-                      <td rowSpan={2} colSpan={2} className={s.tac}>
-                        <div className={s.barPair}>
-                          <div className={s.barPairRow}>
-                            <div className={`${s.barPairFill} ${s.barPairSeagreen}`} style={{ width: `${row.currentWeight}%` }} />
-                            <span className={s.barPairLabel}>{row.currentWeight.toFixed(2)}</span>
-                          </div>
-                          <div className={s.barPairRow}>
-                            <div className={`${s.barPairFill} ${s.barPairKhaki}`} style={{ width: `${row.priorWeight}%` }} />
-                            <span className={s.barPairLabel}>{row.priorWeight.toFixed(2)}</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className={s.tar}>{row.priorReturn.toFixed(2)}</td>
-                      <td className={`${s.tar} ${s.bdr}`}>{row.cumulativeReturn.toFixed(2)}</td>
-                    </tr>
-                  </Fragment>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className={s.info}>
-            <ul><li>{L(tx.note1)}</li></ul>
-          </div>
-
           <h3 className={s.contTitSub} style={{ marginBottom: 15 }}>{L(tx.recent3mLineTit)}</h3>
           <div className={s.chartFigure}>
             <TrendLineChart data={sd.recent3mLine} />
@@ -370,41 +311,6 @@ export default function BAA001WrapPerformanceReport() {
           <h3 className={s.contTitSub} style={{ marginBottom: 15 }}>{L(tx.assetTypeWeightTit)}</h3>
           <div className={s.chartFigure}>
             <AssetDonutChart data={sd.assetTypeRows.map((r) => ({ name: L(r.name), value: r.currentWeight }))} />
-          </div>
-
-          <h3 className={s.contTitSub} style={{ marginBottom: 15 }}>{L(tx.s3bTit)}</h3>
-          <span className={s.unit}>{L(tx.unitWonPercent)}</span>
-          <table className={s.table5r1cTable}>
-            <colgroup><col /><col style={{ width: '20%' }} /><col style={{ width: '15%' }} /><col style={{ width: '20%' }} /><col style={{ width: '15%' }} /></colgroup>
-            <thead>
-              <tr>
-                <th rowSpan={2}>{L(tx.col.division)}</th>
-                <th colSpan={2}>{L(sd.securityHeaderCurrent)}</th>
-                <th colSpan={2}>{L(sd.securityHeaderPrior)}</th>
-              </tr>
-              <tr>
-                <th>{L(tx.evalAmount)}</th>
-                <th>{L(tx.weight)}</th>
-                <th>{L(tx.evalAmount)}</th>
-                <th>{L(tx.weight)}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sd.securityRows.map((row) => (
-                <tr key={L(row.name)}>
-                  <td className={s.tac}>{L(row.name)}</td>
-                  <td className={s.tar}>{num(row.currentAmount)}</td>
-                  <td className={s.tar}>{row.currentWeight.toFixed(2)}</td>
-                  <td className={s.tar}>{num(row.priorAmount)}</td>
-                  <td className={s.tar}>{row.priorWeight.toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <h3 className={s.contTitSub} style={{ margin: '15px 0' }}>{L(tx.securityWeightTit)}</h3>
-          <div className={s.chartFigure}>
-            <AssetDonutChart data={sd.securityRows.map((r) => ({ name: L(r.name), value: r.currentWeight }))} />
           </div>
 
           <h3 className={s.contTitSub} style={{ marginBottom: 10 }}>{L(tx.s3cTit)}</h3>

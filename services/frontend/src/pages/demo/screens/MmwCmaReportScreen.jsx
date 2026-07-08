@@ -7,7 +7,7 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './baa007Data';
+import { text as tx, sampleData as sd } from './mmwCmaReportData';
 
 const s = sharedStyles;
 
@@ -20,7 +20,7 @@ function MultiLine({ text }) {
   ));
 }
 
-export default function BAA007MmwCmaReport() {
+export default function MmwCmaReportScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);

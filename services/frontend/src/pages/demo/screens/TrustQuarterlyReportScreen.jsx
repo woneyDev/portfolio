@@ -8,11 +8,11 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './bbd002Data';
+import { text as tx, sampleData as sd } from './trustQuarterlyReportData';
 
 const s = sharedStyles;
 
-export default function BBD002TrustQuarterlyReport() {
+export default function TrustQuarterlyReportScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);

@@ -1,6 +1,6 @@
 // 실제 고객 데이터가 아닌, 화면 구조를 보여주기 위한 예시(더미) 데이터입니다.
-// BAA001(단품_국내, 154)과 문구가 거의 동일하여 공통 문구는 그대로 재사용합니다.
-import { text as baseText } from './baa001Data';
+// 랩 성과보고서 기본형과 문구가 거의 동일하여 공통 문구는 그대로 재사용합니다.
+import { text as baseText } from './wrapReportDomesticBasicData';
 
 export const text = {
   ...baseText,

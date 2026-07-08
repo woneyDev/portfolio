@@ -64,28 +64,28 @@
             "routeKey": "shinhan-terms-change-notice"
           },
           {
-            "screenName": "일임형 종합자산관리계좌 성과보고서 (154)",
-            "routeKey": "shinhan-wrap-report"
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (단품형·국내)",
+            "routeKey": "shinhan-wrap-report-domestic-basic"
           },
           {
-            "screenName": "일임형 종합자산관리계좌 성과보고서 (155)",
-            "routeKey": "shinhan-wrap-report-155"
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (단품형·국내 간편)",
+            "routeKey": "shinhan-wrap-report-domestic-simple"
           },
           {
-            "screenName": "일임형 종합자산관리계좌 성과보고서 (156)",
-            "routeKey": "shinhan-wrap-report-156"
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (단품형·해외)",
+            "routeKey": "shinhan-wrap-report-overseas-basic"
           },
           {
-            "screenName": "일임형 종합자산관리계좌 성과보고서 (157)",
-            "routeKey": "shinhan-wrap-report-157"
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (자산배분형·해외)",
+            "routeKey": "shinhan-wrap-report-overseas-asset"
           },
           {
-            "screenName": "일임형 종합자산관리계좌 성과보고서 (177)",
-            "routeKey": "shinhan-wrap-report-177"
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (EMA형·국내)",
+            "routeKey": "shinhan-wrap-report-ema-domestic"
           },
           {
-            "screenName": "일임형 종합자산관리계좌 성과보고서 (178)",
-            "routeKey": "shinhan-wrap-report-178"
+            "screenName": "일임형 종합자산관리계좌 성과보고서 (EMA형·해외)",
+            "routeKey": "shinhan-wrap-report-ema-overseas"
           },
           {
             "screenName": "MMW형 CMA 투자결과 보고서",
@@ -118,6 +118,10 @@
           {
             "screenName": "퇴직연금 가입자 법정교육(IRP형)",
             "routeKey": "shinhan-legal-education-irp"
+          },
+          {
+            "screenName": "금융소득 원천징수 명세서",
+            "routeKey": "shinhan-withholding-statement"
           }
         ]
       }

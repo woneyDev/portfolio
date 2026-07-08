@@ -7,7 +7,7 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './bca001Data';
+import { text as tx, sampleData as sd } from './fundReturnReportData';
 
 const s = sharedStyles;
 
@@ -20,7 +20,7 @@ function MultiLine({ text }) {
   ));
 }
 
-export default function BCA001FundReturnReport() {
+export default function FundReturnReportScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);

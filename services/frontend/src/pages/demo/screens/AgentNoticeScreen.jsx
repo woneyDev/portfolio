@@ -6,11 +6,11 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData } from './aaa004Data';
+import { text as tx, sampleData } from './agentNoticeData';
 
 const s = sharedStyles;
 
-export default function AAA004AgentNotice() {
+export default function AgentNoticeScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => field[lang];

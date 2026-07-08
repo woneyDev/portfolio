@@ -7,7 +7,7 @@ import Toast from '../shared/Toast';
 import { useScaledWindow } from '../shared/useScaledWindow';
 import { useToast } from '../shared/useToast';
 import { useLanguage } from '../../../i18n/LanguageContext';
-import { text as tx, sampleData as sd } from './bdc001Data';
+import { text as tx, sampleData as sd } from './retirementPensionReportData';
 import circle1 from '../../../assets/jsp-demo/circle_1.png';
 import circle2 from '../../../assets/jsp-demo/circle_2.png';
 import circle3 from '../../../assets/jsp-demo/circle_3.png';
@@ -26,7 +26,7 @@ function MultiLine({ text }) {
   ));
 }
 
-export default function BDC001RetirementPensionReport() {
+export default function RetirementPensionReportScreen() {
   const { lang, t } = useLanguage();
   const d = t.shinhanShared;
   const L = (field) => (field && typeof field === 'object' ? field[lang] : field);
