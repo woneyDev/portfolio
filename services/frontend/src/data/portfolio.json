@@ -114,6 +114,10 @@
           {
             "screenName": "퇴직연금 가입자 법정교육(DC형)",
             "routeKey": "shinhan-legal-education-dc"
+          },
+          {
+            "screenName": "퇴직연금 가입자 법정교육(IRP형)",
+            "routeKey": "shinhan-legal-education-irp"
           }
         ]
       }

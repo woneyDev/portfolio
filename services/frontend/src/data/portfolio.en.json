@@ -114,6 +114,10 @@
           {
             "screenName": "Retirement Pension Statutory Education (DC Type)",
             "routeKey": "shinhan-legal-education-dc"
+          },
+          {
+            "screenName": "Retirement Pension Statutory Education (IRP Type)",
+            "routeKey": "shinhan-legal-education-irp"
           }
         ]
       }
