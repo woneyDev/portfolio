@@ -53,7 +53,7 @@ export default function Navbar({ sectionIds }) {
 
   return (
     <nav className="navbar">
-      <span className="nav-brand">Portfolio</span>
+      <span className="nav-brand">{t.nav.brand}</span>
       <div className="nav-right">
         <div className="nav-links">
           {sectionIds.intro && <a href="#intro" onClick={(e) => scrollToSection(e, 'intro')}>{t.nav.intro}</a>}

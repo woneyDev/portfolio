@@ -13,6 +13,7 @@ export function LanguageProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('lang', lang);
+    document.title = strings[lang].nav.brand;
   }, [lang]);
 
   return (

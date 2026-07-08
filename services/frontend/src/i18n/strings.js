@@ -1,6 +1,6 @@
 export const strings = {
   ko: {
-    nav: { intro: '소개', skills: '기술 스택', projects: '프로젝트', career: '경력' },
+    nav: { brand: '포트폴리오', intro: '소개', skills: '기술 스택', projects: '프로젝트', career: '경력' },
     sectionTitles: { intro: '자기소개', skills: '기술 스택', projects: '프로젝트', career: '경력' },
     hero: { emailBtn: '이메일 문의' },
     projects: {
@@ -340,7 +340,7 @@ export const strings = {
     },
   },
   en: {
-    nav: { intro: 'About', skills: 'Skills', projects: 'Projects', career: 'Career' },
+    nav: { brand: 'Portfolio', intro: 'About', skills: 'Skills', projects: 'Projects', career: 'Career' },
     sectionTitles: { intro: 'About Me', skills: 'Skills', projects: 'Projects', career: 'Career' },
     hero: { emailBtn: 'Email Me' },
     projects: {
