@@ -106,6 +106,10 @@
           {
             "screenName": "연금저축 수익률 보고서",
             "routeKey": "shinhan-pension-fund-report"
+          },
+          {
+            "screenName": "퇴직연금 적립금 운용현황보고서",
+            "routeKey": "shinhan-retirement-pension-report"
           }
         ]
       }

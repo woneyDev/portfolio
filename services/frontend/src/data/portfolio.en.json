@@ -106,6 +106,10 @@
           {
             "screenName": "Pension Savings Fund Return Report",
             "routeKey": "shinhan-pension-fund-report"
+          },
+          {
+            "screenName": "Retirement Pension Fund Management Status Report",
+            "routeKey": "shinhan-retirement-pension-report"
           }
         ]
       }
