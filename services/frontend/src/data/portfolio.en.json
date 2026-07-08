@@ -110,6 +110,10 @@
           {
             "screenName": "Retirement Pension Fund Management Status Report",
             "routeKey": "shinhan-retirement-pension-report"
+          },
+          {
+            "screenName": "Retirement Pension Statutory Education (DC Type)",
+            "routeKey": "shinhan-legal-education-dc"
           }
         ]
       }
