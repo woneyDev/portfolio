@@ -8,6 +8,7 @@ import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
 import CareerSection from '../components/CareerSection';
 import StaticDemoPortfolio from './StaticDemoPortfolio';
+import LoginRequired from './LoginRequired';
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
@@ -46,12 +47,16 @@ function renderSection(sectionType, portfolio) {
 }
 
 export default function PublicPortfolio() {
-  const { username } = useParams();
+  const { handle } = useParams();
+  // "/:handle" 하나로 "@아이디" 구간 전체를 받은 뒤, "@"로 시작하는 경우에만 회원 아이디로 인정한다.
+  // ("/@:username" 형태는 react-router가 동적 구간으로 인식하지 못해 항상 매칭에 실패하는 문제의 우회)
+  const username = handle?.startsWith('@') ? handle.slice(1) : null;
   const { t } = useLanguage();
   const [portfolio, setPortfolio] = useState(null);
   const [status, setStatus] = useState('loading'); // loading | ready | not-found | error
 
   useEffect(() => {
+    if (!username) return;
     let cancelled = false;
     setStatus('loading');
 
@@ -69,6 +74,11 @@ export default function PublicPortfolio() {
 
     return () => { cancelled = true; };
   }, [username]);
+
+  // "@"로 시작하지 않는 알 수 없는 주소는 기존과 동일하게 로그인 안내 화면으로 보낸다.
+  if (!username) {
+    return <LoginRequired />;
+  }
 
   // 서버(API)가 아직 인터넷에 없어서 응답을 못 받는 경우 — 기본 회원(홈)이면 정적 데모 콘텐츠로 대신 보여준다.
   // 서버가 실제로 준비되면 이 요청들은 정상 응답하게 되고, 이 대체 화면은 더 이상 나타나지 않는다.

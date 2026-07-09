@@ -73,7 +73,9 @@ export default function App() {
               }
             />
           ))}
-          <Route path="/@:username" element={<PublicPortfolio />} />
+          {/* react-router는 ":param" 앞에 "/"가 있어야만 동적 구간으로 인식해서 "/@:username"은 항상 매칭 실패한다.
+              그래서 "@아이디" 전체를 한 구간(:handle)으로 받은 뒤 PublicPortfolio에서 "@" 접두사를 검사해 벗겨낸다. */}
+          <Route path="/:handle" element={<PublicPortfolio />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/oauth-callback" element={<OAuthCallback />} />
           <Route path="/admin" element={<AdminLogin />} />
