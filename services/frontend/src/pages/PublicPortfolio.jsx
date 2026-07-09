@@ -11,6 +11,16 @@ import StaticDemoPortfolio from './StaticDemoPortfolio';
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
+const SECTION_ANCHOR_IDS = { SKILLS: 'skills', PROJECTS: 'projects', CAREER: 'career' };
+
+// 배치 정보가 없는 예전 캐시 응답(배포 직후 최대 10분)을 위한 기본 순서 — DB 기본값과 동일하게 맞춤
+const FALLBACK_LAYOUT = [
+  { sectionType: 'HERO', x: 0, y: 0, w: 4, h: 2, visible: true },
+  { sectionType: 'SKILLS', x: 0, y: 2, w: 4, h: 2, visible: true },
+  { sectionType: 'PROJECTS', x: 0, y: 4, w: 4, h: 3, visible: true },
+  { sectionType: 'CAREER', x: 0, y: 7, w: 4, h: 2, visible: true },
+];
+
 function groupSkillsByCategory(flatSkills) {
   const grouped = new Map();
   for (const skill of flatSkills) {
@@ -18,6 +28,21 @@ function groupSkillsByCategory(flatSkills) {
     grouped.get(skill.category).push(skill.name);
   }
   return Array.from(grouped, ([category, items]) => ({ category, items }));
+}
+
+function renderSection(sectionType, portfolio) {
+  switch (sectionType) {
+    case 'HERO':
+      return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
+    case 'SKILLS':
+      return <SkillsSection data={groupSkillsByCategory(portfolio.skills)} />;
+    case 'PROJECTS':
+      return <ProjectsSection data={portfolio.projects} />;
+    case 'CAREER':
+      return <CareerSection data={portfolio.career} />;
+    default:
+      return null;
+  }
 }
 
 export default function PublicPortfolio() {
@@ -59,12 +84,21 @@ export default function PublicPortfolio() {
         {status === 'not-found' && <div className="section"><p>&quot;{username}&quot; 회원을 찾을 수 없습니다.</p></div>}
         {status === 'error' && <div className="section"><p>포트폴리오를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p></div>}
         {status === 'ready' && (
-          <>
-            <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />
-            <div id="skills" className="scroll-anchor"><SkillsSection data={groupSkillsByCategory(portfolio.skills)} /></div>
-            <div id="projects" className="scroll-anchor"><ProjectsSection data={portfolio.projects} /></div>
-            <div id="career" className="scroll-anchor"><CareerSection data={portfolio.career} /></div>
-          </>
+          <div className="portfolio-grid">
+            {(portfolio.layout?.length > 0 ? portfolio.layout : FALLBACK_LAYOUT)
+              .filter((item) => item.visible)
+              .sort((a, b) => a.y - b.y || a.x - b.x)
+              .map((item) => (
+                <div
+                  key={item.sectionType}
+                  id={SECTION_ANCHOR_IDS[item.sectionType]}
+                  className="portfolio-grid-item scroll-anchor"
+                  style={{ gridColumn: `${item.x + 1} / span ${item.w}` }}
+                >
+                  {renderSection(item.sectionType, portfolio)}
+                </div>
+              ))}
+          </div>
         )}
       </main>
       <footer className="footer">

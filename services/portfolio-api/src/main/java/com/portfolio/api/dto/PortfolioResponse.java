@@ -3,8 +3,10 @@ package com.portfolio.api.dto;
 import com.portfolio.api.entity.Career;
 import com.portfolio.api.entity.PortfolioOwner;
 import com.portfolio.api.entity.Project;
+import com.portfolio.api.entity.SectionLayout;
 import com.portfolio.api.entity.Skill;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class PortfolioResponse {
@@ -14,6 +16,7 @@ public class PortfolioResponse {
     private final List<SkillDto> skills;
     private final List<ProjectDto> projects;
     private final List<CareerDto> career;
+    private final List<LayoutDto> layout;
 
     public PortfolioResponse(PortfolioOwner owner) {
         this.username = owner.getMember().getUsername();
@@ -21,6 +24,10 @@ public class PortfolioResponse {
         this.skills = owner.getSkills().stream().map(SkillDto::new).toList();
         this.projects = owner.getProjects().stream().map(ProjectDto::new).toList();
         this.career = owner.getCareers().stream().map(CareerDto::new).toList();
+        this.layout = owner.getSectionLayouts().stream()
+                .map(LayoutDto::new)
+                .sorted(Comparator.comparing(LayoutDto::sectionType))
+                .toList();
     }
 
     public String getUsername() { return username; }
@@ -28,6 +35,7 @@ public class PortfolioResponse {
     public List<SkillDto> getSkills() { return skills; }
     public List<ProjectDto> getProjects() { return projects; }
     public List<CareerDto> getCareer() { return career; }
+    public List<LayoutDto> getLayout() { return layout; }
 
     public record HeroDto(String title, String subtitle, String email, String githubUrl) {
         public HeroDto(PortfolioOwner o) {
@@ -50,6 +58,12 @@ public class PortfolioResponse {
     public record CareerDto(String company, String role, String period, List<String> achievements) {
         public CareerDto(Career c) {
             this(c.getCompany(), c.getRole(), c.getPeriod(), c.getAchievements());
+        }
+    }
+
+    public record LayoutDto(String sectionType, int x, int y, int w, int h, boolean visible) {
+        public LayoutDto(SectionLayout l) {
+            this(l.getSectionType().name(), l.getGridX(), l.getGridY(), l.getGridWidth(), l.getGridHeight(), l.isVisible());
         }
     }
 }

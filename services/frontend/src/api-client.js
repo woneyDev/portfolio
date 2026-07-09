@@ -25,6 +25,14 @@ export const api = {
       headers: authHeaders(token),
       body: JSON.stringify(data),
     }),
+  updateMyLayout: (token, layout) =>
+    request('/api/portfolio/me/layout', {
+      method: 'PUT',
+      headers: authHeaders(token),
+      body: JSON.stringify({
+        sections: layout.map(({ sectionType, x, y, w, h, visible }) => ({ sectionType, x, y, w, h, visible })),
+      }),
+    }),
   getGithubStats: () => request('/api/github/stats'),
   generatePdf:    () => request('/api/pdf/generate', { method: 'POST' }),
 

@@ -4,6 +4,7 @@ import PrivateRoute from './components/PrivateRoute';
 import DemoAccessGuard from './components/DemoAccessGuard';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import MyPage from './pages/MyPage';
 import PublicPortfolio from './pages/PublicPortfolio';
 import StaticDemoPortfolio from './pages/StaticDemoPortfolio';
 import VerifyEmail from './pages/VerifyEmail';
@@ -81,6 +82,14 @@ export default function App() {
             element={
               <PrivateRoute>
                 <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/mypage"
+            element={
+              <PrivateRoute>
+                <MyPage />
               </PrivateRoute>
             }
           />

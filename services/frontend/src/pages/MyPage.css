@@ -1,0 +1,129 @@
+.mypage-wrap {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #f1f5f9;
+  padding: 2rem 2.5rem 4rem;
+}
+
+.mypage-status {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+  color: #94a3b8;
+}
+
+.mypage-header {
+  margin-bottom: 1.25rem;
+}
+
+.mypage-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.mypage-hint {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.mypage-save-status {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.mypage-save-status--saving { color: #facc15; }
+.mypage-save-status--saved { color: #4ade80; }
+
+.mypage-hidden-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.mypage-hidden-label {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-right: 0.25rem;
+}
+
+.mypage-add-btn {
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mypage-add-btn:hover { background: #475569; }
+
+.mypage-grid {
+  position: relative;
+}
+
+.mypage-widget {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mypage-widget-handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: #16202f;
+  border-bottom: 1px solid #334155;
+  cursor: move;
+  flex-shrink: 0;
+}
+
+.mypage-widget-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.mypage-hide-btn {
+  background: none;
+  border: 1px solid #475569;
+  color: #94a3b8;
+  border-radius: 6px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.mypage-hide-btn:hover {
+  border-color: #f87171;
+  color: #f87171;
+}
+
+.mypage-widget-body {
+  flex: 1;
+  overflow: auto;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* 위젯 안에 재사용되는 포트폴리오 섹션 컴포넌트는 원래 전체 화면 폭 기준으로 만들어졌으므로,
+   좁은 위젯 안에서도 어색하지 않도록 안쪽 여백만 줄인다. */
+.mypage-widget-body .section,
+.mypage-widget-body .hero {
+  padding: 1rem;
+}

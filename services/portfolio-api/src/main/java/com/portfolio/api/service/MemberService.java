@@ -3,6 +3,8 @@ package com.portfolio.api.service;
 import com.portfolio.api.dto.RegisterRequest;
 import com.portfolio.api.entity.Member;
 import com.portfolio.api.entity.PortfolioOwner;
+import com.portfolio.api.entity.SectionLayout;
+import com.portfolio.api.entity.SectionType;
 import com.portfolio.api.repository.MemberRepository;
 import com.portfolio.api.repository.PortfolioOwnerRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -104,7 +107,33 @@ public class MemberService {
         owner.setEmail(contactEmail);
         owner.setGithubUrl("");
         owner.setMember(member);
+        owner.setSectionLayouts(defaultSectionLayouts(owner));
         portfolioOwnerRepository.save(owner);
+    }
+
+    /**
+     * 신규 회원의 기본 배치 — 세로 1열: 자기소개 → 스킬 → 프로젝트 → 경력사항, 전부 표시.
+     * DB 마이그레이션(V4)에서 기존 회원에게 백필한 좌표와 동일하게 맞춘다.
+     */
+    private Set<SectionLayout> defaultSectionLayouts(PortfolioOwner owner) {
+        Set<SectionLayout> layouts = new LinkedHashSet<>();
+        layouts.add(layout(owner, SectionType.HERO, 0, 0, 4, 2));
+        layouts.add(layout(owner, SectionType.SKILLS, 0, 2, 4, 2));
+        layouts.add(layout(owner, SectionType.PROJECTS, 0, 4, 4, 3));
+        layouts.add(layout(owner, SectionType.CAREER, 0, 7, 4, 2));
+        return layouts;
+    }
+
+    private SectionLayout layout(PortfolioOwner owner, SectionType type, int x, int y, int w, int h) {
+        SectionLayout layout = new SectionLayout();
+        layout.setOwner(owner);
+        layout.setSectionType(type);
+        layout.setGridX(x);
+        layout.setGridY(y);
+        layout.setGridWidth(w);
+        layout.setGridHeight(h);
+        layout.setVisible(true);
+        return layout;
     }
 
     private String generateUniqueUsername(String email) {

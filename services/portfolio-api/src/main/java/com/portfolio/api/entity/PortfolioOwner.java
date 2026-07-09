@@ -38,6 +38,9 @@ public class PortfolioOwner {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Career> careers = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<SectionLayout> sectionLayouts = new LinkedHashSet<>();
+
     public PortfolioOwner() {}
 
     public Long getId() { return id; }
@@ -66,4 +69,7 @@ public class PortfolioOwner {
 
     public Set<Career> getCareers() { return careers; }
     public void setCareers(Set<Career> careers) { this.careers = careers; }
+
+    public Set<SectionLayout> getSectionLayouts() { return sectionLayouts; }
+    public void setSectionLayouts(Set<SectionLayout> sectionLayouts) { this.sectionLayouts = sectionLayouts; }
 }

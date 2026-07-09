@@ -2,9 +2,12 @@ package com.portfolio.api.controller;
 
 import com.portfolio.api.config.AuthInterceptor;
 import com.portfolio.api.dto.PortfolioResponse;
+import com.portfolio.api.dto.UpdateLayoutRequest;
 import com.portfolio.api.dto.UpdatePortfolioRequest;
+import com.portfolio.api.service.InvalidLayoutException;
 import com.portfolio.api.service.PortfolioService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +49,17 @@ public class PortfolioController {
             @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId,
             @Valid @RequestBody UpdatePortfolioRequest request) {
         return ResponseEntity.ok(portfolioService.updateMyPortfolio(memberId, request));
+    }
+
+    @PutMapping("/portfolio/me/layout")
+    public ResponseEntity<?> updateMyLayout(
+            @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId,
+            @Valid @RequestBody UpdateLayoutRequest request) {
+        try {
+            return ResponseEntity.ok(portfolioService.updateMyLayout(memberId, request));
+        } catch (InvalidLayoutException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
+        }
     }
 
     @GetMapping("/health")
