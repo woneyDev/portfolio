@@ -55,6 +55,7 @@ export default function PublicPortfolio() {
   const { t } = useLanguage();
   const [portfolio, setPortfolio] = useState(null);
   const [status, setStatus] = useState('loading'); // loading | ready | not-found | error
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     if (!username) return;
@@ -76,6 +77,21 @@ export default function PublicPortfolio() {
     return () => { cancelled = true; };
   }, [username]);
 
+  // 로그인되어 있고, 지금 보고 있는 페이지가 본인 페이지일 때만 "편집하기" 버튼을 보여준다.
+  useEffect(() => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) return;
+    let cancelled = false;
+    api.getMyPortfolio(token)
+      .then((data) => {
+        if (!cancelled && data.username?.toLowerCase() === username?.toLowerCase()) {
+          setIsOwner(true);
+        }
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [username]);
+
   // "@"로 시작하지 않는 알 수 없는 주소는 기존과 동일하게 로그인 안내 화면으로 보낸다.
   if (!username) {
     return <LoginRequired />;
@@ -89,7 +105,7 @@ export default function PublicPortfolio() {
 
   return (
     <div className="portfolio">
-      <Navbar sectionIds={{ intro: false }} />
+      <Navbar sectionIds={{ intro: false }} editLink={isOwner ? '/mypage' : null} />
       <main>
         {status === 'loading' && <div className="section"><p>불러오는 중...</p></div>}
         {status === 'not-found' && <div className="section"><p>&quot;{username}&quot; 회원을 찾을 수 없습니다.</p></div>}

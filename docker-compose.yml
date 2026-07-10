@@ -7,6 +7,7 @@ services:
       args:
         VITE_MEMBER_ONE_USERNAME: ${VITE_MEMBER_ONE_USERNAME}
         VITE_ROUTER_MODE: ${VITE_ROUTER_MODE:-hash}
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8081}
     ports:
       - "8080:80"
     depends_on:

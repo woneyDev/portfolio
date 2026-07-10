@@ -43,6 +43,17 @@ body {
 .nav-links { display: flex; gap: 1.5rem; }
 .nav-links a { text-decoration: none; color: var(--color-text-muted); font-size: 0.9rem; transition: color 0.2s, transform 0.15s; display: inline-block; }
 .nav-links a:hover { color: var(--color-primary); }
+.nav-edit-btn {
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  transition: opacity 0.2s;
+}
+.nav-edit-btn:hover { opacity: 0.85; }
 
 /* ── 언어 선택 ── */
 .lang-switcher { position: relative; }

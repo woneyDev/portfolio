@@ -21,7 +21,10 @@ services:
 
   # 우리가 직접 운영하는 서버라 nginx가 모든 경로를 index.html로 돌려보내줄 수 있다(nginx.conf의
   # try_files). 따라서 GitHub Pages와 달리 "#" 없는 깨끗한 주소(BrowserRouter)를 쓸 수 있다.
+  # VITE_API_URL은 이 서버의 .env에서만 채워진다(값이 IP → 도메인으로 나중에 바뀔 것이라 여기엔
+  # 하드코딩하지 않는다) — 로컬 .env.example에는 없으니 서버 .env에 직접 추가해서 쓴다.
   frontend:
     build:
       args:
         VITE_ROUTER_MODE: browser
+        VITE_API_URL: ${VITE_API_URL}
