@@ -1,0 +1,22 @@
+# 운영 서버(VPS) 전용 보정 설정.
+# docker-compose.yml과 함께 사용: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# 로컬 개발용 docker-compose.yml은 그대로 두고, 운영 환경에서만 달라져야 하는 부분만 여기서 덮어쓴다.
+services:
+
+  # DB/Redis는 portfolio-api·data-service가 Docker 내부망(서비스명)으로만 접근하면 되고,
+  # 외부(인터넷)에 직접 노출될 이유가 없다. 로컬 전용(127.0.0.1)으로만 포트를 열어
+  # 실수로 인터넷에 통째로 열리는 것을 막는다.
+  postgres:
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  redis:
+    ports:
+      - "127.0.0.1:6379:6379"
+
+  # 이 서버는 메모리가 매우 작아(약 500MB) JVM 기본 힙 크기로는 다른 컨테이너들과 함께 뜨기 빠듯하다.
+  # 힙 상한을 명시적으로 낮게 고정해 메모리 부족으로 서버 전체가 멎는 것을 방지한다.
+  portfolio-api:
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xmx220m -Xms96m
