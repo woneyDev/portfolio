@@ -30,7 +30,12 @@ export default function ProjectDemoModal({ project, onClose }) {
   }, [screens]);
 
   const openDemoScreen = (routeKey) => {
-    const url = `${window.location.pathname}${window.location.search}#/project-demo/${routeKey}`;
+    // GitHub Pages(HashRouter)와 VPS(BrowserRouter, VITE_ROUTER_MODE=browser)는 주소 형식이 달라서
+    // 새 창을 여는 URL도 그에 맞춰 만들어야 한다. 하드코딩된 "#/..." 형태는 BrowserRouter에서는
+    // 그냥 무시되는 단순 URL 조각(fragment)이 되어버려 새 창이 현재 페이지로 열리는 문제가 있었다.
+    const url = import.meta.env.VITE_ROUTER_MODE === 'browser'
+      ? `${window.location.origin}/project-demo/${routeKey}`
+      : `${window.location.pathname}${window.location.search}#/project-demo/${routeKey}`;
 
     // 화면(모니터) 정중앙에 뜨도록 좌표 계산
     const screenWidth = window.screen.availWidth ?? window.screen.width;
