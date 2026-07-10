@@ -6,6 +6,7 @@ services:
       context: ./services/frontend
       args:
         VITE_MEMBER_ONE_USERNAME: ${VITE_MEMBER_ONE_USERNAME}
+        VITE_ROUTER_MODE: ${VITE_ROUTER_MODE:-hash}
     ports:
       - "8080:80"
     depends_on:

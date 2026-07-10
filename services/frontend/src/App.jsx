@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import DemoAccessGuard from './components/DemoAccessGuard';
 import AdminLogin from './pages/AdminLogin';
@@ -43,10 +43,15 @@ const DEMO_SCREEN_ROUTES = [
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
+// GitHub Pages(정적 호스팅, 서버 라우팅 설정 불가)는 "#" 방식(HashRouter)이 필수라 기본값으로 둔다.
+// 반면 우리가 직접 운영하는 서버(VPS)는 nginx가 모든 경로를 index.html로 돌려보내주므로(try_files),
+// "#" 없는 깨끗한 주소(BrowserRouter)를 쓸 수 있다 — 빌드 시 VITE_ROUTER_MODE=browser로 전환한다.
+const Router = import.meta.env.VITE_ROUTER_MODE === 'browser' ? BrowserRouter : HashRouter;
+
 export default function App() {
   return (
     <LanguageProvider>
-      <HashRouter>
+      <Router>
         <Routes>
           <Route path="/" element={<Navigate to={`/@${MEMBER_ONE_USERNAME}`} replace />} />
           <Route path="/demo" element={<StaticDemoPortfolio />} />
@@ -97,7 +102,7 @@ export default function App() {
           />
           <Route path="*" element={<LoginRequired />} />
         </Routes>
-      </HashRouter>
+      </Router>
     </LanguageProvider>
   );
 }
