@@ -12,7 +12,11 @@ async function request(path, options = {}) {
     headers: { 'Content-Type': 'application/json' },
     ...options,
   });
-  if (!res.ok) throw new Error(`API 오류: ${res.status}`);
+  if (!res.ok) {
+    const error = new Error(`API 오류: ${res.status}`);
+    error.status = res.status;
+    throw error;
+  }
   return res.json();
 }
 
