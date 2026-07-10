@@ -24,7 +24,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "https://woneydepp.github.io",
                         "http://localhost:3000",
-                        "http://localhost:8080"
+                        "http://localhost:8080",
+                        // VPS 운영 서버 — 도메인 연결 전까지 IP 주소로 직접 접속하는 프론트엔드를 허용한다.
+                        // 도메인이 생기면 이 줄은 그 도메인 주소로 교체하고 지운다.
+                        "http://138.2.24.46:8080"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
