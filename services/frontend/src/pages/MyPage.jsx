@@ -5,13 +5,16 @@ import HeroSection from '../components/HeroSection';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
 import CareerSection from '../components/CareerSection';
+import CustomSection from '../components/CustomSection';
 import 'react-grid-layout/css/styles.css';
 import './MyPage.css';
 
 const GridLayoutWithWidth = WidthProvider(GridLayout);
 
-const GRID_COLS = 4;
+// 12칸 기준: 2/3/4/6등분이 전부 나누어떨어져서, 창을 줄였을 때 3x1·4x1 같은 배치도 고르게 맞출 수 있다.
+const GRID_COLS = 12;
 const SAVE_DEBOUNCE_MS = 800;
+const CUSTOM_KEY_PREFIX = 'custom:';
 
 const SECTION_LABELS = {
   HERO: '자기소개',
@@ -21,10 +24,10 @@ const SECTION_LABELS = {
 };
 
 const DEFAULT_SIZE_BY_TYPE = {
-  HERO: { w: 4, h: 2 },
-  SKILLS: { w: 4, h: 2 },
-  PROJECTS: { w: 4, h: 3 },
-  CAREER: { w: 4, h: 2 },
+  HERO: { w: 12, h: 2 },
+  SKILLS: { w: 12, h: 2 },
+  PROJECTS: { w: 12, h: 3 },
+  CAREER: { w: 12, h: 2 },
 };
 
 function groupSkillsByCategory(flatSkills) {
@@ -55,30 +58,42 @@ export default function MyPage() {
   const token = localStorage.getItem('admin_token');
   const [portfolio, setPortfolio] = useState(null);
   const [layout, setLayout] = useState([]);
+  const [customSections, setCustomSections] = useState([]);
   const [status, setStatus] = useState('loading'); // loading | ready | error
   const [saveStatus, setSaveStatus] = useState('idle'); // idle | saving | saved
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newContent, setNewContent] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editContent, setEditContent] = useState('');
   const saveTimer = useRef(null);
+
+  function applyPortfolioData(data) {
+    setPortfolio(data);
+    setLayout(data.layout);
+    setCustomSections(data.customSections ?? []);
+  }
 
   useEffect(() => {
     api.getMyPortfolio(token)
       .then((data) => {
-        setPortfolio(data);
-        setLayout(data.layout);
+        applyPortfolioData(data);
         setStatus('ready');
       })
       .catch(() => setStatus('error'));
   }, [token]);
 
-  const persistLayout = useCallback((nextLayout) => {
+  const persistLayout = useCallback((nextLayout, nextCustomSections) => {
     setSaveStatus('saving');
-    api.updateMyLayout(token, nextLayout)
+    api.updateMyLayout(token, nextLayout, nextCustomSections)
       .then(() => setSaveStatus('saved'))
       .catch(() => setSaveStatus('idle'));
   }, [token]);
 
-  const scheduleSave = useCallback((nextLayout) => {
+  const scheduleSave = useCallback((nextLayout, nextCustomSections) => {
     if (saveTimer.current) clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => persistLayout(nextLayout), SAVE_DEBOUNCE_MS);
+    saveTimer.current = setTimeout(() => persistLayout(nextLayout, nextCustomSections), SAVE_DEBOUNCE_MS);
   }, [persistLayout]);
 
   useEffect(() => () => {
@@ -88,37 +103,98 @@ export default function MyPage() {
   const visibleLayout = useMemo(() => layout.filter((item) => item.visible), [layout]);
   const hiddenLayout = useMemo(() => layout.filter((item) => !item.visible), [layout]);
 
-  const gridLayoutItems = useMemo(
-    () => visibleLayout.map((item) => ({ i: item.sectionType, x: item.x, y: item.y, w: item.w, h: item.h })),
-    [visibleLayout],
-  );
+  const gridLayoutItems = useMemo(() => [
+    ...visibleLayout.map((item) => ({ i: item.sectionType, x: item.x, y: item.y, w: item.w, h: item.h })),
+    ...customSections.map((item) => ({ i: `${CUSTOM_KEY_PREFIX}${item.id}`, x: item.x, y: item.y, w: item.w, h: item.h })),
+  ], [visibleLayout, customSections]);
 
-  function handleLayoutChange(changedItems) {
+  function mergeChanges(changedItems) {
     const nextLayout = layout.map((item) => {
       const changed = changedItems.find((c) => c.i === item.sectionType);
       if (!changed) return item;
       return { ...item, x: changed.x, y: changed.y, w: changed.w, h: changed.h };
     });
+    const nextCustomSections = customSections.map((item) => {
+      const changed = changedItems.find((c) => c.i === `${CUSTOM_KEY_PREFIX}${item.id}`);
+      if (!changed) return item;
+      return { ...item, x: changed.x, y: changed.y, w: changed.w, h: changed.h };
+    });
+    return { nextLayout, nextCustomSections };
+  }
+
+  // react-grid-layout는 라이브러리 내부 사정(마운트 직후 재계산 등)으로도 onLayoutChange를 호출할 수 있어서,
+  // 여기서는 화면 상태만 맞춰두고 저장은 하지 않는다. 실제 저장은 사용자가 드래그·크기조절을 "끝냈을 때"만
+  // 호출되는 onDragStop/onResizeStop에서 한다 — 그래야 사용자가 하지도 않은 변경이 DB에 저장되지 않는다.
+  function handleLayoutChange(changedItems) {
+    const { nextLayout, nextCustomSections } = mergeChanges(changedItems);
     setLayout(nextLayout);
-    scheduleSave(nextLayout);
+    setCustomSections(nextCustomSections);
+  }
+
+  function handleInteractionStop(changedItems) {
+    const { nextLayout, nextCustomSections } = mergeChanges(changedItems);
+    setLayout(nextLayout);
+    setCustomSections(nextCustomSections);
+    scheduleSave(nextLayout, nextCustomSections);
   }
 
   function handleHide(sectionType) {
     const nextLayout = layout.map((item) =>
       item.sectionType === sectionType ? { ...item, visible: false } : item);
     setLayout(nextLayout);
-    scheduleSave(nextLayout);
+    scheduleSave(nextLayout, customSections);
   }
 
   function handleShow(sectionType) {
     const maxY = visibleLayout.reduce((max, item) => Math.max(max, item.y + item.h), 0);
-    const defaults = DEFAULT_SIZE_BY_TYPE[sectionType] ?? { w: 4, h: 2 };
+    const defaults = DEFAULT_SIZE_BY_TYPE[sectionType] ?? { w: 12, h: 2 };
     const nextLayout = layout.map((item) =>
       item.sectionType === sectionType
         ? { ...item, visible: true, x: 0, y: maxY, w: defaults.w, h: defaults.h }
         : item);
     setLayout(nextLayout);
-    scheduleSave(nextLayout);
+    scheduleSave(nextLayout, customSections);
+  }
+
+  function handleAddCustomSection(e) {
+    e.preventDefault();
+    const title = newTitle.trim();
+    const content = newContent.trim();
+    if (!title || !content) return;
+    api.createCustomSection(token, title, content).then((data) => {
+      applyPortfolioData(data);
+      setNewTitle('');
+      setNewContent('');
+      setShowAddForm(false);
+    });
+  }
+
+  function startEditCustomSection(item) {
+    setEditingId(item.id);
+    setEditTitle(item.title);
+    setEditContent(item.content);
+  }
+
+  function cancelEditCustomSection() {
+    setEditingId(null);
+  }
+
+  function saveEditCustomSection(e, id) {
+    e.preventDefault();
+    const title = editTitle.trim();
+    const content = editContent.trim();
+    if (!title || !content) return;
+    api.updateCustomSection(token, id, title, content).then((data) => {
+      applyPortfolioData(data);
+      setEditingId(null);
+    });
+  }
+
+  function handleDeleteCustomSection(id) {
+    if (!window.confirm('이 섹션을 완전히 삭제할까요? 되돌릴 수 없습니다.')) return;
+    api.deleteCustomSection(token, id).then((data) => {
+      applyPortfolioData(data);
+    });
   }
 
   if (status === 'loading') return <div className="mypage-status">불러오는 중...</div>;
@@ -151,6 +227,39 @@ export default function MyPage() {
         </div>
       )}
 
+      <div className="mypage-custom-add">
+        {!showAddForm && (
+          <button type="button" className="mypage-add-btn" onClick={() => setShowAddForm(true)}>
+            + 새 섹션 추가
+          </button>
+        )}
+        {showAddForm && (
+          <form className="mypage-custom-form" onSubmit={handleAddCustomSection}>
+            <input
+              className="mypage-custom-input"
+              type="text"
+              placeholder="섹션 제목 (예: 수상 내역, 취미)"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              maxLength={60}
+              autoFocus
+            />
+            <textarea
+              className="mypage-custom-textarea"
+              placeholder="자유롭게 내용을 작성하세요"
+              value={newContent}
+              onChange={(e) => setNewContent(e.target.value)}
+              maxLength={5000}
+              rows={3}
+            />
+            <div className="mypage-custom-form-actions">
+              <button type="submit" className="mypage-btn-primary">추가</button>
+              <button type="button" className="mypage-btn-secondary" onClick={() => setShowAddForm(false)}>취소</button>
+            </div>
+          </form>
+        )}
+      </div>
+
       <GridLayoutWithWidth
         className="mypage-grid"
         cols={GRID_COLS}
@@ -159,6 +268,8 @@ export default function MyPage() {
         layout={gridLayoutItems}
         draggableHandle=".mypage-widget-handle"
         onLayoutChange={handleLayoutChange}
+        onDragStop={handleInteractionStop}
+        onResizeStop={handleInteractionStop}
       >
         {visibleLayout.map((item) => (
           <div key={item.sectionType} className="mypage-widget">
@@ -175,6 +286,61 @@ export default function MyPage() {
             </div>
             <div className="mypage-widget-body">
               {renderSectionContent(item.sectionType, portfolio)}
+            </div>
+          </div>
+        ))}
+
+        {customSections.map((item) => (
+          <div key={`${CUSTOM_KEY_PREFIX}${item.id}`} className="mypage-widget">
+            <div className="mypage-widget-handle">
+              <span className="mypage-widget-title">{item.title}</span>
+              <div className="mypage-widget-actions">
+                {editingId !== item.id && (
+                  <button
+                    type="button"
+                    className="mypage-hide-btn"
+                    onClick={() => startEditCustomSection(item)}
+                    title="제목·내용 수정"
+                  >
+                    수정
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="mypage-hide-btn"
+                  onClick={() => handleDeleteCustomSection(item.id)}
+                  title="이 섹션 완전히 삭제"
+                >
+                  삭제
+                </button>
+              </div>
+            </div>
+            <div className="mypage-widget-body">
+              {editingId === item.id ? (
+                <form className="mypage-custom-form" onSubmit={(e) => saveEditCustomSection(e, item.id)}>
+                  <input
+                    className="mypage-custom-input"
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    maxLength={60}
+                    autoFocus
+                  />
+                  <textarea
+                    className="mypage-custom-textarea"
+                    value={editContent}
+                    onChange={(e) => setEditContent(e.target.value)}
+                    maxLength={5000}
+                    rows={3}
+                  />
+                  <div className="mypage-custom-form-actions">
+                    <button type="submit" className="mypage-btn-primary">저장</button>
+                    <button type="button" className="mypage-btn-secondary" onClick={cancelEditCustomSection}>취소</button>
+                  </div>
+                </form>
+              ) : (
+                <CustomSection data={item} />
+              )}
             </div>
           </div>
         ))}

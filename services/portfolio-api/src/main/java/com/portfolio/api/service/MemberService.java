@@ -113,14 +113,15 @@ public class MemberService {
 
     /**
      * 신규 회원의 기본 배치 — 세로 1열: 자기소개 → 스킬 → 프로젝트 → 경력사항, 전부 표시.
-     * DB 마이그레이션(V4)에서 기존 회원에게 백필한 좌표와 동일하게 맞춘다.
+     * 격자는 12칸 기준(가로폭 12 = 전체 폭). DB 마이그레이션(V4, V5)에서 기존 회원에게
+     * 백필한 좌표와 동일하게 맞춘다.
      */
     private Set<SectionLayout> defaultSectionLayouts(PortfolioOwner owner) {
         Set<SectionLayout> layouts = new LinkedHashSet<>();
-        layouts.add(layout(owner, SectionType.HERO, 0, 0, 4, 2));
-        layouts.add(layout(owner, SectionType.SKILLS, 0, 2, 4, 2));
-        layouts.add(layout(owner, SectionType.PROJECTS, 0, 4, 4, 3));
-        layouts.add(layout(owner, SectionType.CAREER, 0, 7, 4, 2));
+        layouts.add(layout(owner, SectionType.HERO, 0, 0, 12, 2));
+        layouts.add(layout(owner, SectionType.SKILLS, 0, 2, 12, 2));
+        layouts.add(layout(owner, SectionType.PROJECTS, 0, 4, 12, 3));
+        layouts.add(layout(owner, SectionType.CAREER, 0, 7, 12, 2));
         return layouts;
     }
 

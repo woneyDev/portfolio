@@ -40,5 +40,8 @@ tools/
 CLAUDE.md
 xCLAUDE.md
 
+# Claude Code 로컬 권한 허용 목록 (세션마다 계속 누적되어 바뀌는 개인 로컬 설정, 공개 저장소에 올리지 않음)
+.claude/settings.local.json
+
 # 신한투자증권 직인(서명) 이미지 - 법적 위험으로 공개 저장소에 올리지 않음
 services/frontend/src/assets/jsp-demo/sign_shinhan_*.png

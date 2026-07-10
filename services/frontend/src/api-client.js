@@ -25,13 +25,34 @@ export const api = {
       headers: authHeaders(token),
       body: JSON.stringify(data),
     }),
-  updateMyLayout: (token, layout) =>
+  updateMyLayout: (token, layout, customSections = []) =>
     request('/api/portfolio/me/layout', {
       method: 'PUT',
       headers: authHeaders(token),
       body: JSON.stringify({
         sections: layout.map(({ sectionType, x, y, w, h, visible }) => ({ sectionType, x, y, w, h, visible })),
+        customSections: customSections.map(({ id, x, y, w, h, visible }) => ({ id, x, y, w, h, visible })),
       }),
+    }),
+
+  createCustomSection: (token, title, content) =>
+    request('/api/portfolio/me/custom-sections', {
+      method: 'POST',
+      headers: authHeaders(token),
+      body: JSON.stringify({ title, content }),
+    }),
+
+  updateCustomSection: (token, id, title, content) =>
+    request(`/api/portfolio/me/custom-sections/${id}`, {
+      method: 'PUT',
+      headers: authHeaders(token),
+      body: JSON.stringify({ title, content }),
+    }),
+
+  deleteCustomSection: (token, id) =>
+    request(`/api/portfolio/me/custom-sections/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders(token),
     }),
   getGithubStats: () => request('/api/github/stats'),
   generatePdf:    () => request('/api/pdf/generate', { method: 'POST' }),

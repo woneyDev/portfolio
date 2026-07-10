@@ -69,6 +69,88 @@
 
 .mypage-add-btn:hover { background: #475569; }
 
+.mypage-custom-add {
+  margin-bottom: 1.25rem;
+}
+
+.mypage-custom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  max-width: 480px;
+}
+
+.mypage-custom-input,
+.mypage-custom-textarea {
+  background: #0f172a;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  color: #f1f5f9;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.mypage-custom-input:focus,
+.mypage-custom-textarea:focus {
+  outline: none;
+  border-color: #60a5fa;
+}
+
+.mypage-custom-form-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mypage-btn-primary {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.mypage-btn-primary:hover { background: #1d4ed8; }
+
+.mypage-btn-secondary {
+  background: none;
+  border: 1px solid #475569;
+  color: #94a3b8;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.mypage-btn-secondary:hover { border-color: #94a3b8; color: #e2e8f0; }
+
+.mypage-widget-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mypage-widget-body .mypage-custom-form {
+  border: none;
+  border-radius: 0;
+  padding: 0.75rem;
+  max-width: none;
+  background: transparent;
+}
+
+.mypage-widget-body .mypage-custom-input,
+.mypage-widget-body .mypage-custom-textarea {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
 .mypage-grid {
   position: relative;
 }

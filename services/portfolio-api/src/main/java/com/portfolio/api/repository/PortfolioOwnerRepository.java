@@ -18,6 +18,7 @@ public interface PortfolioOwnerRepository extends JpaRepository<PortfolioOwner, 
             LEFT JOIN FETCH o.projects
             LEFT JOIN FETCH o.careers
             LEFT JOIN FETCH o.sectionLayouts
+            LEFT JOIN FETCH o.customSections
             WHERE o.member.username = :username
             """)
     Optional<PortfolioOwner> findByMemberUsernameWithAll(String username);

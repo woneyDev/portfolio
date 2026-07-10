@@ -41,6 +41,9 @@ public class PortfolioOwner {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SectionLayout> sectionLayouts = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CustomSection> customSections = new LinkedHashSet<>();
+
     public PortfolioOwner() {}
 
     public Long getId() { return id; }
@@ -72,4 +75,7 @@ public class PortfolioOwner {
 
     public Set<SectionLayout> getSectionLayouts() { return sectionLayouts; }
     public void setSectionLayouts(Set<SectionLayout> sectionLayouts) { this.sectionLayouts = sectionLayouts; }
+
+    public Set<CustomSection> getCustomSections() { return customSections; }
+    public void setCustomSections(Set<CustomSection> customSections) { this.customSections = customSections; }
 }

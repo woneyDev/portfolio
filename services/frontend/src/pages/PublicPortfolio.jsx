@@ -7,6 +7,7 @@ import HeroSection from '../components/HeroSection';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
 import CareerSection from '../components/CareerSection';
+import CustomSection from '../components/CustomSection';
 import StaticDemoPortfolio from './StaticDemoPortfolio';
 import LoginRequired from './LoginRequired';
 
@@ -16,10 +17,10 @@ const SECTION_ANCHOR_IDS = { SKILLS: 'skills', PROJECTS: 'projects', CAREER: 'ca
 
 // 배치 정보가 없는 예전 캐시 응답(배포 직후 최대 10분)을 위한 기본 순서 — DB 기본값과 동일하게 맞춤
 const FALLBACK_LAYOUT = [
-  { sectionType: 'HERO', x: 0, y: 0, w: 4, h: 2, visible: true },
-  { sectionType: 'SKILLS', x: 0, y: 2, w: 4, h: 2, visible: true },
-  { sectionType: 'PROJECTS', x: 0, y: 4, w: 4, h: 3, visible: true },
-  { sectionType: 'CAREER', x: 0, y: 7, w: 4, h: 2, visible: true },
+  { sectionType: 'HERO', x: 0, y: 0, w: 12, h: 2, visible: true },
+  { sectionType: 'SKILLS', x: 0, y: 2, w: 12, h: 2, visible: true },
+  { sectionType: 'PROJECTS', x: 0, y: 4, w: 12, h: 3, visible: true },
+  { sectionType: 'CAREER', x: 0, y: 7, w: 12, h: 2, visible: true },
 ];
 
 function groupSkillsByCategory(flatSkills) {
@@ -95,17 +96,22 @@ export default function PublicPortfolio() {
         {status === 'error' && <div className="section"><p>포트폴리오를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p></div>}
         {status === 'ready' && (
           <div className="portfolio-grid">
-            {(portfolio.layout?.length > 0 ? portfolio.layout : FALLBACK_LAYOUT)
+            {[
+              ...(portfolio.layout?.length > 0 ? portfolio.layout : FALLBACK_LAYOUT)
+                .map((item) => ({ ...item, key: item.sectionType, kind: 'fixed' })),
+              ...(portfolio.customSections ?? [])
+                .map((item) => ({ ...item, key: `custom-${item.id}`, kind: 'custom' })),
+            ]
               .filter((item) => item.visible)
               .sort((a, b) => a.y - b.y || a.x - b.x)
               .map((item) => (
                 <div
-                  key={item.sectionType}
+                  key={item.key}
                   id={SECTION_ANCHOR_IDS[item.sectionType]}
                   className="portfolio-grid-item scroll-anchor"
                   style={{ gridColumn: `${item.x + 1} / span ${item.w}` }}
                 >
-                  {renderSection(item.sectionType, portfolio)}
+                  {item.kind === 'custom' ? <CustomSection data={item} /> : renderSection(item.sectionType, portfolio)}
                 </div>
               ))}
           </div>

@@ -1,7 +1,9 @@
 package com.portfolio.api.controller;
 
 import com.portfolio.api.config.AuthInterceptor;
+import com.portfolio.api.dto.CreateCustomSectionRequest;
 import com.portfolio.api.dto.PortfolioResponse;
+import com.portfolio.api.dto.UpdateCustomSectionRequest;
 import com.portfolio.api.dto.UpdateLayoutRequest;
 import com.portfolio.api.dto.UpdatePortfolioRequest;
 import com.portfolio.api.service.InvalidLayoutException;
@@ -60,6 +62,28 @@ public class PortfolioController {
         } catch (InvalidLayoutException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
         }
+    }
+
+    @PostMapping("/portfolio/me/custom-sections")
+    public ResponseEntity<PortfolioResponse> addCustomSection(
+            @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId,
+            @Valid @RequestBody CreateCustomSectionRequest request) {
+        return ResponseEntity.ok(portfolioService.addCustomSection(memberId, request));
+    }
+
+    @PutMapping("/portfolio/me/custom-sections/{sectionId}")
+    public ResponseEntity<PortfolioResponse> updateCustomSection(
+            @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId,
+            @PathVariable Long sectionId,
+            @Valid @RequestBody UpdateCustomSectionRequest request) {
+        return ResponseEntity.ok(portfolioService.updateCustomSection(memberId, sectionId, request));
+    }
+
+    @DeleteMapping("/portfolio/me/custom-sections/{sectionId}")
+    public ResponseEntity<PortfolioResponse> deleteCustomSection(
+            @RequestAttribute(AuthInterceptor.MEMBER_ID_ATTRIBUTE) Long memberId,
+            @PathVariable Long sectionId) {
+        return ResponseEntity.ok(portfolioService.deleteCustomSection(memberId, sectionId));
     }
 
     @GetMapping("/health")
