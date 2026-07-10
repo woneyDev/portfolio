@@ -21,6 +21,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 브라우저가 크로스 오리진(다른 포트/도메인) 요청 전에 자동으로 보내는 "사전 확인 요청(CORS Preflight)"이다.
+        // 이 요청에는 브라우저가 의도적으로 Authorization 헤더를 싣지 않으므로, 아래의 로그인 검사를 절대 통과할 수 없다.
+        // 여기서 막아버리면 브라우저는 "서버가 허락하지 않았다"고 판단해 뒤따르는 진짜 요청(로그인 토큰 포함)을 아예 보내지 않는다.
+        // 그래서 이 사전 확인 요청만 별도로 통과시킨다 — 실제 데이터 요청(GET/POST/PUT 등)은 아래 로직으로 여전히 검사된다.
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
+
         String token = extractToken(request);
         String memberId = token != null ? sessionManager.validateToken(token) : null;
 

@@ -4,7 +4,8 @@ import { api } from '../api-client';
 import './Admin.css';
 
 // ── 임시 조치: 실제 서버(VPS)가 준비되기 전까지, 백엔드 없이도 정적 데모 화면을 볼 수 있게 하는 우회 ──
-// VPS 준비 후 실제 로그인이 완전히 자리잡으면 이 블록은 통째로 삭제한다.
+// 실제 로그인(api.login)을 먼저 시도하고, 서버가 아예 응답하지 않을 때만(TypeError) 이 값으로 대체한다.
+// VPS 준비 후에는 이 조건이 트리거될 일이 없으므로, 정리 차원에서 이 블록은 통째로 삭제한다.
 const TEMP_PREVIEW_ID = 'woney';
 const TEMP_PREVIEW_PASSWORD = '1123';
 
@@ -21,20 +22,24 @@ export default function AdminLogin() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
-
-    if (usernameOrEmail === TEMP_PREVIEW_ID && password === TEMP_PREVIEW_PASSWORD) {
-      localStorage.setItem('preview_session', '1');
-      navigate('/demo');
-      return;
-    }
-
     setLoading(true);
+
     try {
       const data = await api.login(usernameOrEmail, password);
       localStorage.setItem('admin_token', data.token);
       navigate('/admin/dashboard');
-    } catch {
-      setError('아이디, 이메일 또는 비밀번호가 올바르지 않습니다. 이메일 인증을 완료했는지도 확인해주세요.');
+    } catch (err) {
+      // fetch()는 서버가 아예 응답하지 못하는 경우(VPS 미기동 등) TypeError를 던진다.
+      // 서버가 정상 응답했는데 인증에 실패한 경우는 api-client.js의 request()가 일반 Error를 던진다.
+      const backendUnreachable = err instanceof TypeError;
+      if (backendUnreachable && usernameOrEmail === TEMP_PREVIEW_ID && password === TEMP_PREVIEW_PASSWORD) {
+        localStorage.setItem('preview_session', '1');
+        navigate('/demo');
+      } else if (backendUnreachable) {
+        setError('서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.');
+      } else {
+        setError('아이디, 이메일 또는 비밀번호가 올바르지 않습니다. 이메일 인증을 완료했는지도 확인해주세요.');
+      }
     } finally {
       setLoading(false);
     }
