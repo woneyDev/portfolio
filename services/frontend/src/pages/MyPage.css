@@ -151,6 +151,24 @@
   color: #0f172a;
 }
 
+.rich-text-editor {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.rich-text-editor .ql-toolbar {
+  border-color: #cbd5e1;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.rich-text-editor .ql-container {
+  border-color: #cbd5e1;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  min-height: 120px;
+  font-size: 0.9rem;
+}
+
 .mypage-grid {
   position: relative;
 }

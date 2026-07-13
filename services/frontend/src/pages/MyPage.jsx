@@ -2,10 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import GridLayout, { WidthProvider } from 'react-grid-layout/legacy';
 import { api } from '../api-client';
 import HeroSection from '../components/HeroSection';
-import SkillsSection from '../components/SkillsSection';
-import ProjectsSection from '../components/ProjectsSection';
-import CareerSection from '../components/CareerSection';
 import CustomSection from '../components/CustomSection';
+import RichTextEditor from '../components/RichTextEditor';
 import 'react-grid-layout/css/styles.css';
 import './MyPage.css';
 
@@ -16,42 +14,16 @@ const GRID_COLS = 12;
 const SAVE_DEBOUNCE_MS = 800;
 const CUSTOM_KEY_PREFIX = 'custom:';
 
+// 배너(인트로)만 유일한 고정 섹션이다. 자기소개/기술스택/프로젝트/경력은 전부 커스텀 섹션으로 취급된다.
 const SECTION_LABELS = {
-  HERO: '자기소개',
-  SKILLS: '스킬',
-  PROJECTS: '프로젝트',
-  CAREER: '경력사항',
+  HERO: '인트로 배너',
 };
-
-const DEFAULT_SIZE_BY_TYPE = {
-  HERO: { w: 12, h: 2 },
-  SKILLS: { w: 12, h: 2 },
-  PROJECTS: { w: 12, h: 3 },
-  CAREER: { w: 12, h: 2 },
-};
-
-function groupSkillsByCategory(flatSkills) {
-  const grouped = new Map();
-  for (const skill of flatSkills) {
-    if (!grouped.has(skill.category)) grouped.set(skill.category, []);
-    grouped.get(skill.category).push(skill.name);
-  }
-  return Array.from(grouped, ([category, items]) => ({ category, items }));
-}
 
 function renderSectionContent(sectionType, portfolio) {
-  switch (sectionType) {
-    case 'HERO':
-      return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
-    case 'SKILLS':
-      return <SkillsSection data={groupSkillsByCategory(portfolio.skills)} />;
-    case 'PROJECTS':
-      return <ProjectsSection data={portfolio.projects} />;
-    case 'CAREER':
-      return <CareerSection data={portfolio.career} />;
-    default:
-      return null;
+  if (sectionType === 'HERO') {
+    return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
   }
+  return null;
 }
 
 export default function MyPage() {
@@ -147,10 +119,9 @@ export default function MyPage() {
 
   function handleShow(sectionType) {
     const maxY = visibleLayout.reduce((max, item) => Math.max(max, item.y + item.h), 0);
-    const defaults = DEFAULT_SIZE_BY_TYPE[sectionType] ?? { w: 12, h: 2 };
     const nextLayout = layout.map((item) =>
       item.sectionType === sectionType
-        ? { ...item, visible: true, x: 0, y: maxY, w: defaults.w, h: defaults.h }
+        ? { ...item, visible: true, x: 0, y: maxY, w: 12, h: 2 }
         : item);
     setLayout(nextLayout);
     scheduleSave(nextLayout, customSections);
@@ -244,13 +215,10 @@ export default function MyPage() {
               maxLength={60}
               autoFocus
             />
-            <textarea
-              className="mypage-custom-textarea"
-              placeholder="자유롭게 내용을 작성하세요"
+            <RichTextEditor
               value={newContent}
-              onChange={(e) => setNewContent(e.target.value)}
-              maxLength={5000}
-              rows={3}
+              onChange={setNewContent}
+              placeholder="자유롭게 내용을 작성하세요"
             />
             <div className="mypage-custom-form-actions">
               <button type="submit" className="mypage-btn-primary">추가</button>
@@ -326,12 +294,10 @@ export default function MyPage() {
                     maxLength={60}
                     autoFocus
                   />
-                  <textarea
-                    className="mypage-custom-textarea"
+                  <RichTextEditor
+                    key={item.id}
                     value={editContent}
-                    onChange={(e) => setEditContent(e.target.value)}
-                    maxLength={5000}
-                    rows={3}
+                    onChange={setEditContent}
                   />
                   <div className="mypage-custom-form-actions">
                     <button type="submit" className="mypage-btn-primary">저장</button>

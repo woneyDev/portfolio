@@ -4,47 +4,22 @@ import { api } from '../api-client';
 import { useLanguage } from '../i18n/LanguageContext';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
-import SkillsSection from '../components/SkillsSection';
-import ProjectsSection from '../components/ProjectsSection';
-import CareerSection from '../components/CareerSection';
 import CustomSection from '../components/CustomSection';
 import StaticDemoPortfolio from './StaticDemoPortfolio';
 import LoginRequired from './LoginRequired';
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
-const SECTION_ANCHOR_IDS = { SKILLS: 'skills', PROJECTS: 'projects', CAREER: 'career' };
-
 // 배치 정보가 없는 예전 캐시 응답(배포 직후 최대 10분)을 위한 기본 순서 — DB 기본값과 동일하게 맞춤
 const FALLBACK_LAYOUT = [
   { sectionType: 'HERO', x: 0, y: 0, w: 12, h: 2, visible: true },
-  { sectionType: 'SKILLS', x: 0, y: 2, w: 12, h: 2, visible: true },
-  { sectionType: 'PROJECTS', x: 0, y: 4, w: 12, h: 3, visible: true },
-  { sectionType: 'CAREER', x: 0, y: 7, w: 12, h: 2, visible: true },
 ];
 
-function groupSkillsByCategory(flatSkills) {
-  const grouped = new Map();
-  for (const skill of flatSkills) {
-    if (!grouped.has(skill.category)) grouped.set(skill.category, []);
-    grouped.get(skill.category).push(skill.name);
-  }
-  return Array.from(grouped, ([category, items]) => ({ category, items }));
-}
-
 function renderSection(sectionType, portfolio) {
-  switch (sectionType) {
-    case 'HERO':
-      return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
-    case 'SKILLS':
-      return <SkillsSection data={groupSkillsByCategory(portfolio.skills)} />;
-    case 'PROJECTS':
-      return <ProjectsSection data={portfolio.projects} />;
-    case 'CAREER':
-      return <CareerSection data={portfolio.career} />;
-    default:
-      return null;
+  if (sectionType === 'HERO') {
+    return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
   }
+  return null;
 }
 
 export default function PublicPortfolio() {
@@ -116,17 +91,14 @@ export default function PublicPortfolio() {
         .sort((a, b) => a.y - b.y || a.x - b.x)
         .map((item) => ({
           ...item,
-          anchorId: item.kind === 'custom' ? `custom-${item.id}` : SECTION_ANCHOR_IDS[item.sectionType],
+          anchorId: item.kind === 'custom' ? `custom-${item.id}` : undefined,
         }))
     : [];
 
-  // HERO(맨 위 배너)는 퀵버튼에서 제외 — 그 외 보이는 섹션은 고정/커스텀 구분 없이 모두 포함한다.
+  // HERO(맨 위 배너)는 유일한 고정 섹션이자 퀵버튼에서 제외 대상 — 커스텀 섹션만 퀵버튼에 오른다.
   const navItems = visibleSections
     .filter((item) => item.anchorId)
-    .map((item) => ({
-      id: item.anchorId,
-      label: item.kind === 'custom' ? item.title : t.nav[item.sectionType.toLowerCase()],
-    }));
+    .map((item) => ({ id: item.anchorId, label: item.title }));
 
   return (
     <div className="portfolio">
