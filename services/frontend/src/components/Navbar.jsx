@@ -1,5 +1,6 @@
 import { useLanguage } from '../i18n/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
+import AccountMenu from './AccountMenu';
 
 const NAVBAR_HEIGHT = 56;
 
@@ -62,7 +63,7 @@ export default function Navbar({ items = [], editLink }) {
             </a>
           ))}
         </div>
-        {editLink && <a href={editLink} className="nav-edit-btn">편집하기</a>}
+        <AccountMenu editLink={editLink} />
         <LanguageSwitcher />
       </div>
     </nav>

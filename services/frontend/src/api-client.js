@@ -81,3 +81,10 @@ export const api = {
       headers: authHeaders(token),
     }),
 };
+
+// 로그아웃 API 호출 + 로컬 토큰 정리를 한 번에 처리한다 (여러 화면에서 공용으로 사용).
+export async function logoutAndClearToken() {
+  const token = localStorage.getItem('admin_token');
+  try { await api.logout(token); } catch { /* 무시 */ }
+  localStorage.removeItem('admin_token');
+}

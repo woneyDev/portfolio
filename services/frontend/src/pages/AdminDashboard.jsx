@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { api } from '../api-client';
+import { logoutAndClearToken } from '../api-client';
 import './Admin.css';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
 
   async function handleLogout() {
-    const token = localStorage.getItem('admin_token');
-    try { await api.logout(token); } catch { /* 무시 */ }
-    localStorage.removeItem('admin_token');
+    await logoutAndClearToken();
     navigate('/admin');
   }
 
