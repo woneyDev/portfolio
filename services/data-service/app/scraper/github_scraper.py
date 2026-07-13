@@ -1,3 +1,4 @@
+import asyncio
 import httpx
 from fastapi import APIRouter, HTTPException
 from app.config import settings
@@ -22,7 +23,6 @@ async def _fetch_activity() -> dict:
     base = GITHUB_API
 
     async with httpx.AsyncClient(headers=_headers(), timeout=10.0) as client:
-        # 동시 호출로 응답 속도 최적화
         profile_resp, repos_resp, events_resp = await _gather(client, [
             f"{base}/users/{username}",
             f"{base}/users/{username}/repos?sort=updated&per_page=10",
@@ -65,18 +65,19 @@ async def _fetch_activity() -> dict:
     }
 
 
+async def _fetch_one(client: httpx.AsyncClient, url: str) -> dict:
+    resp = await client.get(url)
+    if resp.status_code != 200:
+        raise HTTPException(
+            status_code=502,
+            detail=f"GitHub API 오류: {resp.status_code} — {url}",
+        )
+    return resp.json()
+
+
 async def _gather(client: httpx.AsyncClient, urls: list[str]) -> list:
-    """여러 URL을 순차 호출합니다. (httpx AsyncClient 기반)"""
-    results = []
-    for url in urls:
-        resp = await client.get(url)
-        if resp.status_code != 200:
-            raise HTTPException(
-                status_code=502,
-                detail=f"GitHub API 오류: {resp.status_code} — {url}",
-            )
-        results.append(resp.json())
-    return results
+    """여러 URL을 동시에 병렬 호출합니다."""
+    return await asyncio.gather(*[_fetch_one(client, url) for url in urls])
 
 
 @router.get("/activity", summary="GitHub 활동 데이터 조회 (Redis 캐시)")
