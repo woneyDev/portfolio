@@ -103,33 +103,50 @@ export default function PublicPortfolio() {
     return <StaticDemoPortfolio />;
   }
 
+  // 화면에 실제로 보이는 섹션(고정 + 커스텀)을 배치 순서(위→아래, 왼쪽→오른쪽)대로 하나의 목록으로 합친다.
+  // 퀵버튼(Navbar)도 이 목록을 그대로 따라간다 — 섹션을 숨기거나 이름을 바꾸면 퀵버튼도 자동으로 맞춰진다.
+  const visibleSections = status === 'ready'
+    ? [
+        ...(portfolio.layout?.length > 0 ? portfolio.layout : FALLBACK_LAYOUT)
+          .map((item) => ({ ...item, key: item.sectionType, kind: 'fixed' })),
+        ...(portfolio.customSections ?? [])
+          .map((item) => ({ ...item, key: `custom-${item.id}`, kind: 'custom' })),
+      ]
+        .filter((item) => item.visible)
+        .sort((a, b) => a.y - b.y || a.x - b.x)
+        .map((item) => ({
+          ...item,
+          anchorId: item.kind === 'custom' ? `custom-${item.id}` : SECTION_ANCHOR_IDS[item.sectionType],
+        }))
+    : [];
+
+  // HERO(맨 위 배너)는 퀵버튼에서 제외 — 그 외 보이는 섹션은 고정/커스텀 구분 없이 모두 포함한다.
+  const navItems = visibleSections
+    .filter((item) => item.anchorId)
+    .map((item) => ({
+      id: item.anchorId,
+      label: item.kind === 'custom' ? item.title : t.nav[item.sectionType.toLowerCase()],
+    }));
+
   return (
     <div className="portfolio">
-      <Navbar sectionIds={{ intro: false }} editLink={isOwner ? '/mypage' : null} />
+      <Navbar items={navItems} editLink={isOwner ? '/mypage' : null} />
       <main>
         {status === 'loading' && <div className="section"><p>불러오는 중...</p></div>}
         {status === 'not-found' && <div className="section"><p>&quot;{username}&quot; 회원을 찾을 수 없습니다.</p></div>}
         {status === 'error' && <div className="section"><p>포트폴리오를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p></div>}
         {status === 'ready' && (
           <div className="portfolio-grid">
-            {[
-              ...(portfolio.layout?.length > 0 ? portfolio.layout : FALLBACK_LAYOUT)
-                .map((item) => ({ ...item, key: item.sectionType, kind: 'fixed' })),
-              ...(portfolio.customSections ?? [])
-                .map((item) => ({ ...item, key: `custom-${item.id}`, kind: 'custom' })),
-            ]
-              .filter((item) => item.visible)
-              .sort((a, b) => a.y - b.y || a.x - b.x)
-              .map((item) => (
-                <div
-                  key={item.key}
-                  id={SECTION_ANCHOR_IDS[item.sectionType]}
-                  className="portfolio-grid-item scroll-anchor"
-                  style={{ gridColumn: `${item.x + 1} / span ${item.w}` }}
-                >
-                  {item.kind === 'custom' ? <CustomSection data={item} /> : renderSection(item.sectionType, portfolio)}
-                </div>
-              ))}
+            {visibleSections.map((item) => (
+              <div
+                key={item.key}
+                id={item.anchorId}
+                className="portfolio-grid-item scroll-anchor"
+                style={{ gridColumn: `${item.x + 1} / span ${item.w}` }}
+              >
+                {item.kind === 'custom' ? <CustomSection data={item} /> : renderSection(item.sectionType, portfolio)}
+              </div>
+            ))}
           </div>
         )}
       </main>

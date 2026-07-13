@@ -48,7 +48,7 @@ export function scrollToSection(e, id) {
   animatedScrollTo(targetY);
 }
 
-export default function Navbar({ sectionIds, editLink }) {
+export default function Navbar({ items = [], editLink }) {
   const { t } = useLanguage();
 
   return (
@@ -56,10 +56,11 @@ export default function Navbar({ sectionIds, editLink }) {
       <span className="nav-brand">{t.nav.brand}</span>
       <div className="nav-right">
         <div className="nav-links">
-          {sectionIds.intro && <a href="#intro" onClick={(e) => scrollToSection(e, 'intro')}>{t.nav.intro}</a>}
-          <a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>{t.nav.skills}</a>
-          <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>{t.nav.projects}</a>
-          <a href="#career" onClick={(e) => scrollToSection(e, 'career')}>{t.nav.career}</a>
+          {items.map((item) => (
+            <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)}>
+              {item.label}
+            </a>
+          ))}
         </div>
         {editLink && <a href={editLink} className="nav-edit-btn">편집하기</a>}
         <LanguageSwitcher />

@@ -16,7 +16,14 @@ export default function StaticDemoPortfolio() {
 
   return (
     <div className="portfolio">
-      <Navbar sectionIds={{ intro: true }} />
+      <Navbar
+        items={[
+          { id: 'intro', label: t.nav.intro },
+          { id: 'skills', label: t.nav.skills },
+          { id: 'projects', label: t.nav.projects },
+          { id: 'career', label: t.nav.career },
+        ]}
+      />
       <main>
         <HeroSection data={portfolioData.hero} />
         <div id="intro" className="scroll-anchor"><IntroSection data={portfolioData.intro} /></div>
