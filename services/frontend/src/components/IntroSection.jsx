@@ -8,7 +8,7 @@ export default function IntroSection({ data }) {
       <h2 className="section-title">{t.sectionTitles.intro}</h2>
       <div className="intro-layout">
         <div className="intro-photo">
-          <img src={profilePhoto} alt="프로필 사진" />
+          <img src={profilePhoto} alt={t.account.profileAlt} />
         </div>
         <div className="intro-body">
           <p className="intro-greeting">{data.greeting}</p>

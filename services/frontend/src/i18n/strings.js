@@ -11,6 +11,19 @@ export const strings = {
     },
     footer: '© 2026 · React로 제작 · GitHub Pages에서 호스팅',
     languageName: '한국어',
+    status: {
+      loading: '불러오는 중...',
+      notFoundBefore: '"',
+      notFoundAfter: '" 회원을 찾을 수 없습니다.',
+      loadError: '포트폴리오를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.',
+    },
+    account: {
+      login: '로그인',
+      editToggle: '편집하기',
+      editAction: '화면 편집',
+      logout: '로그아웃',
+      profileAlt: '프로필 사진',
+    },
     shinhanDemo: {
       logoAlt: '신한투자증권 로고',
       screenName: '월간거래내역 및 잔고',
@@ -351,6 +364,19 @@ export const strings = {
     },
     footer: '© 2026 · Built with React · Hosted on GitHub Pages',
     languageName: 'English',
+    status: {
+      loading: 'Loading...',
+      notFoundBefore: '"',
+      notFoundAfter: '" was not found.',
+      loadError: 'Failed to load the portfolio. Please try again shortly.',
+    },
+    account: {
+      login: 'Log in',
+      editToggle: 'Edit',
+      editAction: 'Edit layout',
+      logout: 'Log out',
+      profileAlt: 'Profile photo',
+    },
     shinhanDemo: {
       logoAlt: 'Shinhan Investment Corp. logo',
       screenName: 'Monthly Transactions & Balance',

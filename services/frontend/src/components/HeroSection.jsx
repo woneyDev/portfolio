@@ -6,7 +6,7 @@ export default function HeroSection({ data }) {
   return (
     <section className="hero">
       <div className="hero-content">
-        <img src={profilePhoto} alt="프로필 사진" className="hero-photo" />
+        <img src={profilePhoto} alt={t.account.profileAlt} className="hero-photo" />
         <h1>{data.title}</h1>
         <p className="hero-subtitle">{data.subtitle}</p>
         <div className="hero-links">

@@ -132,9 +132,11 @@ export default function PublicPortfolio() {
     <div className="portfolio">
       <Navbar items={navItems} editLink={isOwner ? '/mypage' : null} />
       <main>
-        {status === 'loading' && <div className="section"><p>불러오는 중...</p></div>}
-        {status === 'not-found' && <div className="section"><p>&quot;{username}&quot; 회원을 찾을 수 없습니다.</p></div>}
-        {status === 'error' && <div className="section"><p>포트폴리오를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p></div>}
+        {status === 'loading' && <div className="section"><p>{t.status.loading}</p></div>}
+        {status === 'not-found' && (
+          <div className="section"><p>{t.status.notFoundBefore}{username}{t.status.notFoundAfter}</p></div>
+        )}
+        {status === 'error' && <div className="section"><p>{t.status.loadError}</p></div>}
         {status === 'ready' && (
           <div className="portfolio-grid">
             {visibleSections.map((item) => (
