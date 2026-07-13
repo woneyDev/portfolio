@@ -158,7 +158,7 @@ public class PortfolioService {
         CustomSection section = new CustomSection();
         section.setOwner(owner);
         section.setTitle(request.title());
-        section.setContent(request.content());
+        section.setContent(HtmlSanitizer.sanitize(request.content()));
         section.setGridX(0);
         section.setGridY(maxY);
         section.setGridWidth(12);
@@ -186,7 +186,7 @@ public class PortfolioService {
 
         CustomSection section = findOwnCustomSection(owner, sectionId);
         section.setTitle(request.title());
-        section.setContent(request.content());
+        section.setContent(HtmlSanitizer.sanitize(request.content()));
 
         redisTemplate.delete(CACHE_KEY_PREFIX + owner.getMember().getUsername());
 
