@@ -34,7 +34,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         if (memberId == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setContentType("application/json");
+            response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write("{\"error\":\"인증이 필요합니다.\"}");
             return false;
         }

@@ -1,6 +1,7 @@
 package com.portfolio.api.config;
 
 import com.portfolio.api.session.SessionManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     private final SessionManager sessionManager;
+
+    @Value("${security.admin-allowed-ips:}")
+    private String adminAllowedIps;
 
     public WebConfig(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
@@ -36,6 +40,16 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // 1단계: IP 허용 목록 검사 — 로그인·소셜 로그인·마이페이지 관련 요청은 등록된 접속 위치에서만 통과한다.
+        // 여기를 통과해야만 아래 2단계(로그인 세션 검증)로 넘어간다.
+        registry.addInterceptor(new IpAllowlistInterceptor(adminAllowedIps))
+                .addPathPatterns(
+                        "/api/auth/login",
+                        "/api/auth/oauth/**",
+                        "/api/portfolio/me",
+                        "/api/portfolio/me/**");
+
+        // 2단계: 로그인 세션(토큰) 검증 — 마이페이지 관련 요청만 대상으로, 실제 로그인한 회원인지 서버가 직접 확인한다.
         registry.addInterceptor(new AuthInterceptor(sessionManager))
                 .addPathPatterns("/api/portfolio/me/**", "/api/portfolio/me");
     }

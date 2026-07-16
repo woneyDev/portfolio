@@ -58,6 +58,11 @@ server:
 session:
   ttl-seconds: ${SESSION_TTL_SECONDS:3600}
 
+# ── 관리 기능(로그인/마이페이지) 접속 허용 IP 목록 ──
+# 쉼표로 구분해서 여러 개 등록 가능. 비워두면 로컬(localhost) 외에는 전부 차단됨.
+security:
+  admin-allowed-ips: ${ADMIN_ALLOWED_IPS:}
+
 # ── 애플리케이션 설정 ──
 app:
   # 인증 메일 링크에 사용할 프론트엔드 주소
