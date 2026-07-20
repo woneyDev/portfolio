@@ -70,6 +70,9 @@ export default function AdminLogin() {
         <button className="admin-btn" type="submit" disabled={loading}>
           {loading ? '로그인 중...' : '로그인'}
         </button>
+        <button type="button" className="admin-btn admin-btn-outline" onClick={() => navigate('/signup')}>
+          회원가입
+        </button>
 
         <div className="admin-oauth-divider">또는</div>
         <button type="button" className="admin-btn admin-oauth-btn admin-oauth-google" disabled title="준비 중입니다">

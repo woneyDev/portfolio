@@ -36,6 +36,9 @@ export default function LoginRequired() {
         <button className="admin-btn" onClick={() => navigate('/admin', { replace: true })}>
           지금 로그인 페이지로 이동
         </button>
+        <button className="admin-btn admin-btn-outline" onClick={() => navigate('/signup')}>
+          아직 계정이 없으신가요? 회원가입
+        </button>
       </div>
     </div>
   );

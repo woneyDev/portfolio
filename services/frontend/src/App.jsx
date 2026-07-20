@@ -3,6 +3,7 @@ import { HashRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router
 import PrivateRoute from './components/PrivateRoute';
 import DemoAccessGuard from './components/DemoAccessGuard';
 import AdminLogin from './pages/AdminLogin';
+import Signup from './pages/Signup';
 import AdminDashboard from './pages/AdminDashboard';
 import MyPage from './pages/MyPage';
 import PublicPortfolio from './pages/PublicPortfolio';
@@ -84,6 +85,7 @@ export default function App() {
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/oauth-callback" element={<OAuthCallback />} />
           <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/signup" element={<Signup />} />
           <Route
             path="/admin/dashboard"
             element={

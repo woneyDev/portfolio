@@ -28,9 +28,12 @@ public class PortfolioController {
     }
 
     @GetMapping("/portfolio/{username}")
-    public ResponseEntity<String> getPortfolioByUsername(@PathVariable String username) {
+    public ResponseEntity<String> getPortfolioByUsername(
+            @PathVariable String username,
+            @RequestParam(defaultValue = "ko") String lang) {
         try {
-            String json = portfolioService.getPortfolioJsonByUsername(username.toLowerCase());
+            String normalizedLang = "en".equalsIgnoreCase(lang) ? "en" : "ko";
+            String json = portfolioService.getPortfolioJsonByUsername(username.toLowerCase(), normalizedLang);
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .header("Cache-Control", "public, max-age=60")

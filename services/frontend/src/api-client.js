@@ -13,7 +13,9 @@ async function request(path, options = {}) {
     ...options,
   });
   if (!res.ok) {
-    const error = new Error(`API 오류: ${res.status}`);
+    // 서버가 { error: "..." } 형태로 구체적인 안내 문구를 내려주면 그걸 그대로 화면에 보여줄 수 있게 담아둔다.
+    const body = await res.json().catch(() => null);
+    const error = new Error(body?.error ?? `API 오류: ${res.status}`);
     error.status = res.status;
     throw error;
   }
@@ -21,7 +23,7 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  getPortfolioByUsername: (username) => request(`/api/portfolio/${username}`),
+  getPortfolioByUsername: (username, lang = 'ko') => request(`/api/portfolio/${username}?lang=${lang}`),
   getMyPortfolio: (token) => request('/api/portfolio/me', { headers: authHeaders(token) }),
   updateMyPortfolio: (token, data) =>
     request('/api/portfolio/me', {
@@ -61,11 +63,14 @@ export const api = {
   getGithubStats: () => request('/api/github/stats'),
   generatePdf:    () => request('/api/pdf/generate', { method: 'POST' }),
 
-  register: (username, email, password) =>
+  register: (email, password, passwordConfirm, nickname, affiliation) =>
     request('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ email, password, passwordConfirm, nickname, affiliation }),
     }),
+
+  checkEmailAvailability: (email) =>
+    request(`/api/auth/check-email?email=${encodeURIComponent(email)}`),
 
   verifyEmail: (token) => request(`/api/auth/verify-email?token=${encodeURIComponent(token)}`),
 

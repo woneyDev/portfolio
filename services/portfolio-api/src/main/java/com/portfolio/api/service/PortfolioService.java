@@ -51,9 +51,10 @@ public class PortfolioService {
 
     /**
      * 공개 조회용 — 방문자가 보는 특정 회원의 포트폴리오. Redis에 JSON 문자열을 캐싱합니다(cache-aside).
+     * 언어별로 따로 캐싱한다 — 두 언어를 한 번에 다 내려주지 않고, 방문자가 언어를 바꿀 때만 그 언어로 새로 요청한다.
      */
-    public String getPortfolioJsonByUsername(String username) {
-        String cacheKey = CACHE_KEY_PREFIX + username;
+    public String getPortfolioJsonByUsername(String username, String lang) {
+        String cacheKey = CACHE_KEY_PREFIX + username + ":" + lang;
         String cached = redisTemplate.opsForValue().get(cacheKey);
         if (cached != null) {
             return cached;
@@ -62,18 +63,18 @@ public class PortfolioService {
         PortfolioOwner owner = ownerRepository.findByMemberUsernameWithAll(username)
                 .orElseThrow(() -> new NoSuchElementException("존재하지 않는 회원입니다: " + username));
 
-        String json = writeJson(new PortfolioResponse(owner));
+        String json = writeJson(new PortfolioResponse(owner, lang));
         redisTemplate.opsForValue().set(cacheKey, json, CACHE_TTL);
         return json;
     }
 
     /**
-     * 로그인한 회원 본인의 포트폴리오 조회 (관리자 대시보드용).
+     * 로그인한 회원 본인의 포트폴리오 조회 (마이페이지·관리자 대시보드용 — 항상 한글 기준으로 편집한다).
      */
     public PortfolioResponse getMyPortfolio(Long memberId) {
         PortfolioOwner owner = ownerRepository.findByMember_Id(memberId)
                 .orElseThrow(() -> new NoSuchElementException("포트폴리오를 찾을 수 없습니다."));
-        return new PortfolioResponse(owner);
+        return new PortfolioResponse(owner, "ko");
     }
 
     @Transactional
@@ -88,9 +89,9 @@ public class PortfolioService {
         owner.setEmail(request.email());
         owner.setGithubUrl(request.githubUrl());
 
-        redisTemplate.delete(CACHE_KEY_PREFIX + owner.getMember().getUsername());
+        invalidateCache(owner.getMember().getUsername());
 
-        return new PortfolioResponse(owner);
+        return new PortfolioResponse(owner, "ko");
     }
 
     /**
@@ -139,9 +140,9 @@ public class PortfolioService {
             }
         }
 
-        redisTemplate.delete(CACHE_KEY_PREFIX + owner.getMember().getUsername());
+        invalidateCache(owner.getMember().getUsername());
 
-        return new PortfolioResponse(owner);
+        return new PortfolioResponse(owner, "ko");
     }
 
     /**
@@ -171,9 +172,9 @@ public class PortfolioService {
         customSectionRepository.save(section);
         owner.getCustomSections().add(section);
 
-        redisTemplate.delete(CACHE_KEY_PREFIX + owner.getMember().getUsername());
+        invalidateCache(owner.getMember().getUsername());
 
-        return new PortfolioResponse(owner);
+        return new PortfolioResponse(owner, "ko");
     }
 
     /**
@@ -188,9 +189,9 @@ public class PortfolioService {
         section.setTitle(request.title());
         section.setContent(HtmlSanitizer.sanitize(request.content()));
 
-        redisTemplate.delete(CACHE_KEY_PREFIX + owner.getMember().getUsername());
+        invalidateCache(owner.getMember().getUsername());
 
-        return new PortfolioResponse(owner);
+        return new PortfolioResponse(owner, "ko");
     }
 
     /**
@@ -205,9 +206,9 @@ public class PortfolioService {
         CustomSection section = findOwnCustomSection(owner, sectionId);
         owner.getCustomSections().remove(section);
 
-        redisTemplate.delete(CACHE_KEY_PREFIX + owner.getMember().getUsername());
+        invalidateCache(owner.getMember().getUsername());
 
-        return new PortfolioResponse(owner);
+        return new PortfolioResponse(owner, "ko");
     }
 
     private CustomSection findOwnCustomSection(PortfolioOwner owner, Long sectionId) {
@@ -229,6 +230,11 @@ public class PortfolioService {
                 .max(Comparator.naturalOrder())
                 .orElse(0);
         return Math.max(maxFromFixed, maxFromCustom);
+    }
+
+    private void invalidateCache(String username) {
+        redisTemplate.delete(CACHE_KEY_PREFIX + username + ":ko");
+        redisTemplate.delete(CACHE_KEY_PREFIX + username + ":en");
     }
 
     private SectionType parseSectionType(String value) {

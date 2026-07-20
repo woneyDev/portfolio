@@ -4,22 +4,67 @@ import { api } from '../api-client';
 import { useLanguage } from '../i18n/LanguageContext';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
+import SkillsSection from '../components/SkillsSection';
+import ProjectsSection from '../components/ProjectsSection';
+import CareerSection from '../components/CareerSection';
 import CustomSection from '../components/CustomSection';
+import profilePhoto from '../assets/profile.jpg';
 import StaticDemoPortfolio from './StaticDemoPortfolio';
 import LoginRequired from './LoginRequired';
 
 const MEMBER_ONE_USERNAME = import.meta.env.VITE_MEMBER_ONE_USERNAME;
 
+const SECTION_ANCHOR_IDS = { SKILLS: 'skills', PROJECTS: 'projects', CAREER: 'career' };
+
 // 배치 정보가 없는 예전 캐시 응답(배포 직후 최대 10분)을 위한 기본 순서 — DB 기본값과 동일하게 맞춤
 const FALLBACK_LAYOUT = [
   { sectionType: 'HERO', x: 0, y: 0, w: 12, h: 2, visible: true },
+  { sectionType: 'SKILLS', x: 0, y: 2, w: 12, h: 2, visible: true },
+  { sectionType: 'PROJECTS', x: 0, y: 4, w: 12, h: 3, visible: true },
+  { sectionType: 'CAREER', x: 0, y: 7, w: 12, h: 2, visible: true },
 ];
 
-function renderSection(sectionType, portfolio) {
-  if (sectionType === 'HERO') {
-    return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
+function groupSkillsByCategory(flatSkills) {
+  const grouped = new Map();
+  for (const skill of flatSkills) {
+    if (!grouped.has(skill.category)) grouped.set(skill.category, []);
+    grouped.get(skill.category).push(skill.name);
   }
-  return null;
+  return Array.from(grouped, ([category, items]) => ({ category, items }));
+}
+
+// 자기소개(slug: 'intro') 섹션만 데모 화면(IntroSection)과 동일하게 좌측에 프로필 사진을 곁들여 보여준다.
+// title로 판별하지 않는 이유: 영어로 보면 제목이 "About Me"로 바뀌어 문자열 비교가 깨지기 때문.
+function renderCustomSection(item) {
+  if (item.slug === 'intro') {
+    return (
+      <section className="section custom-section">
+        <h2 className="section-title">{item.title}</h2>
+        <div className="intro-layout">
+          <div className="intro-photo"><img src={profilePhoto} alt="프로필 사진" /></div>
+          <div className="intro-body">
+            <div className="custom-section-content" dangerouslySetInnerHTML={{ __html: item.content }} />
+          </div>
+        </div>
+      </section>
+    );
+  }
+  return <CustomSection data={item} />;
+}
+
+function renderSection(sectionType, portfolio) {
+  switch (sectionType) {
+    case 'HERO':
+      return <HeroSection data={{ ...portfolio.hero, github: portfolio.hero.githubUrl }} />;
+    case 'SKILLS':
+      return <SkillsSection data={groupSkillsByCategory(portfolio.skills)} />;
+    case 'PROJECTS':
+      return <ProjectsSection data={portfolio.projects} />;
+    case 'CAREER':
+      return <CareerSection data={portfolio.career} />;
+    default:
+      return null;
+  }
 }
 
 export default function PublicPortfolio() {
@@ -27,17 +72,18 @@ export default function PublicPortfolio() {
   // "/:handle" 하나로 "@아이디" 구간 전체를 받은 뒤, "@"로 시작하는 경우에만 회원 아이디로 인정한다.
   // ("/@:username" 형태는 react-router가 동적 구간으로 인식하지 못해 항상 매칭에 실패하는 문제의 우회)
   const username = handle?.startsWith('@') ? handle.slice(1) : null;
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [portfolio, setPortfolio] = useState(null);
   const [status, setStatus] = useState('loading'); // loading | ready | not-found | error
   const [isOwner, setIsOwner] = useState(false);
 
+  // 언어를 바꾸면(lang 변경) 그 언어로 다시 요청한다 — 두 언어를 한 번에 미리 받아두지 않는다.
   useEffect(() => {
     if (!username) return;
     let cancelled = false;
     setStatus('loading');
 
-    api.getPortfolioByUsername(username)
+    api.getPortfolioByUsername(username, lang)
       .then((data) => {
         if (!cancelled) {
           setPortfolio(data);
@@ -50,7 +96,7 @@ export default function PublicPortfolio() {
       });
 
     return () => { cancelled = true; };
-  }, [username]);
+  }, [username, lang]);
 
   // 로그인되어 있고, 지금 보고 있는 페이지가 본인 페이지일 때만 "편집하기" 버튼을 보여준다.
   useEffect(() => {
@@ -91,14 +137,17 @@ export default function PublicPortfolio() {
         .sort((a, b) => a.y - b.y || a.x - b.x)
         .map((item) => ({
           ...item,
-          anchorId: item.kind === 'custom' ? `custom-${item.id}` : undefined,
+          anchorId: item.kind === 'custom' ? `custom-${item.id}` : SECTION_ANCHOR_IDS[item.sectionType],
         }))
     : [];
 
-  // HERO(맨 위 배너)는 유일한 고정 섹션이자 퀵버튼에서 제외 대상 — 커스텀 섹션만 퀵버튼에 오른다.
+  // HERO(맨 위 배너)는 퀵버튼에서 제외 — 그 외 보이는 섹션은 고정/커스텀 구분 없이 모두 포함한다.
   const navItems = visibleSections
     .filter((item) => item.anchorId)
-    .map((item) => ({ id: item.anchorId, label: item.title }));
+    .map((item) => ({
+      id: item.anchorId,
+      label: item.kind === 'custom' ? item.title : t.nav[item.sectionType.toLowerCase()],
+    }));
 
   return (
     <div className="portfolio">
@@ -118,7 +167,7 @@ export default function PublicPortfolio() {
                 className="portfolio-grid-item scroll-anchor"
                 style={{ gridColumn: `${item.x + 1} / span ${item.w}` }}
               >
-                {item.kind === 'custom' ? <CustomSection data={item} /> : renderSection(item.sectionType, portfolio)}
+                {item.kind === 'custom' ? renderCustomSection(item) : renderSection(item.sectionType, portfolio)}
               </div>
             ))}
           </div>

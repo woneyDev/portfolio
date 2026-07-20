@@ -54,6 +54,14 @@
   text-align: center;
 }
 
+.admin-hint {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin: -0.4rem 0 0;
+}
+.admin-hint-ok { color: #4ade80; }
+.admin-hint-bad { color: #f87171; }
+
 /* 공통 버튼 */
 .admin-btn {
   background: #2563eb;
@@ -70,6 +78,18 @@
 
 .admin-btn:hover:not(:disabled) { background: #1d4ed8; }
 .admin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.admin-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  color: #60a5fa;
+  border: 1px solid #2563eb;
+  text-decoration: none;
+}
+.admin-btn-outline:hover { background: #2563eb22; }
+
+.admin-section-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* 소셜 로그인 */
 .admin-oauth-divider {
@@ -141,6 +161,21 @@
   background: #2563eb22;
   color: #60a5fa;
 }
+
+.admin-view-live-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: none;
+  border: 1px solid #2563eb;
+  color: #60a5fa;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.admin-view-live-btn:hover { background: #2563eb22; }
 
 .admin-logout-btn {
   background: none;

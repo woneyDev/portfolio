@@ -16,8 +16,14 @@ public class PortfolioOwner {
     @Column(nullable = false)
     private String title;
 
+    @Column(name = "title_en")
+    private String titleEn;
+
     @Column(nullable = false, length = 500)
     private String subtitle;
+
+    @Column(name = "subtitle_en", length = 500)
+    private String subtitleEn;
 
     @Column(nullable = false)
     private String email;
@@ -28,6 +34,15 @@ public class PortfolioOwner {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false, unique = true)
     private Member member;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Skill> skills = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Project> projects = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Career> careers = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SectionLayout> sectionLayouts = new LinkedHashSet<>();
@@ -43,8 +58,14 @@ public class PortfolioOwner {
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 
+    public String getTitleEn() { return titleEn; }
+    public void setTitleEn(String titleEn) { this.titleEn = titleEn; }
+
     public String getSubtitle() { return subtitle; }
     public void setSubtitle(String subtitle) { this.subtitle = subtitle; }
+
+    public String getSubtitleEn() { return subtitleEn; }
+    public void setSubtitleEn(String subtitleEn) { this.subtitleEn = subtitleEn; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
@@ -54,6 +75,15 @@ public class PortfolioOwner {
 
     public Member getMember() { return member; }
     public void setMember(Member member) { this.member = member; }
+
+    public Set<Skill> getSkills() { return skills; }
+    public void setSkills(Set<Skill> skills) { this.skills = skills; }
+
+    public Set<Project> getProjects() { return projects; }
+    public void setProjects(Set<Project> projects) { this.projects = projects; }
+
+    public Set<Career> getCareers() { return careers; }
+    public void setCareers(Set<Career> careers) { this.careers = careers; }
 
     public Set<SectionLayout> getSectionLayouts() { return sectionLayouts; }
     public void setSectionLayouts(Set<SectionLayout> sectionLayouts) { this.sectionLayouts = sectionLayouts; }

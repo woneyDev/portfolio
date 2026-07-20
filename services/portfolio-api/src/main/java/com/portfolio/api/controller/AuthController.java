@@ -8,6 +8,7 @@ import com.portfolio.api.service.EmailNotVerifiedException;
 import com.portfolio.api.service.InvalidCredentialsException;
 import com.portfolio.api.service.InvalidVerificationTokenException;
 import com.portfolio.api.service.MemberService;
+import com.portfolio.api.service.PasswordMismatchException;
 import com.portfolio.api.session.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -37,7 +38,14 @@ public class AuthController {
                     .body(Map.of("message", "가입 확인 이메일을 보냈습니다. 인증 후 로그인해주세요.", "username", member.getUsername()));
         } catch (DuplicateFieldException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", e.getMessage()));
+        } catch (PasswordMismatchException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
         }
+    }
+
+    @GetMapping("/check-email")
+    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam String email) {
+        return ResponseEntity.ok(Map.of("available", memberService.isEmailAvailable(email)));
     }
 
     @GetMapping("/verify-email")
