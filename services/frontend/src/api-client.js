@@ -60,6 +60,26 @@ export const api = {
       method: 'DELETE',
       headers: authHeaders(token),
     }),
+  getAllowedIps: (token) => request('/api/portfolio/me/allowed-ips', { headers: authHeaders(token) }),
+
+  addAllowedIp: (token, ipAddress, memo) =>
+    request('/api/portfolio/me/allowed-ips', {
+      method: 'POST',
+      headers: authHeaders(token),
+      body: JSON.stringify({ ipAddress, memo }),
+    }),
+
+  deleteAllowedIp: async (token, id) => {
+    const res = await fetch(`${API_BASE_URL}/api/portfolio/me/allowed-ips/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders(token),
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => null);
+      throw new Error(body?.error ?? `API 오류: ${res.status}`);
+    }
+  },
+
   getGithubStats: () => request('/api/github/stats'),
   generatePdf:    () => request('/api/pdf/generate', { method: 'POST' }),
 

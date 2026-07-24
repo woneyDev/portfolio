@@ -1,16 +1,14 @@
 package com.portfolio.api.config;
 
+import com.portfolio.api.service.AllowedIpService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
- * 로그인·마이페이지 등 "관리 기능" 요청은 미리 등록된 IP에서만 통과시킵니다.
+ * 로그인·마이페이지 등 "관리 기능" 요청은 DB에 등록된 IP에서만 통과시킵니다 (관리는 AllowedIpService 담당).
  * 등록되지 않은 IP는 아이디/비밀번호가 맞아도 이 단계에서 먼저 차단됩니다.
  * 로컬 개발(localhost)은 목록 설정과 무관하게 항상 허용해 개발 작업이 막히지 않게 합니다.
  */
@@ -18,15 +16,10 @@ public class IpAllowlistInterceptor implements HandlerInterceptor {
 
     private static final Set<String> ALWAYS_ALLOWED = Set.of("127.0.0.1", "0:0:0:0:0:0:0:1", "::1");
 
-    private final List<String> allowedIps;
+    private final AllowedIpService allowedIpService;
 
-    public IpAllowlistInterceptor(String allowedIpsCsv) {
-        this.allowedIps = allowedIpsCsv == null || allowedIpsCsv.isBlank()
-                ? List.of()
-                : Arrays.stream(allowedIpsCsv.split(","))
-                        .map(String::trim)
-                        .filter(s -> !s.isEmpty())
-                        .collect(Collectors.toList());
+    public IpAllowlistInterceptor(AllowedIpService allowedIpService) {
+        this.allowedIpService = allowedIpService;
     }
 
     @Override
@@ -38,7 +31,7 @@ public class IpAllowlistInterceptor implements HandlerInterceptor {
         }
 
         String clientIp = resolveClientIp(request);
-        if (ALWAYS_ALLOWED.contains(clientIp) || allowedIps.contains(clientIp)) {
+        if (ALWAYS_ALLOWED.contains(clientIp) || allowedIpService.isAllowed(clientIp)) {
             return true;
         }
 

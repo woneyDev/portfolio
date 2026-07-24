@@ -68,6 +68,10 @@ export default function MyPage() {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
+  const [allowedIps, setAllowedIps] = useState([]);
+  const [newIp, setNewIp] = useState('');
+  const [newIpMemo, setNewIpMemo] = useState('');
+  const [ipError, setIpError] = useState('');
   const saveTimer = useRef(null);
 
   function applyPortfolioData(data) {
@@ -84,6 +88,31 @@ export default function MyPage() {
       })
       .catch(() => setStatus('error'));
   }, [token]);
+
+  useEffect(() => {
+    api.getAllowedIps(token).then(setAllowedIps).catch(() => {});
+  }, [token]);
+
+  function handleAddAllowedIp(e) {
+    e.preventDefault();
+    setIpError('');
+    const ip = newIp.trim();
+    if (!ip) return;
+    api.addAllowedIp(token, ip, newIpMemo.trim())
+      .then((created) => {
+        setAllowedIps((prev) => [created, ...prev]);
+        setNewIp('');
+        setNewIpMemo('');
+      })
+      .catch((err) => setIpError(err.message));
+  }
+
+  function handleDeleteAllowedIp(id) {
+    if (!window.confirm('이 IP를 허용 목록에서 제거할까요?')) return;
+    api.deleteAllowedIp(token, id)
+      .then(() => setAllowedIps((prev) => prev.filter((item) => item.id !== id)))
+      .catch((err) => setIpError(err.message));
+  }
 
   const persistLayout = useCallback((nextLayout, nextCustomSections) => {
     setSaveStatus('saving');
@@ -211,6 +240,49 @@ export default function MyPage() {
           {saveStatus === 'saved' && '저장됨'}
         </span>
       </header>
+
+      <div className="mypage-ip-panel">
+        <h2 className="mypage-ip-title">접속 허용 IP 관리</h2>
+        <p className="mypage-hint">등록된 IP에서만 로그인·마이페이지 접속이 가능합니다. (내 컴퓨터는 항상 허용)</p>
+
+        <form className="mypage-ip-form" onSubmit={handleAddAllowedIp}>
+          <input
+            className="mypage-custom-input"
+            type="text"
+            placeholder="IP 주소 (예: 123.45.67.89)"
+            value={newIp}
+            onChange={(e) => setNewIp(e.target.value)}
+            maxLength={45}
+          />
+          <input
+            className="mypage-custom-input"
+            type="text"
+            placeholder="메모 (예: 재택 IP)"
+            value={newIpMemo}
+            onChange={(e) => setNewIpMemo(e.target.value)}
+            maxLength={100}
+          />
+          <button type="submit" className="mypage-btn-primary">추가</button>
+        </form>
+        {ipError && <p className="mypage-ip-error">{ipError}</p>}
+
+        <ul className="mypage-ip-list">
+          {allowedIps.map((item) => (
+            <li key={item.id} className="mypage-ip-item">
+              <span className="mypage-ip-address">{item.ipAddress}</span>
+              {item.memo && <span className="mypage-ip-memo">{item.memo}</span>}
+              <button
+                type="button"
+                className="mypage-hide-btn"
+                onClick={() => handleDeleteAllowedIp(item.id)}
+              >
+                삭제
+              </button>
+            </li>
+          ))}
+          {allowedIps.length === 0 && <li className="mypage-ip-empty">등록된 IP가 없습니다.</li>}
+        </ul>
+      </div>
 
       {hiddenLayout.length > 0 && (
         <div className="mypage-hidden-panel">
