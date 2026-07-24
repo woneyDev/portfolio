@@ -48,7 +48,7 @@ export const sampleData = {
   wrapBranch: { ko: '여의도금융센터', en: 'Yeouido Finance Center' },
   wrapManager: { ko: '정하윤', en: 'Hayoon Jung' },
   managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
-  managingAgent: { ko: '오세훈', en: 'Sehoon Oh' },
+  managingAgent: { ko: '지젤', en: 'Giselle' },
   investTendency: { ko: '적극투자형', en: 'Aggressive' },
   restriction: { ko: '해당없음', en: 'None' },
   periodReturns: [
@@ -121,7 +121,7 @@ export const sampleData = {
   personnel: [
     {
       position: { ko: '팀장', en: 'Team Lead' },
-      name: { ko: '오세훈', en: 'Sehoon Oh' },
+      name: { ko: '지젤', en: 'Giselle' },
       startDate: '2018.11.01',
       contractCount: 142,
       scale: 58900,

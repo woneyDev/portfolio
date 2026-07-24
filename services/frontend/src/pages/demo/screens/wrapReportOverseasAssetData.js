@@ -50,7 +50,7 @@ export const sampleData = {
   wrapBranch: { ko: '판교금융센터', en: 'Pangyo Finance Center' },
   wrapManager: { ko: '한지민', en: 'Jimin Han' },
   managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
-  managingAgent: { ko: '유재석', en: 'Jaeseok Yoo' },
+  managingAgent: { ko: '닝닝', en: 'Ningning' },
   investTendency: { ko: '적극투자형', en: 'Aggressive' },
   restriction: { ko: '해당없음', en: 'None' },
   periodReturns: [
@@ -142,7 +142,7 @@ export const sampleData = {
   personnel: [
     {
       position: { ko: '팀장', en: 'Team Lead' },
-      name: { ko: '유재석', en: 'Jaeseok Yoo' },
+      name: { ko: '닝닝', en: 'Ningning' },
       startDate: '2017.05.01',
       contractCount: 168,
       scale: 74300,

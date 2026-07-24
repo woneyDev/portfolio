@@ -48,7 +48,7 @@ export const sampleData = {
   wrapBranch: { ko: '분당금융센터', en: 'Bundang Finance Center' },
   wrapManager: { ko: '이하늘', en: 'Haneul Lee' },
   managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
-  managingAgent: { ko: '최도윤', en: 'Doyun Choi' },
+  managingAgent: { ko: '윈터', en: 'Winter' },
   investTendency: { ko: '위험중립형', en: 'Neutral' },
   restriction: { ko: '해당없음', en: 'None' },
   periodReturns: [
@@ -123,7 +123,7 @@ export const sampleData = {
   personnel: [
     {
       position: { ko: '팀장', en: 'Team Lead' },
-      name: { ko: '최도윤', en: 'Doyun Choi' },
+      name: { ko: '윈터', en: 'Winter' },
       startDate: '2020.07.01',
       contractCount: 96,
       scale: 32150,

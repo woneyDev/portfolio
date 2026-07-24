@@ -121,7 +121,7 @@ export const sampleData = {
   personnel: [
     {
       position: { ko: '퀀트팀장', en: 'Quant Team Lead' },
-      name: { ko: '조수민', en: 'Sumin Cho' },
+      name: { ko: '카리나', en: 'Karina' },
       startDate: '2021.09.01',
       contractCount: 210,
       scale: 41600,

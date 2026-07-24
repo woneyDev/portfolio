@@ -202,7 +202,7 @@ export const sampleData = {
   },
   performanceFeeBasis: { ko: '별도의 성과보수는 부과하지 않습니다.', en: 'No separate performance fee is charged.' },
   personnel: [
-    { position: { ko: '팀장', en: 'Team Lead' }, name: { ko: '한지민', en: 'Jimin Han' }, mgmtStartDate: '2018.05.01', contractCount: 86, scale: 32400, career: { ko: '신한투자증권 신탁부 11년 경력', en: '11 years at Shinhan Investment Corp. Trust Dept.' }, contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' } },
+    { position: { ko: '팀장', en: 'Team Lead' }, name: { ko: '김태희', en: 'Taehee Kim' }, mgmtStartDate: '2016.03.01', contractCount: 104, scale: 41200, career: { ko: '신한투자증권 신탁부 14년 경력', en: '14 years at Shinhan Investment Corp. Trust Dept.' }, contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' } },
   ],
   administrators: [
     { fundName: { ko: '신한 밸류주식신탁', en: 'Shinhan Value Equity Trust' }, branch: { ko: '강남금융센터', en: 'Gangnam Finance Center' }, position: { ko: '과장', en: 'Manager' }, name: { ko: '오세훈', en: 'Sehoon Oh' }, contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' }, fundCode: 'TR0001' },

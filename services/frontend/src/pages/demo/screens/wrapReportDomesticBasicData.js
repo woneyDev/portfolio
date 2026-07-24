@@ -253,7 +253,7 @@ export const sampleData = {
   wrapBranch: { ko: '강남금융센터', en: 'Gangnam Finance Center' },
   wrapManager: { ko: '김지수', en: 'Jisoo Kim' },
   managingFirm: { ko: '신한자산운용', en: 'Shinhan Asset Management' },
-  managingAgent: { ko: '박서준', en: 'Seojun Park' },
+  managingAgent: { ko: '카리나', en: 'Karina' },
   investTendency: { ko: '적극투자형', en: 'Aggressive' },
   restriction: { ko: '해당없음', en: 'None' },
   periodReturns: [
@@ -340,11 +340,11 @@ export const sampleData = {
   personnel: [
     {
       position: { ko: '팀장', en: 'Team Lead' },
-      name: { ko: '박서준', en: 'Seojun Park' },
-      startDate: '2019.03.01',
-      contractCount: 128,
-      scale: 45820,
-      career: { ko: '신한자산운용 주식운용팀 10년 경력', en: '10 years at Shinhan Asset Management Equity Management Team' },
+      name: { ko: '카리나', en: 'Karina' },
+      startDate: '2020.07.01',
+      contractCount: 97,
+      scale: 38600,
+      career: { ko: '신한자산운용 주식운용팀 8년 경력', en: '8 years at Shinhan Asset Management Equity Management Team' },
       contact: { ko: '02-1588-0365', en: '+82-2-1588-0365' },
     },
   ],

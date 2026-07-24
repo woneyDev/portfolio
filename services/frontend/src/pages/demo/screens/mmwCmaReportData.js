@@ -95,9 +95,9 @@ export const sampleData = {
   termTrades: [],
   fpInfo: { ko: '신한투자증권', en: 'Shinhan Investment Corp.' },
   contact: { ko: '', en: '' },
-  managerInfo: { ko: '랩운용부 부장 손은주', en: 'Wrap Management Dept. Team Lead Eunju Son' },
+  managerInfo: { ko: '랩운용부 부장 지젤', en: 'Wrap Management Dept. Team Lead Giselle' },
   career: {
-    ko: '1999.02 이화여자대학교 수학과\n1999.04~2020.12 신한투자증권 금융상품부, 퇴직연금부, 투자상품부\n2021.01 ~ 신한투자증권 랩운용부\n- 투자자산운용사 자격증 보유',
-    en: 'Feb 1999 Ewha Womans University, Mathematics\nApr 1999 – Dec 2020 Shinhan Investment Corp. Financial Products, Retirement Pension, Investment Products Divisions\nJan 2021 – Present Shinhan Investment Corp. Wrap Management Dept.\n- Holds Investment Asset Management Professional certification',
+    ko: '2003.02 경영학 학사\n2003.03~2019.12 신한투자증권 금융상품부, 투자상품부\n2020.01 ~ 신한투자증권 랩운용부\n- 투자자산운용사 자격증 보유',
+    en: 'Feb 2003 B.A. in Business Administration\nMar 2003 – Dec 2019 Shinhan Investment Corp. Financial Products, Investment Products Divisions\nJan 2020 – Present Shinhan Investment Corp. Wrap Management Dept.\n- Holds Investment Asset Management Professional certification',
   },
 };
